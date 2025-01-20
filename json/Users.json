@@ -1,0 +1,16 @@
+{
+  "users": [
+    {
+      "userId": "user_1",
+      "username": "Kholoud",
+      "email": "Kholoud@gmail.com",
+      "password": "hashed_password_123"
+    },
+    {
+      "userId": "user_2",
+      "username": "Haleemo",
+      "email": "x.smith@example.com",
+      "password": "hashed_password_456"
+    }
+  ]
+}

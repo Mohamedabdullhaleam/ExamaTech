@@ -1,0 +1,45 @@
+[
+  {
+    "userId": "user_101",
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "quizAttempts": [
+      {
+        "quizId": "quiz_101",
+        "attempts": [
+          {
+            "attemptId": "attempt_1",
+            "score": 8,
+            "completedAt": "2025-01-19T10:30:00Z"
+          },
+          {
+            "attemptId": "attempt_2",
+            "score": 10,
+            "answers": [1, 0, , , , , , , , , , , , , , , , , , ,],
+            "completedAt": "2025-01-19T11:00:00Z"
+          }
+        ],
+        "bestScore": 10
+      }
+    ]
+  },
+
+  {
+    "userId": "user_102",
+    "name": "Jane Smith",
+    "email": "jane.smith@example.com",
+    "quizAttempts": [
+      {
+        "quizId": "quiz_101",
+        "attempts": [
+          {
+            "attemptId": "attempt_1",
+            "score": 6,
+            "completedAt": "2025-01-19T09:45:00Z"
+          }
+        ],
+        "bestScore": 6
+      }
+    ]
+  }
+]
