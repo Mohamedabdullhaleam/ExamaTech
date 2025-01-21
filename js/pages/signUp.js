@@ -1,6 +1,18 @@
+import {
+  validateRequiredFields,
+  validateEmailFormat,
+  validatePasswordStrength,
+  validatePasswordMatch,
+  validateUser,
+} from "./userValidation.js";
+
 async function postUserData(newUser) {
   const url = "http://localhost:3000/users";
   try {
+    const errors = validateUser(newUser);
+    if (errors.length > 0) {
+      throw new Error(errors.join(", "));
+    }
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -19,20 +31,15 @@ async function postUserData(newUser) {
   }
 }
 
-// const User = {
-//   username: document.querySelector("#username"),
-//   email: document.querySelector("#email"),
-//   password: document.querySelector("#password"),
-//   confirmPassword: document.querySelector("#confirm-password"),
-// };
-
+let firstname = "kh";
+let lastname = "ahmed";
 /*
 / * * *  Helper functions * * * /
 */
-const generateUserId = function () {
+const generateUserName = function () {
   const timestamp = Date.now().toString().slice(-5);
-  const randomNum = Math.floor(Math.random() * 100);
-  return `user_${timestamp}_${randomNum}`;
+  //   const randomNum = Math.floor(Math.random() * 100);
+  return `${firstname}_${lastname.slice(4)}_${timestamp}`;
 };
 
 // const generateId = () => {
@@ -44,11 +51,12 @@ const generateUserId = function () {
 
 / * * *  * * * End * * * * * * * /;
 const newUser = {
-  userId: generateUserId(),
-  username: "kholoud",
-  name: "Kholoud Ahmed",
+  username: generateUserName(),
+  firstname: "Kholoud",
+  lastname: "Ahmed",
   email: "shdbs@gmail.com",
-  password: "hashed_password_456",
+  password: "Hashed_password_456",
+  confirmPassword: "Hashed_password_456",
 };
 
 postUserData(newUser);

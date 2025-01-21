@@ -26,6 +26,15 @@
       "name": "Kholoud Ahmed",
       "email": "shdbs@gmail.com",
       "password": "hashed_password_456"
+    },
+    {
+      "id": "d2fc",
+      "username": "kh_d_93784",
+      "firstname": "Kholoud",
+      "lastname": "Ahmed",
+      "email": "shdbs@gmail.com",
+      "password": "Hashed_password_456",
+      "confirmPassword": "Hashed_password_456"
     }
   ]
 }
