@@ -8,8 +8,23 @@
     },
     {
       "userId": "user_2",
-      "username": "Haleemo",
-      "email": "x.smith@example.com",
+      "username": "Haleem",
+      "email": "Haleemo@gmail.com",
+      "password": "hashed_password_456"
+    },
+    {
+      "id": "48df",
+      "userId": "user_60443_25",
+      "username": "kholoud",
+      "email": "shdbs@gmail.com",
+      "password": "hashed_password_456"
+    },
+    {
+      "id": "7c6c",
+      "userId": "user_72233_54",
+      "username": "kholoud",
+      "name": "Kholoud Ahmed",
+      "email": "shdbs@gmail.com",
       "password": "hashed_password_456"
     }
   ]
