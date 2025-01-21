@@ -31,8 +31,9 @@ async function postUserData(newUser) {
   }
 }
 
-let firstname = "kh";
-let lastname = "ahmed";
+// these will be fetched from the form
+let firstname = "kholoud";
+let lastname = "ahmeddddd";
 /*
 / * * *  Helper functions * * * /
 */
