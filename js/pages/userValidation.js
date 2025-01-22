@@ -11,6 +11,13 @@ export function validateRequiredFields(user) {
   return null;
 }
 
+export function validateName(name) {
+  if (!/^[A-Za-z\s]+$/.test(name)) {
+    return "Invalid name format. Name should only contain alphabetic characters and spaces.";
+  }
+  return null;
+}
+
 // Validates the email format
 export function validateEmailFormat(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
