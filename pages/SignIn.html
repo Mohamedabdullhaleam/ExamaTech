@@ -39,8 +39,9 @@
               placeholder="Enter your Email or Username "
               class="w-full border-b-2 border-b-main-color pb-1 mt-16 outline-none"
             />
+            <p id="error-msg" class="text-red-500">Enter characters only</p>
 
-            <div class="relative mt-16">
+            <div class="relative mt-12">
               <input
                 id="password-input"
                 type="password"
@@ -57,14 +58,16 @@
                 ></i>
               </span>
             </div>
-
+            <p id="error-msg" class="text-red-500 invisible">
+              Enter characters only
+            </p>
             <input
               type="submit"
               value="LOG IN"
-              class="w-full bg-main-color p-2 mt-16 mb-2 outline-none rounded-xl text-white cursor-pointer active:bg-sec-color"
+              class="w-full bg-main-color p-2 mt-12 mb-2 outline-none rounded-xl text-white cursor-pointer active:bg-sec-color"
             />
 
-            <p class="text-light-color">
+            <p class="text-light-color text-sm">
               Don’t have an account ?
               <a class="text-sec-color font-semibold cursor-pointer">Sign up</a>
             </p>
