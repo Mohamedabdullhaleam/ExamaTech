@@ -851,8 +851,24 @@ video {
   height: 100%;
 }
 
+.min-h-\[1\.5rem\] {
+  min-height: 1.5rem;
+}
+
 .min-h-screen {
   min-height: 100vh;
+}
+
+.min-h-\[1rem\] {
+  min-height: 1rem;
+}
+
+.min-h-\[1\.4rem\] {
+  min-height: 1.4rem;
+}
+
+.min-h-\[1\.6rem\] {
+  min-height: 1.6rem;
 }
 
 .w-\[this-is\\\\\] {
@@ -2697,10 +2713,6 @@ h1 {
 
   .md\:w-\[700px\] {
     width: 700px;
-  }
-
-  .md\:w-\[800px\] {
-    width: 800px;
   }
 
   .md\:grid-cols-12 {
