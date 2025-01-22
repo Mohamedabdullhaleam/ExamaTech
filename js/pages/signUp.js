@@ -37,8 +37,22 @@ async function postUserData(newUser) {
   }
 }
 
-//*** get and validate the data from the user ***/
-/*** handling no repeated data --email--*/
+// these will be fetched from the form
+let firstname = "kholoud";
+let lastname = "Ahmeddddd";
+
+/*
+/ * * *  Helper functions * * * /
+*/
+/ * * * * user_name generation * * * /;
+const generateUserName = function () {
+  const timestamp = Date.now().toString().slice(-5);
+  //   const randomNum = Math.floor(Math.random() * 100);
+  return `${firstname}_${lastname.slice(0, 5)}_${timestamp}`;
+};
+
+/ * * * * mail duplication * * * /;
+
 async function checkEmailExists(email) {
   const url = `http://localhost:3000/users?email=${email}`;
   try {
@@ -47,34 +61,17 @@ async function checkEmailExists(email) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    // Return true if email already exists, false otherwise
     return data.length > 0;
   } catch (error) {
     console.error("Error checking email:", error);
-    return true; // Treat as existing email if error occurs
+    return true;
   }
 }
-
-// these will be fetched from the form
-let firstname = "kholoud";
-let lastname = "Ahmeddddd";
-/*
-/ * * *  Helper functions * * * /
-*/
-const generateUserName = function () {
-  const timestamp = Date.now().toString().slice(-5);
-  //   const randomNum = Math.floor(Math.random() * 100);
-  return `${firstname}_${lastname.slice(0, 5)}_${timestamp}`;
-};
-
-// const generateId = () => {
-//   currentId = currentId + 1;
-//   return currentId;
-// };
 
 // edit to be fetched from the sign-up page
 
 / * * *  * * * End * * * * * * * /;
+
 const newUser = {
   username: generateUserName(),
   firstname: "Kholoud",
