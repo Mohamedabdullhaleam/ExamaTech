@@ -3,7 +3,13 @@ module.exports = {
   content: ["./**/*.{html,js}"],
   theme: {
     extend: {
-      //// any color or font extensions
+      colors: {
+        "main-color": "#8FA38B",
+        "sec-color": "#556352",
+        "text-color": "#180F11",
+        "light-color": "#8E8C92",
+        "light-green": "#EBEBEB",
+      },
     },
   },
   plugins: [],
