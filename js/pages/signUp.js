@@ -1,10 +1,86 @@
 import {
+  validateName,
   validateRequiredFields,
   validateEmailFormat,
   validatePasswordStrength,
   validatePasswordMatch,
   validateUser,
 } from "./userValidation.js";
+
+/ * * DOM * * /;
+
+/ * * Showing error msgs in front * * /;
+document.getElementById("signup-form").addEventListener("submit", validate);
+
+async function validate(event) {
+  event.preventDefault();
+
+  const firstName = document.getElementById("first-name").value.trim();
+  const lastName = document.getElementById("last-name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password-input").value;
+  const confirmPassword = document.getElementById("confirm-password").value;
+  console.log(firstName, lastName, email, password, confirmPassword);
+
+  const newUser = {
+    username: generateUserName(firstName, lastName),
+    firstname: firstName,
+    lastname: lastName,
+    email: email,
+    password: password,
+    confirmPassword: confirmPassword,
+  };
+
+  / * * * * setting the array of object that holds all errors  * * * * /;
+  const errors = []; // array of object to save and display errors
+  const firstNameError = validateName(firstName);
+  if (firstNameError) {
+    errors.push({ id: "error-first-name", message: firstNameError });
+  }
+  const lastNameError = validateName(lastName);
+  if (lastNameError) {
+    errors.push({ id: "error-last-name", message: lastNameError });
+  }
+  const emailError = validateEmailFormat(email);
+  if (emailError) {
+    errors.push({ id: "error-email", message: emailError });
+  }
+  const passwordError = validatePasswordStrength(password);
+  if (passwordError) {
+    errors.push({ id: "error-password", message: passwordError });
+  }
+  const passwordMatchError = validatePasswordMatch(password, confirmPassword);
+  if (passwordMatchError) {
+    errors.push({
+      id: "error-confirm-password",
+      message: passwordMatchError,
+    });
+  }
+  // const requiredFieldsError = validateRequiredFields(newUser);
+  // if (requiredFieldsError)
+  //   errors.push({ id: "error-first-name", message: requiredFieldsError });
+  // If there are errors, display them
+
+  if (errors.length > 0) {
+    displyError(errors);
+  } else {
+    postUserData(newUser);
+  }
+}
+
+function displyError(errors) {
+  // 1- clear all previous errors
+  document.querySelectorAll(".text-red-500").forEach(function (errorElement) {
+    errorElement.textContent = "";
+    errorElement.classList.add("invisible");
+  });
+  // 2- display new errors
+  errors.forEach(function (error) {
+    const errorElement = document.getElementById(error.id);
+    errorElement.textContent = error.message;
+    errorElement.classList.remove("invisible");
+  });
+}
 
 async function postUserData(newUser) {
   const emailExists = await checkEmailExists(newUser.email);
@@ -37,22 +113,16 @@ async function postUserData(newUser) {
   }
 }
 
-// these will be fetched from the form
-let firstname = "kholoud";
-let lastname = "Ahmeddddd";
+/ * * *  Helper functions * * * /;
 
-/*
-/ * * *  Helper functions * * * /
-*/
-/ * * * * user_name generation * * * /;
-const generateUserName = function () {
+/ * * *  user_name generation * * * /;
+const generateUserName = function (firstName, lastName) {
   const timestamp = Date.now().toString().slice(-5);
   //   const randomNum = Math.floor(Math.random() * 100);
-  return `${firstname}_${lastname.slice(0, 5)}_${timestamp}`;
+  return `${firstName}_${lastName.slice(0, 5)}_${timestamp}`;
 };
 
 / * * * * mail duplication * * * /;
-
 async function checkEmailExists(email) {
   const url = `http://localhost:3000/users?email=${email}`;
   try {
@@ -67,18 +137,3 @@ async function checkEmailExists(email) {
     return true;
   }
 }
-
-// edit to be fetched from the sign-up page
-
-/ * * *  * * * End * * * * * * * /;
-
-const newUser = {
-  username: generateUserName(),
-  firstname: "Kholoud",
-  lastname: "Ahmed",
-  email: "shdbs@gmaixl.com",
-  password: "Hashed_password_456",
-  confirmPassword: "Hashed_password_456",
-};
-
-postUserData(newUser);

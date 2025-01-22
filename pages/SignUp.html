@@ -20,20 +20,21 @@
 
       <div class="col-span-12 md:col-span-6 bg-white rounded-3xl items-center p-6 md:p-12 flex flex-col">
         <h2 class="font-medium text-3xl">Sign Up</h2>
-        <form class="w-full max-w-[400px]">
-          <input type="text" placeholder="First Name"
+        <form id="signup-form" class="w-full max-w-[400px]">
+          <input id="first-name" type="text" placeholder="First Name"
             class="w-full border-b-2 border-b-main-color pb-1 mt-7 outline-none" />
-          <p id="error-msg" class="text-red-500">
-            Yout need to enter chrachters only
+          <p id="error-first-name" class="text-red-500">
+            You need to enter chrachters only
           </p>
-          <input type="text" placeholder="Last Name"
+          <input id="last-name" type="text" placeholder="Last Name"
             class="w-full border-b-2 border-b-main-color pb-1 mt-5 outline-none" />
-          <p id="error-msg" class="text-red-500 invisible">
-            Yout need to enter chrachters only
+          <p id="error-last-name" class="text-red-500 invisible">
+            You need to enter chrachters only
           </p>
-          <input type="text" placeholder="Email" class="w-full border-b-2 border-b-main-color pb-1 mt-5 outline-none" />
-          <p id="error-msg" class="text-red-500 invisible">
-            Yout need to enter chrachters only
+          <input id="email" type="text" placeholder="Email"
+            class="w-full border-b-2 border-b-main-color pb-1 mt-5 outline-none" />
+          <p id="error-email" class="text-red-500 invisible">
+            You need to enter chrachters only
           </p>
 
           <div class="relative mt-5">
@@ -43,12 +44,12 @@
               <i id="password-icon" class="fa-solid fa-eye-slash text-main-color"></i>
             </span>
           </div>
-          <p id="error-msg" class="text-red-500 invisible">
+          <p id="error-password" class="text-red-500 invisible">
             Yout need to enter chrachters only
           </p>
-          <input type="password" placeholder="Confirm Password"
+          <input id="confirm-password" type="password" placeholder="Confirm Password"
             class="w-full border-b-2 border-b-main-color pb-1 mt-5 outline-none" />
-          <p id="error-msg" class="text-red-500 invisible">
+          <p id="error-confirm-password" class="text-red-500 invisible">
             Yout need to enter chrachters only
           </p>
 
@@ -64,6 +65,7 @@
     </div>
   </div>
   <script src="../js/passIcon.js"></script>
+  <script type="module" src="../js/pages/signUp.js"></script>
 </body>
 
 </html>

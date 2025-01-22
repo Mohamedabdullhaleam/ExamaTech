@@ -13,7 +13,7 @@ export function validateRequiredFields(user) {
 
 export function validateName(name) {
   if (!/^[A-Za-z\s]+$/.test(name)) {
-    return "Invalid name format. Name should only contain alphabetic characters and spaces.";
+    return "Name should only contain alphabetic characters";
   }
   return null;
 }
@@ -48,6 +48,7 @@ export function validatePasswordMatch(password, confirmPassword) {
   return null;
 }
 
+// do we need this //
 // Main function to validate the user
 export function validateUser(user) {
   const errors = [];
