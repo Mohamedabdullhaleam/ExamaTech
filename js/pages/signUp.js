@@ -56,10 +56,16 @@ async function validate(event) {
       message: passwordMatchError,
     });
   }
-  // const requiredFieldsError = validateRequiredFields(newUser);
-  // if (requiredFieldsError)
-  //   errors.push({ id: "error-first-name", message: requiredFieldsError });
-  // If there are errors, display them
+  const requiredFieldsError = validateRequiredFields(newUser);
+  if (requiredFieldsError)
+    errors.push({ id: "error-first-name", message: requiredFieldsError });
+
+  const emailExists = await checkEmailExists(newUser.email);
+  if (emailExists) {
+    const alertDiv = document.getElementById("account-exists-alert");
+    alertDiv.classList.remove("hidden");
+    alertDiv.classList.add("flex");
+  }
 
   if (errors.length > 0) {
     displyError(errors);
@@ -71,7 +77,7 @@ async function validate(event) {
 function displyError(errors) {
   // 1- clear all previous errors
   document.querySelectorAll(".text-red-500").forEach(function (errorElement) {
-    errorElement.textContent = "hhh";
+    errorElement.textContent = "mk";
     // errorElement.classList.remove("visible");
     errorElement.classList.add("invisible");
   });

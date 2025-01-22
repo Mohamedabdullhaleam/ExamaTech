@@ -13,7 +13,7 @@ export function validateRequiredFields(user) {
 
 export function validateName(name) {
   if (!/^[A-Za-z\s]+$/.test(name)) {
-    return "Name should only contain alphabetic characters";
+    return "Name should only contain alphabetic characters.";
   }
   return null;
 }
@@ -35,7 +35,7 @@ export function validatePasswordStrength(password) {
     !/[0-9]/.test(password) ||
     !/[@$!%*?&#_]/.test(password)
   ) {
-    return "Password must be at least 8 characters long, include one uppercase letter, one number, and one special character.";
+    return "Password: 8+ chars, 1 uppercase, 1 number, 1 symbol.";
   }
   return null;
 }

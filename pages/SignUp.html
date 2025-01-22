@@ -20,6 +20,11 @@
 
       <div class="col-span-12 md:col-span-6 bg-white rounded-3xl items-center p-6 md:p-12 flex flex-col">
         <h2 class="font-medium text-3xl">Sign Up</h2>
+        <div id="account-exists-alert" class="hidden text-red-500 p-2 mt-2 rounded-lg flex items-center gap-2">
+          <i class="fa-solid fa-circle-exclamation text-red-500"></i>
+          <span>Account already exists. Please try logging in.</span>
+        </div>
+
         <form id="signup-form" class="w-full max-w-[400px]">
           <input id="first-name" type="text" placeholder="First Name"
             class="w-full border-b-2 border-b-main-color pb-1 mt-7 outline-none" />
@@ -44,7 +49,7 @@
               <i id="password-icon" class="fa-solid fa-eye-slash text-main-color"></i>
             </span>
           </div>
-          <p id="error-password" class="text-red-500 text-sm min-h-[1.6rem] invisible">
+          <p id="error-password" class="text-red-500 text-sm min-h-[1rem] invisible">
             Yout need to enter chrachters only
           </p>
           <input id="confirm-password" type="password" placeholder="Confirm Password"
