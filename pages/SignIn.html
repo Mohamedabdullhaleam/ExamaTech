@@ -13,10 +13,14 @@
 
   <body class="bg-light-green flex items-center justify-center h-screen">
     <div
-      class="sign-in h-[600px] w-[1000px] bg-main-color rounded-3xl shadow-2xl shadow-text-color flex"
+      class="sign-in xl:h-[600px] xl:w-[1000px] bg-main-color rounded-3xl shadow-2xl shadow-text-color flex md:h-[500px] md:w-[700px] sm:w-[400px]"
     >
-      <div class="row grid grid-cols-12 h-full w-full">
-        <div class="col-span-6 flex flex-col justify-between mr-1">
+      <div
+        class="md:row md:grid md:grid-cols-12 md:h-full md:w-full sm:w-[400px]"
+      >
+        <div
+          class="hidden md:col-span-6 md:flex md:flex-col md:justify-between mr-1"
+        >
           <h1 class="font-weight-bold text-3xl text-white p-10">Exama-Tech</h1>
           <img
             src="../assets/images/registration.svg"
@@ -26,17 +30,18 @@
         </div>
 
         <div
-          class="col-span-6 bg-white rounded-3xl items-center p-16 flex flex-col"
+          class="md:col-span-6 bg-white rounded-3xl items-center p-16 flex flex-col"
         >
           <h2 class="font-medium text-3xl">Log In</h2>
-          <form class="w-80">
+          <form class="md:w-80 sm:w-60">
             <input
               type="text"
               placeholder="Enter your Email or Username "
               class="w-full border-b-2 border-b-main-color pb-1 mt-16 outline-none"
             />
+            <p id="error-msg" class="text-red-500">Enter characters only</p>
 
-            <div class="relative mt-16">
+            <div class="relative mt-12">
               <input
                 id="password-input"
                 type="password"
@@ -53,14 +58,16 @@
                 ></i>
               </span>
             </div>
-
+            <p id="error-msg" class="text-red-500 invisible">
+              Enter characters only
+            </p>
             <input
               type="submit"
               value="LOG IN"
-              class="w-full bg-main-color p-2 mt-16 mb-2 outline-none rounded-xl text-white cursor-pointer active:bg-sec-color"
+              class="w-full bg-main-color p-2 mt-12 mb-2 outline-none rounded-xl text-white cursor-pointer active:bg-sec-color"
             />
 
-            <p class="text-light-color">
+            <p class="text-light-color text-sm">
               Don’t have an account ?
               <a class="text-sec-color font-semibold cursor-pointer">Sign up</a>
             </p>
