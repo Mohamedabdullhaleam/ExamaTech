@@ -63,8 +63,7 @@ async function validate(event) {
   const emailExists = await checkEmailExists(newUser.email);
   if (emailExists) {
     const alertDiv = document.getElementById("account-exists-alert");
-    alertDiv.classList.remove("hidden");
-    alertDiv.classList.add("flex");
+    alertDiv.classList.remove("invisible");
   }
 
   if (errors.length > 0) {
@@ -133,7 +132,7 @@ async function checkEmailExists(email) {
 function displyError(errors) {
   // 1- clear all previous errors
   document.querySelectorAll(".text-red-500").forEach(function (errorElement) {
-    errorElement.textContent = "mk";
+    errorElement.textContent = "ss";
     // errorElement.classList.remove("visible");
     errorElement.classList.add("invisible");
   });
