@@ -7,31 +7,12 @@
   <link href="../css/output.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
   <title>SignUp</title>
-  <style>
-    .overlay {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      display: hidden;
-      justify-content: center;
-      align-items: center;
 
-      z-index: 1;
-    }
-
-    .modal {
-      display: hidden;
-      background-color: aliceblue;
-      width: 400px;
-      height: 400px;
-    }
-  </style>
 </head>
 
 <body class="bg-light-green flex items-center justify-center min-h-screen">
 
-  <div id="popup-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50">
+  <div id="popup-modal" class=" flex fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50">
     <div class="bg-white w-[90%] sm:w-[28rem] md:w-[32rem] lg:w-[36rem] p-6 sm:p-8 rounded-xl shadow-lg">
 
       <div class="flex justify-center items-center mb-4">
@@ -45,7 +26,7 @@
       </p>
 
       <div class="flex justify-center gap-4">
-        <button id="ok-btn" class="px-4 py-2 min-w-[7rem] text-white bg-main-color rounded-md hover:bg-gray-400">
+        <button id="ok-btn" class="px-4 py-2 min-w-[7rem] text-white bg-main-color rounded-md active:bg-sec-color">
           Ok
         </button>
       </div>

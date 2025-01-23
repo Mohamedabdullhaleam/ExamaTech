@@ -5,7 +5,6 @@ import {
   validatePasswordStrength,
   validatePasswordMatch,
   validateUser,
-  // checkEmailExists,
 } from "./userValidation.js";
 
 / * * DOM * * /;
@@ -30,6 +29,7 @@ async function validate() {
     lastname: lastName,
     email: email,
     password: password,
+    confirmPassword: confirmPassword,
   };
 
   / * * * * setting the array of object that holds all errors  * * * * /;
@@ -155,10 +155,11 @@ async function checkEmailExists(email) {
       return null;
     }
   } catch (error) {
-    // console.error("Error checking email:", error);
+    console.error("Error checking email:", error);
     return null;
   }
 }
+
 function popUp(userName, user) {
   const popUp = document.getElementById("popup-modal");
   const okButton = document.getElementById("ok-btn");
