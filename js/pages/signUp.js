@@ -5,6 +5,7 @@ import {
   validatePasswordStrength,
   validatePasswordMatch,
   validateUser,
+  checkEmailExists,
 } from "./userValidation.js";
 
 / * * DOM * * /;
@@ -62,8 +63,7 @@ async function validate(event) {
 
   const emailExists = await checkEmailExists(newUser.email);
   if (emailExists) {
-    const alertDiv = document.getElementById("account-exists-alert");
-    alertDiv.classList.remove("invisible");
+    errors.push({ id: "account-exists-alert", message: emailExists });
   }
 
   if (errors.length > 0) {
@@ -115,33 +115,22 @@ const generateUserName = function (firstName, lastName) {
 };
 
 / * * * * mail duplication * * * /;
-async function checkEmailExists(email) {
-  const url = `http://localhost:3000/users?email=${email}`;
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    return data.length > 0;
-  } catch (error) {
-    console.error("Error checking email:", error);
-    return true;
-  }
-}
 
 function displyError(errors) {
   // 1- clear all previous errors
   document.querySelectorAll(".text-red-500").forEach(function (errorElement) {
-    errorElement.textContent = "ss";
-    // errorElement.classList.remove("visible");
+    errorElement.textContent = "";
     errorElement.classList.add("invisible");
   });
   // 2- display new errors
   errors.forEach(function (error) {
     const errorElement = document.getElementById(error.id);
-    errorElement.textContent = error.message;
-    // errorElement.classList.add("visible");
-    errorElement.classList.remove("invisible");
+    if (error.id === "account-exists-alert") {
+      errorElement.classList.remove("invisible");
+      errorElement.innerHTML = error.message;
+    } else {
+      errorElement.textContent = error.message;
+      errorElement.classList.remove("invisible");
+    }
   });
 }

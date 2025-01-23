@@ -29,15 +29,12 @@ export function validateEmailFormat(email) {
 
 // Validates the strength of the password
 export function validatePasswordStrength(password) {
-  if (
-    password.length < 8 ||
-    !/[A-Z]/.test(password) ||
-    !/[0-9]/.test(password) ||
-    !/[@$!%*?&#_]/.test(password)
-  ) {
-    return "Password: 8+ chars, 1 uppercase, 1 number, 1 symbol.";
-  }
-  return null;
+  const errors = [];
+  if (password.length < 8) errors.push("8+ chars");
+  if (!/[A-Z]/.test(password)) errors.push("1 uppercase");
+  if (!/[0-9]/.test(password)) errors.push("1 number");
+  if (!/[@$!%*?&#_]/.test(password)) errors.push("1 symbol");
+  return errors.length > 0 ? `Password: ${errors.join(", ")}.` : null;
 }
 
 // Checks if passwords match
@@ -46,6 +43,25 @@ export function validatePasswordMatch(password, confirmPassword) {
     return "Passwords do not match.";
   }
   return null;
+}
+
+export async function checkEmailExists(email) {
+  if (!email.trim()) {
+    return false;
+  }
+  const url = `http://localhost:3000/users?email=${email}`;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return `<i class="fa-solid fa-circle-exclamation text-red-500"></i>
+    <span>Account already exists. Please try logging in.</span>`;
+  } catch (error) {
+    console.error("Error checking email:", error);
+    return null;
+  }
 }
 
 // do we need this //
