@@ -5,7 +5,7 @@ import {
   validatePasswordStrength,
   validatePasswordMatch,
   validateUser,
-  checkEmailExists,
+  // checkEmailExists,
 } from "./userValidation.js";
 
 / * * DOM * * /;
@@ -99,7 +99,8 @@ async function postUserData(newUser) {
     }
     const result = await response.json();
     console.log("Data posted successfully:", result);
-    window.location.href = "SignIn.html";
+    console.log(`HI : result.userName`);
+    popUp(result.userName);
   } catch (error) {
     console.error("Error posting data:", error);
   }
@@ -113,8 +114,6 @@ const generateUserName = function (firstName, lastName) {
   //   const randomNum = Math.floor(Math.random() * 100);
   return `${firstName}_${lastName.slice(0, 5)}_${timestamp}`;
 };
-
-/ * * * * mail duplication * * * /;
 
 function displyError(errors) {
   // 1- clear all previous errors
@@ -133,4 +132,41 @@ function displyError(errors) {
       errorElement.classList.remove("invisible");
     }
   });
+}
+
+async function checkEmailExists(email) {
+  if (!email.trim()) {
+    return false;
+  }
+  const url = `http://localhost:3000/users?email=${email}`;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+
+    if (data.length > 0) {
+      return `<i class="fa-solid fa-circle-exclamation text-red-500"></i>
+        <span>Account already exists. Please try logging in.</span>`;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error("Error checking email:", error);
+    return null;
+  }
+}
+function popUp(userName) {
+  const popUp = document.getElementById("popup-modal");
+  const okButton = document.getElementById("ok-btn");
+  const msg = document.getElementById("username-reveal");
+
+  popUp.classList.remove("hidden");
+  msg.textContent = `Your UserName is ${userName}. Keep it in mind!`;
+
+  okButton.onclick = () => {
+    popUp.classList.add("hidden"); // Hide the popup
+    setTimeout(() => (window.location.href = "SignIn.html"), 100); // Redirect after a brief delay
+  };
 }
