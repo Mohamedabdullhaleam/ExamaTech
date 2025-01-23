@@ -1,58 +1,91 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="../css/output.css" rel="stylesheet" />
     <link rel="stylesheet" href="../css/styles.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
-</head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+  </head>
 
-<body class="bg-light-green flex items-center justify-center h-screen">
+  <body class="bg-light-green flex items-center justify-center min-h-screen">
     <div
-        class="sign-in xl:h-[600px] xl:w-[1000px] bg-main-color rounded-3xl shadow-2xl shadow-text-color flex md:h-[500px] md:w-[700px] sm:w-[400px]">
-        <div class="md:row md:grid md:grid-cols-12 md:h-full md:w-full sm:w-[400px]">
-            <div class="hidden md:col-span-6 md:flex md:flex-col md:justify-between mr-1">
-                <h1 class="font-weight-bold text-3xl text-white p-10">Exama-Tech</h1>
-                <img src="../assets/images/registration.svg" class="w-full self-end" alt="Registration" />
-            </div>
-
-            <div class="md:col-span-6 bg-white rounded-3xl items-center p-16 flex flex-col">
-                <h2 class="font-medium text-3xl">Log In</h2>
-                <form id="sign-in-form" class="md:w-80 sm:w-60">
-                    <!-- Input field for email or username -->
-                    <input id="username-or-email" type="text" placeholder="Enter your Email or Username"
-                        class="w-full border-b-2 border-b-main-color ps-1 pb-1 mt-16 outline-none" />
-                    <!-- Error message for invalid input -->
-                    <p id="username-error-msg" class="text-red-500 invisible">Please enter a valid email or username</p>
-
-                    <!-- Input field for password -->
-                    <div class="relative mt-12">
-                        <input id="password-input" type="password" placeholder="Password"
-                            class="w-full border-b-2 border-b-main-color pb-1 ps-1 outline-none pr-10" />
-                        <span class="absolute inset-y-0 right-0 flex items-center cursor-pointer pr-3"
-                            onclick="togglePassword()">
-                            <i id="password-icon" class="fa-solid fa-eye-slash text-main-color"></i>
-                        </span>
-                    </div>
-                    <!-- Error message for invalid password -->
-                    <p id="password-error-msg" class="text-red-500 invisible">Please enter a valid password</p>
-
-                    <!-- Submit button -->
-                    <input type="submit" value="LOG IN"
-                        class="w-full bg-main-color p-2 mt-12 mb-2 outline-none rounded-xl text-white cursor-pointer active:bg-sec-color" />
-
-                    <p class="text-light-color text-sm">
-                        Don’t have an account?
-                        <a id="sign-up" class="text-sec-color font-semibold cursor-pointer">Sign up</a>
-                    </p>
-                </form>
-            </div>
+      class="sign-in xl:h-[600px] xl:w-[1000px] bg-main-color rounded-3xl shadow-2xl shadow-text-color flex md:h-[500px] md:w-[700px] sm:w-[400px]"
+    >
+      <div
+        class="grid grid-cols-1 md:grid-cols-12 w-full h-full"
+      >
+        <div
+          class="hidden md:col-span-6 md:flex md:flex-col md:justify-between mr-1  p-10""
+        >
+          <h1 class="font-weight-bold text-3xl text-white ">Exama-Tech</h1>
+          <img
+            src="../assets/images/registration.svg"
+            class="w-full self-end"
+            alt="Registration"
+          />
         </div>
+
+        <div
+          class="md:col-span-6 bg-white rounded-3xl items-center p-16 flex flex-col"
+        >
+          <h2 class="font-medium text-3xl">Log In</h2>
+          <form id="sign-in-form" class="md:w-80 sm:w-60">
+            <input
+              id="username-or-email"
+              type="text"
+              placeholder="Enter your Email or Username"
+              class="w-full border-b-2 border-b-main-color ps-1 pb-1 mt-20 outline-none"
+            />
+
+            <p id="username-error-msg" class="text-red-500 invisible">
+              Please enter a valid email or username
+            </p>
+
+            <div class="relative mt-5">
+              <input
+                id="password-input"
+                type="password"
+                placeholder="Password"
+                class="w-full border-b-2 border-b-main-color pb-1 ps-1 outline-none pr-10"
+              />
+              <span
+                class="absolute inset-y-0 right-0 flex items-center cursor-pointer pr-3"
+                onclick="togglePassword()"
+              >
+                <i
+                  id="password-icon"
+                  class="fa-solid fa-eye-slash text-main-color"
+                ></i>
+              </span>
+            </div>
+
+            <p id="password-error-msg" class="text-red-500 invisible">
+              Please enter a valid password
+            </p>
+
+            <input
+              type="submit"
+              value="LOG IN"
+              class="w-full bg-main-color p-2 mt-5 mb-2 outline-none rounded-xl text-white cursor-pointer active:bg-sec-color"
+            />
+
+            <p class="text-light-color text-sm">
+              Don’t have an account?
+              <a
+                id="sign-up"
+                class="text-sec-color font-semibold cursor-pointer"
+                >Sign up</a
+              >
+            </p>
+          </form>
+        </div>
+      </div>
     </div>
     <script src="../js/PassIcon.js"></script>
     <script src="../js/pages/signIn.js"></script>
-</body>
-
+  </body>
 </html>

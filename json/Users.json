@@ -100,6 +100,24 @@
       "email": "lilKasby@gmail.com",
       "password": "Khmomo@236",
       "confirmPassword": "Khmomo@236"
+    },
+    {
+      "id": "143f",
+      "username": "kholoud_ahmed_03214",
+      "firstname": "kholoud",
+      "lastname": "ahmed",
+      "email": "loom@gmail.com",
+      "password": "Kholoud_ahmed1",
+      "confirmPassword": "Kholoud_ahmed1"
+    },
+    {
+      "id": "db9c",
+      "username": "kholoud_ahmed_19823",
+      "firstname": "kholoud",
+      "lastname": "ahmed",
+      "email": "loom1@gmail.com",
+      "password": "Kholoud_ahmed1",
+      "confirmPassword": "Kholoud_ahmed1"
     }
   ]
 }

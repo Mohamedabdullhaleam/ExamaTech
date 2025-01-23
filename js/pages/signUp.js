@@ -145,3 +145,7 @@ function displyError(errors) {
     errorElement.classList.remove("invisible");
   });
 }
+
+document.getElementById("sign-in").addEventListener("click", function (e) {
+  window.location.href = "SignIn.html";
+});
