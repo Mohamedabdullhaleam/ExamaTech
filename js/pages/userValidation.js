@@ -72,3 +72,11 @@ export function validateUser(user) {
 
   return errors;
 }
+
+/ * * * Log-In * * * /;
+export function validateSignInFields(emailOrUsername, password) {
+  if (!emailOrUsername || !password) {
+    return "Both email/username and password are required.";
+  }
+  return null;
+}
