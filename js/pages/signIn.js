@@ -1,6 +1,5 @@
 async function checkUserCredentials(userNameOrEmail, password) {
   try {
-    // Query by email first
     const emailUrl = `http://localhost:3000/users?email=${userNameOrEmail}`;
     const emailResponse = await fetch(emailUrl);
     const emailData = await emailResponse.json();
@@ -9,7 +8,7 @@ async function checkUserCredentials(userNameOrEmail, password) {
     if (emailData.length > 0) {
       const user = emailData[0];
       if (user.password === password) {
-        return true;
+        return user.username;
       }
     }
 
@@ -35,11 +34,11 @@ async function checkUserCredentials(userNameOrEmail, password) {
 }
 
 async function run() {
-  const result = await checkUserCredentials(
+  const userName = await checkUserCredentials(
     "kholoud_ddddd_58540",
     "Hashed_password_456"
   );
-  console.log(result); // This will log the result of checkUserCredentials (true, false, null, or the username)
+  console.log(userName); // This will log the result of checkUserCredentials (true, false, null, or the username)
 }
 
 // run();
@@ -54,7 +53,7 @@ document
     const userNameOrEmail = document.getElementById("username-or-email").value;
     const password = document.getElementById("password-input").value;
 
-    const result = await checkUserCredentials(userNameOrEmail, password);
+    const userName = await checkUserCredentials(userNameOrEmail, password);
 
     if (!userNameOrEmail) {
       document
@@ -72,12 +71,15 @@ document
       document.getElementById("password-error-msg").classList.add("invisible");
     }
 
-    if (result) {
-      console.log("Login successful: ", result);
-      alert("Login successful! Welcome " + result);
-      // Redirect user or take other actions after successful login
+    if (userName) {
+      console.log("Login successful: ", userName);
+      localStorage.setItem("loggedInUser", userName);
+      window.location.href = "Confirmation.html";
     } else {
       console.log("Invalid login credentials");
-      alert("Invalid credentials. Please try again."); // redirect to error page or
+      alert("Invalid credentials. Please try again.");
     }
   });
+document.getElementById("sign-up").addEventListener("click", function (e) {
+  window.location.href = "SignUp.html";
+});

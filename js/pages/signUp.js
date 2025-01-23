@@ -99,6 +99,7 @@ async function postUserData(newUser) {
     }
     const result = await response.json();
     console.log("Data posted successfully:", result);
+    window.location.href = "SignIn.html";
   } catch (error) {
     console.error("Error posting data:", error);
   }
