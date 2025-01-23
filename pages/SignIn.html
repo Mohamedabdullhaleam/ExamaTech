@@ -10,6 +10,29 @@
 </head>
 
 <body class="bg-light-green flex items-center justify-center h-screen">
+    <!-- pop-up -->
+    <div id="popup-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white w-[90%] sm:w-[28rem] md:w-[32rem] lg:w-[36rem] p-6 sm:p-8 rounded-xl shadow-lg">
+
+            <div class="flex justify-center items-center mb-4">
+                <img class="w-25 sm:w-28 md:w-[7rem]" src="../assets/images/Confirm.svg" alt="confirmation">
+            </div>
+
+            <h2 class="text-lg sm:text-xl font-semibold text-center text-main-color mb-4">DONE</h2>
+
+            <p id="username-reveal" class="text-gray-600 text-sm sm:text-base text-center mb-6">
+                Your UserName is “Ash” , Keep it in mind!
+            </p>
+
+            <div class="flex justify-center gap-4">
+                <button id="ok-btn"
+                    class="px-4 py-2 min-w-[7rem] text-white bg-main-color rounded-md hover:bg-gray-400">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Login -->
     <div
         class="sign-in xl:h-[600px] xl:w-[1000px] bg-main-color rounded-3xl shadow-2xl shadow-text-color flex md:h-[500px] md:w-[700px] sm:w-[400px]">
         <div class="md:row md:grid md:grid-cols-12 md:h-full md:w-full sm:w-[400px]">
