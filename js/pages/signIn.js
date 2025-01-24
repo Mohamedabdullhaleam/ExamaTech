@@ -74,12 +74,46 @@ document
     if (userName) {
       console.log("Login successful: ", userName);
       localStorage.setItem("loggedInUser", userName);
-      window.location.href = "Confirmation.html";
+      popUp();
+      // window.location.href = "Confirmation.html";
     } else {
       console.log("Invalid login credentials");
-      alert("Invalid credentials. Please try again.");
+
+      // alert("Invalid credentials. Please try again.");
     }
   });
+
 document.getElementById("sign-up").addEventListener("click", function (e) {
   window.location.href = "SignUp.html";
 });
+
+function startTimer() {
+  let timerValue = 5;
+  const timerElement = document.getElementById("timer");
+  const cancelButton = document.getElementById("cancel-btn");
+
+  // Update the timer every second
+  const interval = setInterval(() => {
+    timerElement.textContent = timerValue;
+    if (timerValue < 3) {
+      timerElement.style.color = "red";
+    }
+    if (timerValue <= 0) {
+      clearInterval(interval);
+      window.location.href = "ExamPage.html";
+    }
+    timerValue--;
+  }, 1000);
+
+  cancelButton.addEventListener("click", () => {
+    clearInterval(interval);
+    window.location.href = "Dashboard.html";
+  });
+}
+
+function popUp() {
+  const popUp = document.getElementById("popup-modal");
+  popUp.classList.remove("hidden");
+  popUp.classList.add("flex");
+  startTimer();
+}
