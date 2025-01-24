@@ -118,9 +118,8 @@ const logIn = document
 
 / * * *  user_name generation * * * /;
 const generateUserName = function (firstName, lastName) {
-  const timestamp = Date.now().toString().slice(-5);
-  //   const randomNum = Math.floor(Math.random() * 100);
-  return `${firstName}_${lastName.slice(0, 5)}_${timestamp}`;
+  const timestamp = Date.now().toString().slice(-4);
+  return `${firstName.slice(0, 2)}_${lastName}${timestamp}`;
 };
 
 function displyError(errors) {
@@ -178,7 +177,7 @@ function popUp(userName, user) {
   popUp.classList.remove("hidden");
   popUp.classList.add("flex");
 
-  msg.textContent = `Your UserName is ${userName}. Keep it in mind!`;
+  msg.innerHTML = `Your UserName is <span class="font-semibold">"${userName}"</span>. Keep it in mind!`;
 
   okButton.onclick = () => {
     popUp.classList.remove("flex");
