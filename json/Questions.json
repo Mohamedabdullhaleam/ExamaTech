@@ -12,7 +12,12 @@
         { "id": "o3", "text": "Berlin" },
         { "id": "o4", "text": "Rome" }
       ],
-      "correctOptionId": "o1"
+      "correctOptionId": "o1",
+      "flags": {
+        "isFlagged": false,
+        "isAnswered": false
+      },
+      "choosedOptionId": ""
     },
     {
       "id": "q2",
@@ -23,7 +28,12 @@
         { "id": "o3", "text": "Jupiter" },
         { "id": "o4", "text": "Saturn" }
       ],
-      "correctOptionId": "o1"
+      "correctOptionId": "o1",
+      "flags": {
+        "isFlagged": false,
+        "isAnswered": false
+      },
+      "choosedOptionId": ""
     },
     {
       "id": "q3",
@@ -34,7 +44,12 @@
         { "id": "o3", "text": "Giraffe" },
         { "id": "o4", "text": "Hippopotamus" }
       ],
-      "correctOptionId": "o2"
+      "correctOptionId": "o2",
+      "flags": {
+        "isFlagged": false,
+        "isAnswered": false
+      },
+      "choosedOptionId": ""
     },
     {
       "id": "q4",
@@ -45,7 +60,12 @@
         { "id": "o3", "text": "Charles Dickens" },
         { "id": "o4", "text": "Mark Twain" }
       ],
-      "correctOptionId": "o1"
+      "correctOptionId": "o1",
+      "flags": {
+        "isFlagged": false,
+        "isAnswered": false
+      },
+      "choosedOptionId": ""
     },
     {
       "id": "q5",
@@ -56,7 +76,12 @@
         { "id": "o3", "text": "120°C" },
         { "id": "o4", "text": "80°C" }
       ],
-      "correctOptionId": "o2"
+      "correctOptionId": "o2",
+      "flags": {
+        "isFlagged": false,
+        "isAnswered": false
+      },
+      "choosedOptionId": ""
     },
     {
       "id": "q6",
@@ -67,7 +92,12 @@
         { "id": "o3", "text": "South Korea" },
         { "id": "o4", "text": "Thailand" }
       ],
-      "correctOptionId": "o2"
+      "correctOptionId": "o2",
+      "flags": {
+        "isFlagged": false,
+        "isAnswered": false
+      },
+      "choosedOptionId": ""
     },
     {
       "id": "q7",
@@ -78,7 +108,12 @@
         { "id": "o3", "text": "2" },
         { "id": "o4", "text": "3" }
       ],
-      "correctOptionId": "o3"
+      "correctOptionId": "o3",
+      "flags": {
+        "isFlagged": false,
+        "isAnswered": false
+      },
+      "choosedOptionId": ""
     },
     {
       "id": "q8",
@@ -89,7 +124,12 @@
         { "id": "o3", "text": "8" },
         { "id": "o4", "text": "9" }
       ],
-      "correctOptionId": "o3"
+      "correctOptionId": "o3",
+      "flags": {
+        "isFlagged": false,
+        "isAnswered": false
+      },
+      "choosedOptionId": ""
     },
     {
       "id": "q9",
@@ -100,7 +140,12 @@
         { "id": "o3", "text": "Gd" },
         { "id": "o4", "text": "Go" }
       ],
-      "correctOptionId": "o2"
+      "correctOptionId": "o2",
+      "flags": {
+        "isFlagged": false,
+        "isAnswered": false
+      },
+      "choosedOptionId": ""
     },
     {
       "id": "q10",
@@ -111,7 +156,12 @@
         { "id": "o3", "text": "Pacific Ocean" },
         { "id": "o4", "text": "Arctic Ocean" }
       ],
-      "correctOptionId": "o3"
+      "correctOptionId": "o3",
+      "flags": {
+        "isFlagged": false,
+        "isAnswered": false
+      },
+      "choosedOptionId": ""
     },
     {
       "id": "q11",
@@ -122,7 +172,12 @@
         { "id": "o3", "text": "Raphael" },
         { "id": "o4", "text": "Vincent van Gogh" }
       ],
-      "correctOptionId": "o1"
+      "correctOptionId": "o1",
+      "flags": {
+        "isFlagged": false,
+        "isAnswered": false
+      },
+      "choosedOptionId": ""
     },
     {
       "id": "q12",
@@ -133,7 +188,12 @@
         { "id": "o3", "text": "5°C" },
         { "id": "o4", "text": "-5°C" }
       ],
-      "correctOptionId": "o1"
+      "correctOptionId": "o1",
+      "flags": {
+        "isFlagged": false,
+        "isAnswered": false
+      },
+      "choosedOptionId": ""
     }
   ]
 }
