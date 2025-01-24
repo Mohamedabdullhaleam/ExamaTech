@@ -136,6 +136,11 @@ function displyError(errors) {
   });
 }
 
+
+document.getElementById("sign-in").addEventListener("click", function (e) {
+  window.location.href = "SignIn.html";
+});
+
 async function checkEmailExists(email) {
   if (!email.trim()) {
     return false;
@@ -176,3 +181,4 @@ function popUp(userName, user) {
     postUserData(user);
   };
 }
+
