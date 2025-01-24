@@ -88,14 +88,14 @@ document.getElementById("sign-up").addEventListener("click", function (e) {
 });
 
 function startTimer() {
-  let timerValue = 5;
+  let timerValue = 6;
   const timerElement = document.getElementById("timer");
   const cancelButton = document.getElementById("cancel-btn");
 
   // Update the timer every second
   const interval = setInterval(() => {
     timerElement.textContent = timerValue;
-    if (timerValue < 3) {
+    if (timerValue < 4) {
       timerElement.style.color = "red";
     }
     if (timerValue <= 0) {
