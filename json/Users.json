@@ -352,6 +352,15 @@
       "email": "lilooa@gmail.com",
       "password": "Kh_ahmed8637",
       "confirmPassword": "Kh_ahmed8637"
+    },
+    {
+      "id": "60f6",
+      "username": "kh_Kholoud3687",
+      "firstname": "kholoud",
+      "lastname": "Kholoud",
+      "email": "Kholoud1@gmail.com",
+      "password": "Kholoud@1",
+      "confirmPassword": "Kholoud@1"
     }
   ]
 }

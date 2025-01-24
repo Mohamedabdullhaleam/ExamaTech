@@ -11,7 +11,7 @@
     <title>SignUp</title>
   </head>
 
-  <body class="bg-light-green flex items-center justify-center min-h-screen">
+  <body class="bg-light-green flex items-center justify-center h-screen">
     <div
       id="popup-modal"
       class="hidden fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50"
@@ -58,11 +58,11 @@
     </div>
     <!-- sign up  -->
     <div
-      class="sign-up bg-main-color rounded-3xl shadow-2xl shadow-text-color flex flex-col w-full max-w-[1000px] h-auto lg:w-[1000px] md:w-[700px] sm:w-[400px]"
+      class="sign-up bg-main-color rounded-3xl shadow-2xl shadow-text-color flex xl:h-[600px] lg:w-[1000px] h-[600px] w-[400px] md:h-[580px] md:w-[700px] sm:w-[400px]"
     >
       <div class="grid grid-cols-1 md:grid-cols-12 w-full h-full">
         <div
-          class="hidden md:col-span-6 md:flex md:flex-col md:justify-between p-10"
+          class="hidden md:col-span-6 md:flex md:flex-col md:justify-between mr-1 p-10"
         >
           <h1 class="font-weight-bold text-3xl text-white">Exama-Tech</h1>
           <img
@@ -73,20 +73,20 @@
         </div>
 
         <div
-          class="col-span-12 md:col-span-6 bg-white rounded-3xl items-center p-6 md:p-12 flex flex-col"
+          class="md:col-span-6 bg-white rounded-3xl items-center p-16 flex flex-col"
         >
           <h2 class="font-medium text-3xl">Sign Up</h2>
           <div
             id="account-exists-alert"
-            class="invisible text-red-500 min-h-[1.2rem] mt-2 rounded-lg flex items-center gap-2"
+            class="invisible text-red-500 min-h-[1.2rem] mt-1 rounded-lg flex items-center gap-2"
           ></div>
 
-          <form id="signup-form" class="w-full max-w-[400px]">
+          <form id="signup-form" class="md:w-80 sm:w-60">
             <input
               id="first-name"
               type="text"
               placeholder="First Name"
-              class="w-full border-b-2 ps-1 border-b-main-color pb-1 mt-4 outline-none"
+              class="w-full border-b-2 ps-1 border-b-main-color pb-1 mt-2 outline-none"
             />
             <p
               id="error-first-name"
@@ -98,7 +98,7 @@
               id="last-name"
               type="text"
               placeholder="Last Name"
-              class="w-full border-b-2 ps-1 border-b-main-color pb-1 mt-5 outline-none"
+              class="w-full border-b-2 ps-1 border-b-main-color pb-1 mt-2 outline-none"
             />
             <p
               id="error-last-name"
@@ -110,7 +110,7 @@
               id="email"
               type="text"
               placeholder="Email"
-              class="w-full border-b-2 ps-1 border-b-main-color pb-1 mt-5 outline-none"
+              class="w-full border-b-2 ps-1 border-b-main-color pb-1 mt-2 outline-none"
             />
             <p
               id="error-email"
@@ -119,7 +119,7 @@
               You need to enter chrachters only
             </p>
 
-            <div class="relative mt-5">
+            <div class="relative mt-2">
               <input
                 id="password-input"
                 type="password"
@@ -146,7 +146,7 @@
               id="confirm-password"
               type="password"
               placeholder="Confirm Password"
-              class="w-full border-b-2 ps-1 border-b-main-color pb-1 mt-5 outline-none"
+              class="w-full border-b-2 ps-1 border-b-main-color pb-1 mt-2 outline-none"
             />
             <p
               id="error-confirm-password"
@@ -158,10 +158,10 @@
             <input
               type="submit"
               value="Create Account"
-              class="w-full bg-main-color p-3 mt-7 mb-2 outline-none rounded-xl text-white cursor-pointer active:bg-sec-color"
+              class="w-full bg-main-color p-3 mt-2 mb-2 outline-none rounded-xl text-white cursor-pointer active:bg-sec-color"
             />
 
-            <p class="text-light-color text-sm mt-2">
+            <p class="text-light-color text-sm">
               Already have an account ?
               <a id="log-in" class="text-sec-color font-semibold cursor-pointer"
                 >Log In</a
