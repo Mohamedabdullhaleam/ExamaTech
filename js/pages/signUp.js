@@ -108,6 +108,12 @@ async function postUserData(newUser) {
   }
 }
 
+const logIn = document
+  .getElementById("log-in")
+  .addEventListener("click", () => {
+    window.location.href = "SignIn.html";
+  });
+
 / * * *  Helper functions * * * /;
 
 / * * *  user_name generation * * * /;
@@ -135,7 +141,6 @@ function displyError(errors) {
     }
   });
 }
-
 
 document.getElementById("sign-in").addEventListener("click", function (e) {
   window.location.href = "SignIn.html";
@@ -181,4 +186,3 @@ function popUp(userName, user) {
     postUserData(user);
   };
 }
-
