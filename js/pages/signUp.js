@@ -5,23 +5,23 @@ import {
   validatePasswordStrength,
   validatePasswordMatch,
   validateUser,
-  checkEmailExists,
 } from "./userValidation.js";
 
 / * * DOM * * /;
 
 / * * Showing error msgs in front * * /;
-document.getElementById("signup-form").addEventListener("submit", validate);
+document.getElementById("signup-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  validate();
+});
 
-async function validate(event) {
-  event.preventDefault();
-
+async function validate() {
   const firstName = document.getElementById("first-name").value.trim();
   const lastName = document.getElementById("last-name").value.trim();
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password-input").value;
   const confirmPassword = document.getElementById("confirm-password").value;
-  console.log(firstName, lastName, email, password, confirmPassword);
+  // console.log(firstName, lastName, email, password, confirmPassword);
 
   const newUser = {
     username: generateUserName(firstName, lastName),
@@ -69,7 +69,7 @@ async function validate(event) {
   if (errors.length > 0) {
     displyError(errors);
   } else {
-    postUserData(newUser);
+    popUp(newUser.username, newUser);
   }
 }
 
@@ -77,7 +77,7 @@ async function postUserData(newUser) {
   const emailExists = await checkEmailExists(newUser.email);
 
   if (emailExists) {
-    console.error("Error: Email is already in use.");
+    // console.error("Error: Email is already in use.");
     return;
   }
   const url = "http://localhost:3000/users";
@@ -99,7 +99,10 @@ async function postUserData(newUser) {
     }
     const result = await response.json();
     console.log("Data posted successfully:", result);
+    console.log(`HI : result.userName`);
     window.location.href = "SignIn.html";
+
+    // popUp(result.userName);
   } catch (error) {
     console.error("Error posting data:", error);
   }
@@ -113,8 +116,6 @@ const generateUserName = function (firstName, lastName) {
   //   const randomNum = Math.floor(Math.random() * 100);
   return `${firstName}_${lastName.slice(0, 5)}_${timestamp}`;
 };
-
-/ * * * * mail duplication * * * /;
 
 function displyError(errors) {
   // 1- clear all previous errors
@@ -135,6 +136,49 @@ function displyError(errors) {
   });
 }
 
+
 document.getElementById("sign-in").addEventListener("click", function (e) {
   window.location.href = "SignIn.html";
 });
+
+async function checkEmailExists(email) {
+  if (!email.trim()) {
+    return false;
+  }
+  const url = `http://localhost:3000/users?email=${email}`;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+
+    if (data.length > 0) {
+      return `<i class="fa-solid fa-circle-exclamation text-red-500"></i>
+        <span>Account already exists. Please try logging in.</span>`;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error("Error checking email:", error);
+    return null;
+  }
+}
+
+function popUp(userName, user) {
+  const popUp = document.getElementById("popup-modal");
+  const okButton = document.getElementById("ok-btn");
+  const msg = document.getElementById("username-reveal");
+
+  popUp.classList.remove("hidden");
+  popUp.classList.add("flex");
+
+  msg.textContent = `Your UserName is ${userName}. Keep it in mind!`;
+
+  okButton.onclick = () => {
+    popUp.classList.remove("flex");
+    popUp.classList.add("hidden");
+    postUserData(user);
+  };
+}
+

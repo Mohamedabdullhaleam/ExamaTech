@@ -9,69 +9,36 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     />
     <title>Sign Up</title>
-    <style>
-      .overlay {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        display: none;
-        justify-content: center;
-        align-items: center;
-        z-index: 1;
-      }
-
-      .modal {
-        display: none;
-        background-color: aliceblue;
-        width: 400px;
-        height: 400px;
-      }
-    </style>
   </head>
+  <body class="bg-light-green flex items-center justify-center min-h-screen">       
+  <div id="popup-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50">
+    <div class="bg-white w-[90%] sm:w-[28rem] md:w-[32rem] lg:w-[36rem] p-6 sm:p-8 rounded-xl shadow-lg">
 
-  <body class="bg-light-green flex items-center justify-center min-h-screen">
-    <div
-      class="sign-up bg-main-color rounded-3xl shadow-2xl shadow-text-color flex flex-col w-full max-w-[1000px] lg:w-[1000px] md:w-[700px] sm:w-[400px]"
-    >
-      <div class="grid grid-cols-12 md:grid-cols-12 w-full h-full">
-        <div
-          class="hidden md:col-span-6 md:flex md:flex-col md:justify-between p-10"
-        >
-          <h1 class="font-weight-bold text-3xl text-white">Exama-Tech</h1>
-          <img
-            src="../assets/images/registration.svg"
-            class="w-full self-end"
-            alt="Registration"
-          />
-        </div>
+      <div class="flex justify-center items-center mb-4">
+        <img class="w-25 sm:w-28 md:w-[7rem]" src="../assets/images/Confirm.svg" alt="confirmation">
+      </div>
 
-        <div
-          class="col-span-12 md:col-span-6 bg-white rounded-3xl items-center p-6 md:p-12 flex flex-col"
-        >
-          <h2 class="font-medium text-3xl">Sign Up</h2>
-          <div
-            id="account-exists-alert"
-            class="invisible text-red-600 min-h-[1.2rem] mt-2 rounded-lg flex items-center gap-2"
-          >
-            <i class="fa-solid fa-circle-exclamation text-red-600"></i>
-            <span>Account already exists. Please try logging in.</span>
-          </div>
+      <h2 class="text-lg sm:text-xl font-semibold text-center text-main-color mb-4">DONE</h2>
 
-          <form id="signup-form" class="w-full max-w-[400px]">
-            <input
-              id="first-name"
-              type="text"
-              placeholder="First Name"
-              class="w-full border-b-2 ps-1 border-b-main-color pb-1 mt-4 outline-none"
-            />
-            <p
-              id="error-first-name"
-              class="text-red-500 text-sm min-h-[1rem] invisible"
-            >
-              You need to enter characters only
-            </p>
+      <p id="username-reveal" class="text-gray-600 text-sm sm:text-base text-center mb-6">
+        Your UserName is “Ash” , Keep it in mind!
+      </p>
 
+      <div class="flex justify-center gap-4">
+        <button id="ok-btn" class="px-4 py-2 min-w-[7rem] text-white bg-main-color rounded-md active:bg-sec-color">
+          Ok
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- sign up  -->
+  <div
+    class="sign-up bg-main-color rounded-3xl shadow-2xl shadow-text-color flex flex-col w-full max-w-[1000px] h-auto lg:w-[1000px] md:w-[700px] sm:w-[400px]">
+    <div class="grid grid-cols-1 md:grid-cols-12 w-full h-full">
+      <div class="hidden md:col-span-6 md:flex md:flex-col md:justify-between p-10">
+        <h1 class="font-weight-bold text-3xl text-white">Exama-Tech</h1>
+        <img src="../assets/images/registration.svg" class="w-full self-end" alt="Registration" />
+      </div>
             <input
               id="last-name"
               type="text"
@@ -153,7 +120,12 @@
         </div>
       </div>
     </div>
-    <script src="../js/passIcon.js"></script>
-    <script type="module" src="../js/pages/signUp.js"></script>
-  </body>
+
+  </div>
+  <script src="../js/passIcon.js"></script>
+  <script type="module" src="../js/pages/signUp.js"></script>
+
+</body>
+
 </html>
+
