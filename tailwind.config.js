@@ -9,6 +9,8 @@ module.exports = {
         "text-color": "#180F11",
         "light-color": "#8E8C92",
         "light-green": "#EBEBEB",
+        "Btn-color": "#73826F",
+        "flag-color": "#EFA721",
       },
     },
   },
