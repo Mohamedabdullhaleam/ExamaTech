@@ -764,6 +764,10 @@ video {
   margin-right: 0.25rem;
 }
 
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
 .mt-2 {
   margin-top: 0.5rem;
 }
@@ -772,24 +776,8 @@ video {
   margin-top: 5rem;
 }
 
-.mt-4 {
-  margin-top: 1rem;
-}
-
 .mt-5 {
   margin-top: 1.25rem;
-}
-
-.mt-7 {
-  margin-top: 1.75rem;
-}
-
-.mt-1 {
-  margin-top: 0.25rem;
-}
-
-.mt-3 {
-  margin-top: 0.75rem;
 }
 
 .box-border {
@@ -891,6 +879,10 @@ video {
   display: none;
 }
 
+.h-\[600px\] {
+  height: 600px;
+}
+
 .h-full {
   height: 100%;
 }
@@ -899,16 +891,16 @@ video {
   height: 100vh;
 }
 
-.h-\[600px\] {
-  height: 600px;
-}
-
 .min-h-\[1\.2rem\] {
   min-height: 1.2rem;
 }
 
 .min-h-\[1rem\] {
   min-height: 1rem;
+}
+
+.w-\[400px\] {
+  width: 400px;
 }
 
 .w-\[90\%\] {
@@ -929,10 +921,6 @@ video {
 
 .w-full {
   width: 100%;
-}
-
-.w-\[400px\] {
-  width: 400px;
 }
 
 .min-w-\[7rem\] {
@@ -1953,11 +1941,6 @@ video {
   background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
 }
 
-.bg-gray-700 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(55 65 81 / var(--tw-bg-opacity, 1));
-}
-
 .bg-light-green {
   --tw-bg-opacity: 1;
   background-color: rgb(235 235 235 / var(--tw-bg-opacity, 1));
@@ -1968,14 +1951,14 @@ video {
   background-color: rgb(143 163 139 / var(--tw-bg-opacity, 1));
 }
 
-.bg-white {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
-}
-
 .bg-text-color {
   --tw-bg-opacity: 1;
   background-color: rgb(24 15 17 / var(--tw-bg-opacity, 1));
+}
+
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
 }
 
 .bg-opacity-50 {
@@ -2358,9 +2341,9 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
 
-.text-text-color {
+.text-Btn-color {
   --tw-text-opacity: 1;
-  color: rgb(24 15 17 / var(--tw-text-opacity, 1));
+  color: rgb(115 130 111 / var(--tw-text-opacity, 1));
 }
 
 .underline {
@@ -2889,14 +2872,6 @@ h1 {
     display: flex;
   }
 
-  .md\:h-\[500px\] {
-    height: 500px;
-  }
-
-  .md\:h-\[550px\] {
-    height: 550px;
-  }
-
   .md\:h-\[580px\] {
     height: 580px;
   }
@@ -2943,10 +2918,6 @@ h1 {
 @media (min-width: 1280px) {
   .xl\:h-\[600px\] {
     height: 600px;
-  }
-
-  .xl\:w-\[1000px\] {
-    width: 1000px;
   }
 }
 

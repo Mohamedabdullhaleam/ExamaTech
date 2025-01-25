@@ -16,7 +16,6 @@ async function checkUserCredentials(userNameOrEmail, password) {
     const usernameUrl = `http://localhost:3000/users?username=${userNameOrEmail}`;
     const usernameResponse = await fetch(usernameUrl);
     const usernameData = await usernameResponse.json();
-    // console.log(usernameData);
 
     // Check if the user was found by username
     if (usernameData.length > 0) {
@@ -33,17 +32,13 @@ async function checkUserCredentials(userNameOrEmail, password) {
   }
 }
 
-async function run() {
-  const userName = await checkUserCredentials(
-    "kholoud_ddddd_58540",
-    "Hashed_password_456"
-  );
-  console.log(userName); // This will log the result of checkUserCredentials (true, false, null, or the username)
-}
-
-// run();
-
-// console.log(checkUserCredentials("kholoud_ddddd_58540", "Hashed_password_456"));
+// async function run() {
+//   const userName = await checkUserCredentials(
+//     "kholoud_ddddd_58540",
+//     "Hashed_password_456"
+//   );
+//   console.log(userName);
+// }
 
 document
   .getElementById("sign-in-form")
@@ -52,24 +47,24 @@ document
 
     const userNameOrEmail = document.getElementById("username-or-email").value;
     const password = document.getElementById("password-input").value;
+    const userNameErrorMsg = document.getElementById("username-error-msg");
+    const passwordErrorMsg = document.getElementById("password-error-msg");
+
+    // Validate inputs
+    toggleErrorMessage(
+      userNameErrorMsg,
+      !userNameOrEmail,
+      "Please enter a valid email or username."
+    );
+    toggleErrorMessage(
+      passwordErrorMsg,
+      !password,
+      "Please enter a valid password."
+    );
+
+    if (!userNameOrEmail || !password) return;
 
     const userName = await checkUserCredentials(userNameOrEmail, password);
-
-    if (!userNameOrEmail) {
-      document
-        .getElementById("username-error-msg")
-        .classList.remove("invisible");
-    } else {
-      document.getElementById("username-error-msg").classList.add("invisible");
-    }
-
-    if (!password) {
-      document
-        .getElementById("password-error-msg")
-        .classList.remove("invisible");
-    } else {
-      document.getElementById("password-error-msg").classList.add("invisible");
-    }
 
     if (userName) {
       console.log("Login successful: ", userName);
@@ -78,8 +73,11 @@ document
       // window.location.href = "Confirmation.html";
     } else {
       console.log("Invalid login credentials");
-
-      // alert("Invalid credentials. Please try again.");
+      toggleErrorMessage(
+        userNameErrorMsg,
+        true,
+        "Invalid credentials. Try again."
+      );
     }
   });
 
@@ -117,3 +115,22 @@ function popUp() {
   popUp.classList.add("flex");
   startTimer();
 }
+
+function toggleErrorMessage(element, condition, message = "") {
+  if (condition) {
+    element.textContent = message;
+    element.classList.remove("invisible");
+  } else {
+    element.classList.add("invisible");
+  }
+}
+
+document.getElementById("username-or-email").addEventListener("input", () => {
+  const userNameErrorMsg = document.getElementById("username-error-msg");
+  userNameErrorMsg.classList.add("invisible");
+});
+
+document.getElementById("password-input").addEventListener("input", () => {
+  const passwordErrorMsg = document.getElementById("password-error-msg");
+  passwordErrorMsg.classList.add("invisible");
+});

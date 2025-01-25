@@ -101,7 +101,6 @@ async function postUserData(newUser) {
     console.log("Data posted successfully:", result);
     console.log(`HI : result.userName`);
     window.location.href = "SignIn.html";
-
     // popUp(result.userName);
   } catch (error) {
     console.error("Error posting data:", error);
@@ -195,7 +194,7 @@ function popUp(userName, user) {
   popUp.classList.remove("hidden");
   popUp.classList.add("flex");
 
-  msg.innerHTML = `Your UserName is <span id="copyUserName" class="relative text-text-color font-semibold cursor-pointer active:text-main-color">"${userName}"<span class="tooltip hidden absolute -top-8 left-1/2 transform -translate-x-1/2 bg-text-color text-white text-xs py-1 px-2 rounded-lg">Copy</span></span>. Keep it in mind!`;
+  msg.innerHTML = `Your UserName is <span id="copyUserName" class="relative text-Btn-color font-semibold cursor-pointer active:text-main-color">"${userName}"<span class="tooltip hidden absolute -top-8 left-1/2 transform -translate-x-1/2 bg-text-color text-white text-xs py-1 px-2 rounded-lg">Copy</span></span>. Keep it in mind!`;
 
   const copyUserName = document.getElementById("copyUserName");
   const tooltip = copyUserName.querySelector(".tooltip");
