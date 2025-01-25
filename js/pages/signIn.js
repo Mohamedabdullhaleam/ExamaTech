@@ -49,18 +49,11 @@ document
     const password = document.getElementById("password-input").value;
     const userNameErrorMsg = document.getElementById("username-error-msg");
     const passwordErrorMsg = document.getElementById("password-error-msg");
+    const credintials = document.getElementById("invalid-credentials");
 
     // Validate inputs
-    toggleErrorMessage(
-      userNameErrorMsg,
-      !userNameOrEmail,
-      "Please enter a valid email or username."
-    );
-    toggleErrorMessage(
-      passwordErrorMsg,
-      !password,
-      "Please enter a valid password."
-    );
+    toggleErrorMessage(userNameErrorMsg, !userNameOrEmail);
+    toggleErrorMessage(passwordErrorMsg, !password);
 
     if (!userNameOrEmail || !password) return;
 
@@ -73,11 +66,7 @@ document
       // window.location.href = "Confirmation.html";
     } else {
       console.log("Invalid login credentials");
-      toggleErrorMessage(
-        userNameErrorMsg,
-        true,
-        "Invalid credentials. Try again."
-      );
+      toggleErrorMessage(credintials, true);
     }
   });
 
@@ -116,9 +105,8 @@ function popUp() {
   startTimer();
 }
 
-function toggleErrorMessage(element, condition, message = "") {
+function toggleErrorMessage(element, condition) {
   if (condition) {
-    element.textContent = message;
     element.classList.remove("invisible");
   } else {
     element.classList.add("invisible");
@@ -127,7 +115,9 @@ function toggleErrorMessage(element, condition, message = "") {
 
 document.getElementById("username-or-email").addEventListener("input", () => {
   const userNameErrorMsg = document.getElementById("username-error-msg");
+  const emailErrorMsg = document.getElementById("invalid-credentials");
   userNameErrorMsg.classList.add("invisible");
+  emailErrorMsg.classList.add("invisible");
 });
 
 document.getElementById("password-input").addEventListener("input", () => {

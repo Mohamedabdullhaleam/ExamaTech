@@ -7,7 +7,7 @@
     <link href="../css/output.css" rel="stylesheet" />
     <link rel="stylesheet" href="../css/styles.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
-    <link rel="icon" type="image/png" href="../assets/icons/icon4.png">
+    <link rel="icon" type="image/png" href="../assets/icons/icon3.png">
     <title>Sign-In</title>
 </head>
 
@@ -48,9 +48,14 @@
 
         <div class="md:col-span-6 bg-white rounded-3xl items-center p-16 flex flex-col">
             <h2 class="font-medium text-3xl">Log In</h2>
+            <div id="invalid-credentials" class="invisible pt-5 "><i
+                    class="fa-solid fa-circle-exclamation text-red-400"></i>
+                <span class="text-red-400">Invalid credentials. Try again 🤡</span>
+            </div>
+
             <form id="sign-in-form" class="md:w-80 sm:w-60">
                 <input id="username-or-email" type="text" placeholder="Enter your Email or Username"
-                    class="w-full border-b-2 border-b-main-color ps-1 pb-1 mt-20 outline-none" />
+                    class="w-full border-b-2 border-b-main-color ps-1 pb-1 mt-11 outline-none" />
 
                 <p id="username-error-msg" class="text-red-500 invisible">
                     Please enter a valid email or username

@@ -72,6 +72,9 @@ async function validate() {
     popUp(newUser.username, newUser);
   }
 }
+document.addEventListener("DOMContentLoaded", () => {
+  setupInputListeners(); // Initialize input listeners
+});
 
 async function postUserData(newUser) {
   const emailExists = await checkEmailExists(newUser.email);
@@ -234,3 +237,41 @@ function popUp(userName, user) {
     postUserData(user);
   };
 }
+
+function setupInputListeners() {
+  const fields = [
+    { id: "first-name", errorId: "error-first-name" },
+    { id: "last-name", errorId: "error-last-name" },
+    { id: "email", errorId: "error-email" },
+    { id: "password-input", errorId: "error-password" },
+    { id: "confirm-password", errorId: "error-confirm-password" },
+  ];
+
+  fields.forEach((field) => {
+    const inputField = document.getElementById(field.id);
+    const errorElement = document.getElementById(field.errorId);
+    const emailExist = document.getElementById("account-exists-alert");
+    // console.log("Input Field:", inputField, "Error Element:", errorElement);
+    if (inputField && errorElement) {
+      if (field.id === "email") {
+        console.log("email changed");
+        inputField.addEventListener("input", () => {
+          errorElement.textContent = "";
+          emailExist.textContent = "";
+          emailExist.classList.add("invisible");
+          errorElement.classList.add("invisible");
+        });
+      }
+      inputField.addEventListener("input", () => {
+        errorElement.textContent = "";
+        errorElement.classList.add("invisible");
+      });
+    } else {
+      console.error(`Missing field or error element for ${field.id}`);
+    }
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  setupInputListeners();
+});

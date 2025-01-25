@@ -780,6 +780,18 @@ video {
   margin-top: 1.25rem;
 }
 
+.mt-16 {
+  margin-top: 4rem;
+}
+
+.mt-14 {
+  margin-top: 3.5rem;
+}
+
+.mt-11 {
+  margin-top: 2.75rem;
+}
+
 .box-border {
   box-sizing: border-box;
 }
@@ -2146,6 +2158,26 @@ video {
   padding-inline-start: 0.25rem;
 }
 
+.pt-6 {
+  padding-top: 1.5rem;
+}
+
+.pt-3 {
+  padding-top: 0.75rem;
+}
+
+.pt-4 {
+  padding-top: 1rem;
+}
+
+.pt-7 {
+  padding-top: 1.75rem;
+}
+
+.pt-5 {
+  padding-top: 1.25rem;
+}
+
 .text-left {
   text-align: left;
 }
@@ -2344,6 +2376,11 @@ video {
 .text-Btn-color {
   --tw-text-opacity: 1;
   color: rgb(115 130 111 / var(--tw-text-opacity, 1));
+}
+
+.text-red-400 {
+  --tw-text-opacity: 1;
+  color: rgb(248 113 113 / var(--tw-text-opacity, 1));
 }
 
 .underline {
