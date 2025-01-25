@@ -72,6 +72,9 @@ async function validate() {
     popUp(newUser.username, newUser);
   }
 }
+document.addEventListener("DOMContentLoaded", () => {
+  setupInputListeners(); // Initialize input listeners
+});
 
 async function postUserData(newUser) {
   const emailExists = await checkEmailExists(newUser.email);
@@ -101,7 +104,6 @@ async function postUserData(newUser) {
     console.log("Data posted successfully:", result);
     console.log(`HI : result.userName`);
     window.location.href = "SignIn.html";
-
     // popUp(result.userName);
   } catch (error) {
     console.error("Error posting data:", error);
@@ -195,7 +197,7 @@ function popUp(userName, user) {
   popUp.classList.remove("hidden");
   popUp.classList.add("flex");
 
-  msg.innerHTML = `Your UserName is <span id="copyUserName" class="relative text-text-color font-semibold cursor-pointer active:text-main-color">"${userName}"<span class="tooltip hidden absolute -top-8 left-1/2 transform -translate-x-1/2 bg-text-color text-white text-xs py-1 px-2 rounded-lg">Copy</span></span>. Keep it in mind!`;
+  msg.innerHTML = `Your UserName is <span id="copyUserName" class="relative text-Btn-color font-semibold cursor-pointer active:text-main-color">"${userName}"<span class="tooltip hidden absolute -top-8 left-1/2 transform -translate-x-1/2 bg-text-color text-white text-xs py-1 px-2 rounded-lg">Copy</span></span>. Keep it in mind!`;
 
   const copyUserName = document.getElementById("copyUserName");
   const tooltip = copyUserName.querySelector(".tooltip");
@@ -235,3 +237,41 @@ function popUp(userName, user) {
     postUserData(user);
   };
 }
+
+function setupInputListeners() {
+  const fields = [
+    { id: "first-name", errorId: "error-first-name" },
+    { id: "last-name", errorId: "error-last-name" },
+    { id: "email", errorId: "error-email" },
+    { id: "password-input", errorId: "error-password" },
+    { id: "confirm-password", errorId: "error-confirm-password" },
+  ];
+
+  fields.forEach((field) => {
+    const inputField = document.getElementById(field.id);
+    const errorElement = document.getElementById(field.errorId);
+    const emailExist = document.getElementById("account-exists-alert");
+    // console.log("Input Field:", inputField, "Error Element:", errorElement);
+    if (inputField && errorElement) {
+      if (field.id === "email") {
+        console.log("email changed");
+        inputField.addEventListener("input", () => {
+          errorElement.textContent = "";
+          emailExist.textContent = "";
+          emailExist.classList.add("invisible");
+          errorElement.classList.add("invisible");
+        });
+      }
+      inputField.addEventListener("input", () => {
+        errorElement.textContent = "";
+        errorElement.classList.add("invisible");
+      });
+    } else {
+      console.error(`Missing field or error element for ${field.id}`);
+    }
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  setupInputListeners();
+});
