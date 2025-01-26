@@ -178,3 +178,33 @@ document
 
 // Initialize the quiz
 document.addEventListener("DOMContentLoaded", fetchQuizData);
+
+// function displayQuestions() {
+//   const questions = quizData.questions;
+//   const randomizedQuestions = shuffleQuestions(questions);
+//   console.log("To-be-shown-questions-inquiz", randomizedQuestions);
+
+//   // Loop through each question and display
+//   // randomizedQuestions.forEach((question, index) => {
+//   //   const questionElement = document.createElement("div");
+//   //   questionElement.classList.add("question");
+
+//   //   // Question title
+//   //   const questionTitle = document.createElement("h3");
+//   //   questionTitle.textContent = `${index + 1}. ${question.question}`;
+//   //   questionElement.appendChild(questionTitle);
+
+//   //   // Options
+//   //   question.options.forEach((option) => {
+//   //     const optionLabel = document.createElement("label");
+//   //     optionLabel.innerHTML = `
+//   //       <input type="radio" name="q${question.id}" value="${option.id}" onclick="trackAnswer('${question.id}', '${option.id}')">
+//   //       ${option.text}
+//   //     `;
+//   //     questionElement.appendChild(optionLabel);
+//   //   });
+
+//   //   // Append question to container
+//   //   questionsContainer.appendChild(questionElement);
+//   // });
+// }

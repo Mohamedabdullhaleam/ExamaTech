@@ -24,7 +24,7 @@
       <!-- <i class="fa-solid fa-clock fa-spin text-sec-color text-4xl"></i> -->
       <div class="flex items-baseline"></div>
       <p class="text-xl font-semibold">Timer:</p>
-      <span id="timer" class="text-xl font-semibold"> 01:00:59</span>
+      <span id="timer" class="text-xl font-semibold"></span>
     </div>
   </div>
 
@@ -55,15 +55,15 @@
       </div>
       <!-- end of answers div -->
       <div class="controls flex w-full p-3 justify-between">
-        <p class="cursor-pointer active:text-sec-color">
+        <p id="previous" class="cursor-pointer active:text-sec-color">
           <i class="fa-solid fa-angle-left"></i> Previous
         </p>
-        <p class="cursor-pointer active:text-sec-color">
+        <p id="next" class="cursor-pointer active:text-sec-color">
           Next <i class="fa-solid fa-angle-right"></i>
         </p>
       </div>
 
-      <input type="submit" value="Submit"
+      <input id="submit" type="submit" value="Submit"
         class="mt-5 w-36 h-11 text-xl cursor-pointer active:bg-sec-color text-white bg-Btn-color rounded" />
     </div>
     <!-- end of the left section div -->
