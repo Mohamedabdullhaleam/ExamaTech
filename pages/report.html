@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../css/output.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="../assets/icons/icon3.png" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <title>Report</title>
+  </head>
+
+  <body
+    class="bg-gradient-to-br from-white to-main-color w-screen flex flex-col items-center overflow-x-hidden"
+  >
+    <div class="p-6 sm:p-10 grid grid-cols-1 md:grid-cols-12 w-screen">
+      <div class="col-span-10">
+        <h1 id="message" class="font-bold text-4xl sm:text-5xl">Exama-Tech</h1>
+        <h6 class="mt-3 font-mono text-lg">Your Exam Reporting</h6>
+      </div>
+
+      <input
+        type="submit"
+        value="Visit Dashboard"
+        class="ml-auto items-center w-40 h-11 text-xl cursor-pointer active:bg-sec-color text-white bg-Btn-color rounded"
+      />
+    </div>
+    <!-- exam Info grade/date/time taken -->
+    <div class="exam-info p-6 sm:p-10 flex justify-between gap-16 flex-wrap">
+      <div
+        class="grade border rounded-lg flex justify-around items-center text-xl border-main-color h-28 w-64"
+      >
+        <div class="flex flex-col text-center">
+          <p class="text-xl">Grade</p>
+          <span class="text-xl font-semibold">100%</span>
+        </div>
+        <i class="fa-solid fa-medal text-5xl text-sec-color"></i>
+      </div>
+      <div
+        class="time border rounded-lg flex justify-around items-center text-xl border-main-color h-28 w-64"
+      >
+        <div class="flex flex-col text-center">
+          <p class="text-xl">Time Taken</p>
+          <span class="text-xl font-semibold">5min</span>
+        </div>
+        <i class="fa-regular fa-hourglass-half text-5xl text-sec-color"></i>
+      </div>
+      <div
+        class="date border rounded-lg flex justify-around items-center text-xl border-main-color h-28 w-64"
+      >
+        <div class="flex flex-col text-center">
+          <p class="text-xl">Date</p>
+          <span class="text-xl font-semibold">18 March 2025</span>
+        </div>
+        <i class="fa-solid fa-calendar-days text-5xl text-sec-color"></i>
+      </div>
+    </div>
+    <div class="container mb-4">
+      <div class="flex justify-center">
+        <div class="correction pt-7 w-full max-w-4xl flex flex-col gap-4">
+          <div
+            class="border-2 rounded-lg flex justify-center items-center gap-2 border-main-color h-16 w-full"
+          >
+            <i class="fa-regular fa-circle-check text-xl text-green-500"></i>
+            <p class="text-xl">1. What is the color of the sky?</p>
+          </div>
+          <div
+            class="border-2 border-red-500 rounded-lg flex justify-center items-center gap-2 h-16 w-full"
+          >
+            <i class="fa-regular fa-circle-xmark text-xl text-red-500"></i>
+            <p class="text-xl">2. What is the color of the sky?</p>
+          </div>
+          <div
+            class="border-2 rounded-lg flex justify-center items-center gap-2 border-main-color h-16 w-full"
+          >
+            <i class="fa-regular fa-circle-check text-xl text-green-500"></i>
+            <p class="text-xl">3. What is the color of the sky?</p>
+          </div>
+          <div
+            class="border-2 border-red-500 rounded-lg flex justify-center items-center gap-2 h-16 w-full"
+          >
+            <i class="fa-regular fa-circle-xmark text-xl text-red-500"></i>
+            <p class="text-xl">4. What is the color of the sky?</p>
+          </div>
+          <div
+            class="border-2 rounded-lg flex justify-center items-center gap-2 border-main-color h-16 w-full"
+          >
+            <i class="fa-regular fa-circle-check text-xl text-green-500"></i>
+            <p class="text-xl">5. What is the color of the sky?</p>
+          </div>
+          <div
+            class="border-2 border-red-500 rounded-lg flex justify-center items-center gap-2 h-16 w-full"
+          >
+            <i class="fa-regular fa-circle-xmark text-xl text-red-500"></i>
+            <p class="text-xl">6. What is the color of the sky?</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/pages/exam.js"></script>
+    <script>
+      ///
+      document.addEventListener("DOMContentLoaded", () => {
+        const message = "Exama-Tech";
+        const messageElement = document.getElementById("message");
+        let index = 0;
+
+        if (messageElement) {
+          const intervalId = setInterval(() => {
+            messageElement.textContent = message.substring(0, index + 1);
+
+            index++;
+            if (index >= message.length) {
+              clearInterval(intervalId);
+              const blinkInterval = setInterval(() => {
+                messageElement.textContent =
+                  message + (index % 2 === 0 ? "|" : "");
+                index++;
+                if (index >= message.length + 6) {
+                  clearInterval(blinkInterval);
+                  messageElement.textContent = message;
+                }
+              }, 500);
+            }
+          }, 150);
+        } else {
+          console.error('Element with ID "message" not found.');
+        }
+      });
+    </script>
+  </body>
+</html>
