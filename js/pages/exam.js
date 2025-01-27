@@ -130,15 +130,18 @@ document.getElementById("previous").addEventListener("click", () => {
 
 / * * * * * Need to submit on another json * * * * * /;
 /// includes  -- user-name & user email --- answers (correct and wrong )  --- score)
-async function submitQuiz() {
-  const username = localStorage.getItem("username") || "user_101"; // Retrieve from localStorage or use default
+// Retrieve user information from localStorage
+function getUserInfo() {
+  const username = localStorage.getItem("username") || "user_101";
   const email = localStorage.getItem("email") || "john.doe@example.com";
+  return { username, email };
+}
 
-  const questions = quizData.questions;
+// Calculate score and prepare answers array
+function calculateScoreAndAnswers(questions) {
   let score = 0;
   const answers = [];
 
-  // Calculate the score and prepare answers
   questions.forEach((question, index) => {
     const isCorrect = question.choosedOptionId === question.correctOptionId;
     if (isCorrect) score++;
@@ -149,97 +152,108 @@ async function submitQuiz() {
     });
   });
 
+  return { score, answers };
+}
+
+// Fetch existing grades for the user
+async function fetchUserGrades(username) {
   try {
-    // Fetch existing grades for this user
     const response = await fetch(
       `http://localhost:3020/grades?username=${username}`
     );
-    const userData = response.ok ? await response.json() : [];
+    return response.ok ? await response.json() : [];
+  } catch (error) {
+    console.error("Error fetching user grades:", error);
+    return [];
+  }
+}
 
-    // Determine the new attempt number
-    let attemptNumber = 1;
-    if (userData.length > 0) {
-      const existingQuiz = userData[0].quizAttempts.find(
-        (q) => q.quizId === "quiz_101"
-      );
-      if (existingQuiz) {
-        attemptNumber = existingQuiz.attempts.length + 1;
-      }
+// Prepare the payload based on the user data and new attempt
+function preparePayload(userData, username, email, score, answers) {
+  const completedAt = new Date().toISOString();
+  const newAttempt = {
+    attemptId: 1,
+    score,
+    answers,
+    completedAt,
+  };
+
+  if (userData.length > 0) {
+    const payload = { ...userData[0] };
+    const quizIndex = payload.quizAttempts.findIndex(
+      (q) => q.quizId === "quiz_101"
+    );
+
+    if (quizIndex >= 0) {
+      const existingQuiz = payload.quizAttempts[quizIndex];
+      newAttempt.attemptId = existingQuiz.attempts.length + 1;
+      existingQuiz.attempts.push(newAttempt);
+      existingQuiz.bestScore = Math.max(existingQuiz.bestScore, score);
+    } else {
+      payload.quizAttempts.push({
+        quizId: "quiz_101",
+        attempts: [newAttempt],
+        bestScore: score,
+      });
     }
-
-    // Prepare the quiz attempt data
-    const completedAt = new Date().toISOString();
-    const newAttempt = {
-      attemptId: attemptNumber,
-      score,
-      answers,
-      completedAt,
-    };
-
-    let payload;
-
-    if (userData.length > 0) {
-      // Append to existing user data
-      payload = { ...userData[0] };
-      const quizIndex = payload.quizAttempts.findIndex(
-        (q) => q.quizId === "quiz_101"
-      );
-
-      if (quizIndex >= 0) {
-        // Append new attempt to existing quizAttempts
-        payload.quizAttempts[quizIndex].attempts.push(newAttempt);
-        payload.quizAttempts[quizIndex].bestScore = Math.max(
-          payload.quizAttempts[quizIndex].bestScore,
-          score
-        );
-      } else {
-        // Add a new quizAttempts entry
-        payload.quizAttempts.push({
+    return payload;
+  } else {
+    return {
+      username,
+      email,
+      quizAttempts: [
+        {
           quizId: "quiz_101",
           attempts: [newAttempt],
           bestScore: score,
-        });
-      }
-    } else {
-      // New user data
-      payload = {
-        username,
-        email,
-        quizAttempts: [
-          {
-            quizId: "quiz_101",
-            attempts: [newAttempt],
-            bestScore: score,
-          },
-        ],
-      };
-    }
+        },
+      ],
+    };
+  }
+}
 
-    const postResponse = await fetch("http://localhost:3020/grades", {
+// Submit the quiz data to the server
+async function submitQuizData(payload) {
+  try {
+    const response = await fetch("http://localhost:3020/grades", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
     });
-
-    if (postResponse.ok) {
-      alert(`Quiz submitted successfully! Your score: ${score}`);
-      console.log("Submitted data:", payload);
-
-      localStorage.removeItem("randomizedQuestions");
-      localStorage.removeItem("currentQuestionIndex");
-      localStorage.removeItem("countdownFinishTime");
-
-      window.location.href = "report.html";
-    } else {
-      throw new Error("Failed to submit quiz.");
-    }
+    return response.ok;
   } catch (error) {
-    console.error("Error submitting quiz:", error);
+    console.error("Error submitting quiz data:", error);
+    return false;
+  }
+}
+
+// Clear localStorage and redirect after submission
+function clearLocalStorageAndRedirect() {
+  localStorage.removeItem("randomizedQuestions");
+  localStorage.removeItem("currentQuestionIndex");
+  localStorage.removeItem("countdownFinishTime");
+  window.location.href = "report.html";
+}
+
+// Main function to handle quiz submission
+async function submitQuiz() {
+  const { username, email } = getUserInfo();
+  const { score, answers } = calculateScoreAndAnswers(quizData.questions);
+  const userData = await fetchUserGrades(username);
+  const payload = preparePayload(userData, username, email, score, answers);
+
+  const success = await submitQuizData(payload);
+  if (success) {
+    alert(`Quiz submitted successfully! Your score: ${score}`);
+    console.log("Submitted data:", payload);
+    clearLocalStorageAndRedirect();
+  } else {
     alert("An error occurred while submitting the quiz. Please try again.");
   }
 }
+
 const submit = document.getElementById("submit");
 
 submit.addEventListener("click", () => {
