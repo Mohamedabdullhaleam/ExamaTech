@@ -41,7 +41,7 @@ async function fetchQuizData() {
 }
 
 function initQuiz() {
-  const currentQuestionIndex =
+  currentQuestionIndex =
     parseInt(localStorage.getItem("currentQuestionIndex")) || 0;
   displayQuestion(
     quizData.questions[currentQuestionIndex],
@@ -70,6 +70,7 @@ function displayQuestion(question, index) {
 
       radioInput.checked = question.choosedOptionId === option.id; // / Pre-select the radio button if the option was previously chosen
       // console.log("option-id:", option.id);
+      console.log("aaaa", question.flags.isFlagged);
       radioInput.onclick = () => trackAnswer(question.id, option.id);
     }
   });
@@ -96,6 +97,14 @@ function shuffleQuestions(questions) {
 function updateButtonState() {
   const nextButton = document.getElementById("next");
   const prevButton = document.getElementById("previous");
+  const flagIcon = document.getElementById("flag-icon");
+  const currentQuestion = quizData.questions[currentQuestionIndex];
+  if (!currentQuestion.flags.isFlagged) {
+    flagIcon.classList.remove("text-flag-color");
+    flagIcon.classList.add("text-main-color");
+  } else {
+    flagIcon.classList.add("text-flag-color");
+  }
 
   // Disable/enable buttons based on the current index
   prevButton.style.visibility =
@@ -106,10 +115,10 @@ function updateButtonState() {
       : "visible";
 }
 
-// Event listeners for Next and Previous buttons
 document.getElementById("next").addEventListener("click", () => {
   if (currentQuestionIndex < quizData.questions.length - 1) {
     currentQuestionIndex++;
+    localStorage.setItem("currentQuestionIndex", currentQuestionIndex); // Save index
     displayQuestion(
       quizData.questions[currentQuestionIndex],
       currentQuestionIndex
@@ -117,9 +126,11 @@ document.getElementById("next").addEventListener("click", () => {
     updateButtonState();
   }
 });
+
 document.getElementById("previous").addEventListener("click", () => {
   if (currentQuestionIndex > 0) {
     currentQuestionIndex--;
+    localStorage.setItem("currentQuestionIndex", currentQuestionIndex); // Save index
     displayQuestion(
       quizData.questions[currentQuestionIndex],
       currentQuestionIndex
@@ -132,8 +143,8 @@ document.getElementById("previous").addEventListener("click", () => {
 /// includes  -- user-name & user email --- answers (correct and wrong )  --- score)
 // Retrieve user information from localStorage
 function getUserInfo() {
-  const username = localStorage.getItem("username") || "user_101";
-  const email = localStorage.getItem("email") || "john.doe@example.com";
+  const username = localStorage.getItem("username") || "user_101"; /// sent from log-in
+  const email = localStorage.getItem("email") || "john.doe@example.com"; // sent from login
   return { username, email };
 }
 
@@ -260,7 +271,7 @@ submit.addEventListener("click", () => {
   submitQuiz();
 });
 
-/ * * Timer logic  ✔✔    icon pulse* * /;
+/ * * * * * * * * * * * * * * *  * * Timer logic  ✔✔    icon pulse* * * * * * * * * * * * * * * * * * * * * * * * /;
 function startCountdown(hours, minutes, seconds) {
   const finishTime = localStorage.getItem("countdownFinishTime");
   if (!finishTime) {
@@ -310,6 +321,7 @@ function initCountdown() {
     )}:${String(remainingMinutes).padStart(2, "0")}:${String(
       remainingSeconds
     ).padStart(2, "0")}`;
+    warningTimer.classList.remove("invisible");
 
     // Handle the warning styles when less than 2 minutes remain
     if (remainingHours === 0 && remainingMinutes < 2) {
@@ -324,8 +336,77 @@ function initCountdown() {
   }, 1000);
 }
 
+console.log(currentQuestionIndex);
+/ * * * * Flags functionality * * * * /;
+document.querySelector(".fa-flag").addEventListener("click", () => {
+  const currentQuestion = quizData.questions[currentQuestionIndex];
+
+  if (!currentQuestion.flags) {
+    currentQuestion.flags = { isFlagged: false };
+  }
+
+  currentQuestion.flags.isFlagged = !currentQuestion.flags.isFlagged;
+
+  localStorage.setItem(
+    "randomizedQuestions",
+    JSON.stringify(quizData.questions)
+  );
+
+  updateFlagUI(currentQuestionIndex, currentQuestion.flags.isFlagged);
+
+  console.log(
+    `Question ${currentQuestionIndex + 1} is ${
+      currentQuestion.flags.isFlagged ? "flagged" : "unflagged"
+    }.`
+  );
+});
+
+function updateFlagUI(index, isFlagged) {
+  const cardElement = document.getElementById(`card-${index + 1}`);
+  if (isFlagged) {
+    cardElement.classList.add("bg-flag-color");
+  } else {
+    cardElement.classList.remove("bg-flag-color");
+  }
+}
+
+function updateCardColor() {
+  // Retrieve the saved questions from localStorage
+  const savedQuestions = JSON.parse(
+    localStorage.getItem("randomizedQuestions")
+  );
+
+  if (savedQuestions) {
+    savedQuestions.forEach((question, index) => {
+      // Ensure flags object exists before applying styles
+      const isFlagged = question.flags && question.flags.isFlagged;
+      updateFlagUI(index, isFlagged);
+    });
+  }
+}
+const cards = document.getElementById("cards");
+cards.addEventListener("click", (event) => {
+  const liElement = event.target;
+  console.log("Hiiiiiiiiiiiiii", event.target.tagName);
+  if (liElement.tagName === "LI") {
+    const index = Array.from(cards.children).indexOf(liElement);
+    currentQuestionIndex = index;
+    localStorage.setItem("currentQuestionIndex", index);
+    displayQuestion(
+      quizData.questions[currentQuestionIndex],
+      currentQuestionIndex
+    );
+  }
+});
+
 window.onload = () => {
   fetchQuizData();
   initCountdown();
+  updateCardColor();
   updateButtonState();
+
+  const savedIndex = parseInt(localStorage.getItem("currentQuestionIndex"));
+  if (!isNaN(savedIndex)) {
+    currentQuestionIndex = savedIndex;
+  }
 };

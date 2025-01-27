@@ -19,7 +19,7 @@
         Welcome Ash to Exama-Tech , Good Luck
       </h6>
     </div>
-    <div id="warning-timer" class="self-end flex items-center space-x-2">
+    <div id="warning-timer" class="invisible self-end flex items-center space-x-2">
       <i id="warning-icon" class="fa-solid fa-hourglass-start text-sec-color text-4xl"></i>
       <!-- <i class="fa-solid fa-clock fa-spin text-sec-color text-4xl"></i> -->
       <div class="flex items-baseline"></div>
@@ -31,7 +31,7 @@
   <!-- Questions Section -->
   <div class="container gap-9 grid grid-cols-1 md:grid-cols-12 w-full xl:h-[600px]">
     <div class="col-span-7 flex flex-col">
-      <i class="fa-solid fa-flag text-main-color cursor-pointer active:text-flag-color"></i>
+      <i id="flag-icon" class="fa-solid fa-flag text-main-color cursor-pointer"></i>
       <p id="q-number-text" class="question pt-3 text-2xl font-semibold">
         <span id="question-text" class="font-bold"></span>
       </p>
@@ -71,6 +71,7 @@
     <!-- start right section div -->
     <div class="right-section flex justify-center col-span-4 ml-auto">
       <div class="flec flex-col">
+        <!-- Filters  -->
         <ul class="list-none gap-3 flex h-9 questions-list mb-4">
           <li
             class="border border-main-color flex items-center bg-main-color text-white rounded-full px-5 py-2 cursor-pointer transition-colors duration-500">
@@ -90,53 +91,54 @@
           </li>
         </ul>
 
-        <ul class="question-number grid grid-cols-4 gap-14 pl-5 list-none w-full">
-          <li
+        <!-- Cards -->
+        <ul id="cards" class="question-number grid grid-cols-4 gap-14 pl-5 list-none w-full">
+          <li id="card-1"
             class="text-white bg-main-color w-12 h-12 flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color">
             1
           </li>
-          <li
+          <li id="card-2"
             class="text-white w-12 h-12 flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color">
             2
           </li>
-          <li
+          <li id="card-3"
             class="text-white w-12 h-12 flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color">
             3
           </li>
-          <li
+          <li id="card-4"
             class="text-white w-12 h-12 flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color">
             4
           </li>
-          <li
+          <li id="card-5"
             class="text-white w-12 h-12 flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color">
             5
           </li>
-          <li
+          <li id="card-6"
             class="text-white w-12 h-12 flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color">
             6
           </li>
-          <li
+          <li id="card-7"
             class="text-white w-12 h-12 flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color">
             7
           </li>
-          <li
+          <li id="card-8"
             class="text-white w-12 h-12 flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color">
             8
           </li>
-          <li
+          <li id="card-9"
             class="text-white w-12 h-12 flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color">
             9
           </li>
-          <li
+          <li id="card-10"
             class="text-white w-12 h-12 flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color">
             10
           </li>
-          <li
+          <li id="card-11"
             class="text-white w-12 h-12 flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color">
             11
           </li>
-          <li
-            class="text-white bg-flag-color w-12 h-12 flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color">
+          <li id="card-12"
+            class="text-white w-12 h-12 flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color">
             12
           </li>
         </ul>
@@ -179,7 +181,7 @@
 
       flagIcon.addEventListener("click", () => {
         flagIcon.classList.toggle("text-flag-color");
-        flagIcon.classList.toggle("text-main-color");
+        // flagIcon.classList.toggle("text-main-color");
       });
     });
 
