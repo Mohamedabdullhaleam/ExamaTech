@@ -185,12 +185,13 @@ async function fetchUserGrades(username) {
 }
 
 // Prepare the payload based on the user data and new attempt
-function preparePayload(userData, username, email, score, answers) {
+function preparePayload(userData, username, email, score, answers, timeTaken) {
   const completedAt = new Date().toISOString();
   const newAttempt = {
     attemptId: 1,
     score,
     answers,
+    timeTaken, // Add time taken
     completedAt,
   };
 
@@ -257,14 +258,32 @@ function clearLocalStorageAndRedirect() {
 async function submitQuiz() {
   const { username, email } = getUserInfo();
   const { score, answers } = calculateScoreAndAnswers(quizData.questions);
+  const quizStartTime = localStorage.getItem("quizStartTime");
+  const quizEndTime = new Date().getTime();
+  const timeTaken = quizStartTime ? quizEndTime - parseInt(quizStartTime) : 0;
+
+  const formattedTimeTaken = formatTimeTaken(timeTaken); // Format time taken
+
   const userData = await fetchUserGrades(username);
-  const payload = preparePayload(userData, username, email, score, answers);
+  const payload = preparePayload(
+    userData,
+    username,
+    email,
+    score,
+    answers,
+    formattedTimeTaken
+  );
 
   const success = await submitQuizData(payload);
   if (success) {
-    alert(`Quiz submitted successfully! Your score: ${score}`);
-    console.log("Submitted data:", payload);
+    // alert(
+    //   `Quiz submitted successfully! Your score: ${score}. Time taken: ${formattedTimeTaken}`
+    // );
+    // clearLocalStorageAndRedirect();
+    // console.log("Hi mooooo");
     clearLocalStorageAndRedirect();
+    // console.log("Submitted data:", payload);
+    // clearLocalStorageAndRedirect();
   } else {
     alert("An error occurred while submitting the quiz. Please try again.");
   }
@@ -277,13 +296,27 @@ submit.addEventListener("click", () => {
 });
 
 / * * * * * * * * * * * * * * *  * * Timer logic  ✔✔    icon pulse* * * * * * * * * * * * * * * * * * * * * * * * /;
+
+function formatTimeTaken(milliseconds) {
+  const totalSeconds = Math.floor(milliseconds / 1000);
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(
+    2,
+    "0"
+  )}:${String(seconds).padStart(2, "0")}`;
+}
+
 function startCountdown(hours, minutes, seconds) {
   const finishTime = localStorage.getItem("countdownFinishTime");
   if (!finishTime) {
-    const currentTime = new Date().getTime(); // Define currentTime here
+    const currentTime = new Date().getTime();
     const totalMilliseconds = (hours * 3600 + minutes * 60 + seconds) * 1000;
     const countdownFinishTime = currentTime + totalMilliseconds;
     localStorage.setItem("countdownFinishTime", countdownFinishTime);
+    localStorage.setItem("quizStartTime", currentTime);
     console.log("Countdown finish time set to:", countdownFinishTime);
   }
   initCountdown();
