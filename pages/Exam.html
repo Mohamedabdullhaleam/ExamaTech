@@ -31,7 +31,7 @@
   <!-- Questions Section -->
   <div class="container gap-9 grid grid-cols-1 md:grid-cols-12 w-full xl:h-[600px]">
     <div class="col-span-7 flex flex-col">
-      <i id="flag-icon" class="fa-solid fa-flag text-main-color cursor-pointer"></i>
+      <i id="flag-icon" class="fa-solid fa-flag cursor-pointer"></i>
       <p id="q-number-text" class="question pt-3 text-2xl font-semibold">
         <span id="question-text" class="font-bold"></span>
       </p>
@@ -175,17 +175,6 @@
         });
       });
     });
-    ////////
-    document.addEventListener("DOMContentLoaded", () => {
-      const flagIcon = document.querySelector(".fa-flag");
-
-      flagIcon.addEventListener("click", () => {
-        flagIcon.classList.toggle("text-flag-color");
-        // flagIcon.classList.toggle("text-main-color");
-      });
-    });
-
-    ///
     document.addEventListener("DOMContentLoaded", () => {
       const message = "Exama-Tech";
       const messageElement = document.getElementById("message");

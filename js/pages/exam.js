@@ -338,13 +338,15 @@ function initCountdown() {
 
 console.log(currentQuestionIndex);
 / * * * * Flags functionality * * * * /;
-document.querySelector(".fa-flag").addEventListener("click", () => {
+const flagIcon = document.getElementById("flag-icon");
+flagIcon.addEventListener("click", () => {
   const currentQuestion = quizData.questions[currentQuestionIndex];
-
+  flagIcon.classList.toggle("text-main-color");
+  flagIcon.classList.toggle("text-flag-color");
+  console.log("flag--orange");
   if (!currentQuestion.flags) {
     currentQuestion.flags = { isFlagged: false };
   }
-
   currentQuestion.flags.isFlagged = !currentQuestion.flags.isFlagged;
 
   localStorage.setItem(
@@ -392,6 +394,7 @@ cards.addEventListener("click", (event) => {
     const index = Array.from(cards.children).indexOf(liElement);
     currentQuestionIndex = index;
     localStorage.setItem("currentQuestionIndex", index);
+    updateButtonState();
     displayQuestion(
       quizData.questions[currentQuestionIndex],
       currentQuestionIndex
@@ -404,6 +407,8 @@ window.onload = () => {
   initCountdown();
   updateCardColor();
   updateButtonState();
+  const flagIcon = document.getElementById("flag-icon");
+  flagIcon.classList.add("text-main-color");
 
   const savedIndex = parseInt(localStorage.getItem("currentQuestionIndex"));
   if (!isNaN(savedIndex)) {
