@@ -178,3 +178,102 @@ document
 
 // Initialize the quiz
 document.addEventListener("DOMContentLoaded", fetchQuizData);
+
+// function displayQuestions() {
+//   const questions = quizData.questions;
+//   const randomizedQuestions = shuffleQuestions(questions);
+//   console.log("To-be-shown-questions-inquiz", randomizedQuestions);
+
+//   // Loop through each question and display
+//   // randomizedQuestions.forEach((question, index) => {
+//   //   const questionElement = document.createElement("div");
+//   //   questionElement.classList.add("question");
+
+//   //   // Question title
+//   //   const questionTitle = document.createElement("h3");
+//   //   questionTitle.textContent = `${index + 1}. ${question.question}`;
+//   //   questionElement.appendChild(questionTitle);
+
+//   //   // Options
+//   //   question.options.forEach((option) => {
+//   //     const optionLabel = document.createElement("label");
+//   //     optionLabel.innerHTML = `
+//   //       <input type="radio" name="q${question.id}" value="${option.id}" onclick="trackAnswer('${question.id}', '${option.id}')">
+//   //       ${option.text}
+//   //     `;
+//   //     questionElement.appendChild(optionLabel);
+//   //   });
+
+//   //   // Append question to container
+//   //   questionsContainer.appendChild(questionElement);
+//   // });
+// }
+
+// function startCountdown(hours, minutes, seconds) {
+//   const finishTime = localStorage.getItem("countdownFinishTime");
+//   if (!finishTime) {
+//     const currentTime = new Date().getTime(); // Define currentTime here
+//     const totalMilliseconds = (hours * 3600 + minutes * 60 + seconds) * 1000;
+//     const countdownFinishTime = currentTime + totalMilliseconds;
+//     localStorage.setItem("countdownFinishTime", countdownFinishTime);
+//     console.log("Countdown finish time set to:", countdownFinishTime);
+//   }
+//   initCountdown();
+// }
+// function initCountdown() {
+//   console.log("Initializing countdown...");
+
+//   const warningTimer = document.getElementById("warning-timer");
+//   warningTimer.innerHTML = ` <i id="warning-icon" class="fa-solid fa-hourglass-start text-sec-color text-4xl"></i>
+//       <!-- <i class="fa-solid fa-clock fa-spin text-sec-color text-4xl"></i> -->
+//       <div class="flex items-baseline"></div>
+//       <p class="text-xl font-semibold">Timer:</p>
+//       <span id="timer" class="text-xl font-semibold"></span>`;
+
+//   const warningIcon = document.getElementById("warning-icon");
+//   const timerElement = document.getElementById("timer");
+//   const intervalId = setInterval(() => {
+//     const currentTime = new Date().getTime();
+//     const finishTime = localStorage.getItem("countdownFinishTime");
+
+//     if (!finishTime) {
+//       clearInterval(intervalId);
+//       return;
+//     }
+
+//     const remainingTime = Math.max(finishTime - currentTime, 0);
+
+//     if (remainingTime <= 0) {
+//       clearInterval(intervalId);
+//       localStorage.removeItem("countdownFinishTime");
+//       window.location.href = "TimeOut.html";
+//       return;
+//     }
+
+//     const remainingHours = Math.floor(remainingTime / (1000 * 60 * 60));
+//     const remainingMinutes = Math.floor(
+//       (remainingTime % (1000 * 60 * 60)) / (1000 * 60)
+//     );
+
+//     const remainingSeconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+//     console.log(remainingHours, remainingMinutes, remainingSeconds); // nothing displayed //
+
+//     timerElement.textContent = `${String(remainingHours).padStart(
+//       2,
+//       "0"
+//     )}:${String(remainingMinutes).padStart(2, "0")}:${String(
+//       remainingSeconds
+//     ).padStart(2, "0")}`;
+
+//     // Handle the warning styles when less than 2 minutes remain
+//     if (remainingHours === 0 && remainingMinutes < 2) {
+//       warningTimer.classList.add("text-red-500");
+//       warningIcon.classList.remove("text-sec-color");
+//       warningIcon.classList.add("text-red-500", "fa-beat-fade");
+//     } else {
+//       warningTimer.classList.remove("text-red-500");
+//       warningIcon.classList.remove("text-red-500", "fa-beat-fade");
+//       warningIcon.classList.add("text-sec-color");
+//     }
+//   }, 1000);
+// }

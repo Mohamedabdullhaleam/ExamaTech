@@ -720,6 +720,7 @@ video {
   grid-column: span 8 / span 8;
 }
 
+
 .col-span-12 {
   grid-column: span 12 / span 12;
 }
@@ -1003,6 +1004,7 @@ video {
 .w-screen {
   width: 100vw;
 }
+
 
 .w-60 {
   width: 15rem;
@@ -1608,6 +1610,7 @@ video {
 .gap-9 {
   gap: 2.25rem;
 }
+
 
 .gap-7 {
   gap: 1.75rem;
@@ -2971,6 +2974,7 @@ video {
   transition-duration: 500ms;
 }
 
+
 .duration-300 {
   transition-duration: 300ms;
 }
@@ -3134,11 +3138,6 @@ h1 {
   background-color: rgb(85 99 82 / var(--tw-bg-opacity, 1));
 }
 
-.active\:text-flag-color:active {
-  --tw-text-opacity: 1;
-  color: rgb(239 167 33 / var(--tw-text-opacity, 1));
-}
-
 .active\:text-main-color:active {
   --tw-text-opacity: 1;
   color: rgb(143 163 139 / var(--tw-text-opacity, 1));
@@ -3264,6 +3263,10 @@ h1 {
     height: 580px;
   }
 
+  .md\:h-screen {
+    height: 100vh;
+  }
+
   .md\:w-80 {
     width: 20rem;
   }
@@ -3279,6 +3282,10 @@ h1 {
   .md\:w-\[7rem\] {
     width: 7rem;
   }
+
+
+  .md\:w-screen {
+    width: 100vw;
 
   .md\:w-full {
     width: 100%;
