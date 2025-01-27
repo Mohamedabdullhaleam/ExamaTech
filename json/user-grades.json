@@ -1,45 +1,84 @@
-[
-  {
-    "userId": "user_101",
-    "name": "John Doe",
-    "email": "john.doe@example.com",
-    "quizAttempts": [
-      {
-        "quizId": "quiz_101",
-        "attempts": [
-          {
-            "attemptId": "attempt_1",
-            "score": 8,
-            "completedAt": "2025-01-19T10:30:00Z"
-          },
-          {
-            "attemptId": "attempt_2",
-            "score": 10,
-            "answers": [1, 0],
-            "completedAt": "2025-01-19T11:00:00Z"
-          }
-        ],
-        "bestScore": 10
-      }
-    ]
-  },
-
-  {
-    "userId": "user_102",
-    "name": "Jane Smith",
-    "email": "jane.smith@example.com",
-    "quizAttempts": [
-      {
-        "quizId": "quiz_101",
-        "attempts": [
-          {
-            "attemptId": "attempt_1",
-            "score": 6,
-            "completedAt": "2025-01-19T09:45:00Z"
-          }
-        ],
-        "bestScore": 6
-      }
-    ]
-  }
-]
+{
+  "grades": [
+    {
+      "id": "3133",
+      "username": "user_101",
+      "email": "john.doe@example.com",
+      "quizAttempts": [
+        {
+          "quizId": "quiz_101",
+          "attempts": [
+            {
+              "attemptId": 1,
+              "score": 4,
+              "answers": [
+                {
+                  "questionIndex": 0,
+                  "selectedOptionId": "o2",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 1,
+                  "selectedOptionId": "o1",
+                  "isCorrect": true
+                },
+                {
+                  "questionIndex": 2,
+                  "selectedOptionId": "o2",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 3,
+                  "selectedOptionId": "o3",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 4,
+                  "selectedOptionId": "o1",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 5,
+                  "selectedOptionId": "o3",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 6,
+                  "selectedOptionId": "o2",
+                  "isCorrect": true
+                },
+                {
+                  "questionIndex": 7,
+                  "selectedOptionId": "o1",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 8,
+                  "selectedOptionId": "o2",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 9,
+                  "selectedOptionId": "o2",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 10,
+                  "selectedOptionId": "o3",
+                  "isCorrect": true
+                },
+                {
+                  "questionIndex": 11,
+                  "selectedOptionId": "o2",
+                  "isCorrect": true
+                }
+              ],
+              "completedAt": "2025-01-27T00:59:51.075Z"
+            }
+          ],
+          "bestScore": 4
+        }
+      ]
+    }
+  ]
+}

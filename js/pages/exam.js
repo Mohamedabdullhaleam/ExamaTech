@@ -1,5 +1,6 @@
 let quizData = {};
 let currentQuestionIndex = 0;
+
 // Fetch quiz data
 async function fetchQuizData() {
   // get data from local storage first
@@ -18,14 +19,13 @@ async function fetchQuizData() {
 
     quizData = await response.json();
     const { hours, minutes, seconds } = quizData.quizTime;
-
     const randomizedQuestions = shuffleQuestions(quizData.questions);
     quizData.questions = randomizedQuestions; // Store shuffled questions in quizData
 
     // Save shuffled questions in localStorage
     localStorage.setItem(
       "randomizedQuestions",
-      JSON.stringify(randomizedQuestions)
+      JSON.stringify(randomizedQuestions) /// to make an instance of it and use it as frequent as you want "same instance"
     );
     localStorage.setItem(
       "quizTime",
@@ -36,6 +36,7 @@ async function fetchQuizData() {
     initQuiz();
   } catch (error) {
     console.error("Error fetching quiz data:", error);
+    / * * * * Redirect to error page * * * * * /;
   }
 }
 
@@ -48,30 +49,7 @@ function initQuiz() {
   );
 }
 
-function displayQuestion(question, index) {
-  const questionNumberElement = document.getElementById("q-number-text");
-  // const answersContainer = document.querySelector(".answer");
-
-  questionNumberElement.innerHTML = `${
-    index + 1
-  }. <span id="question-text" class="font-bold">${question.question}</span>`;
-
-  // Loop through the options and update the existing divs
-  question.options.forEach((option, optionIndex) => {
-    const optionElement = document.getElementById(`option-${optionIndex + 1}`);
-
-    if (optionElement) {
-      const radioInput = optionElement.querySelector("input");
-      const radioLabel = optionElement.querySelector("label");
-
-      radioInput.id = `choice-${index}-${optionIndex}`;
-      radioLabel.setAttribute("for", radioInput.id);
-      radioLabel.textContent = option.text;
-    }
-  });
-}
-
-// Function to display the questions on the page
+/ * * * *   Disply  * * * * /;
 function displayQuestion(question, index) {
   localStorage.setItem("currentQuestionIndex", index);
 
@@ -90,11 +68,23 @@ function displayQuestion(question, index) {
       radioLabel.setAttribute("for", radioInput.id);
       radioLabel.textContent = option.text;
 
-      // Pre-select if previously chosen
-      radioInput.checked = question.choosedOptionId === option.id;
+      radioInput.checked = question.choosedOptionId === option.id; // / Pre-select the radio button if the option was previously chosen
+      // console.log("option-id:", option.id);
       radioInput.onclick = () => trackAnswer(question.id, option.id);
     }
   });
+}
+
+/ * * * * Tracking Answers * * * * /;
+function trackAnswer(questionId, optionId) {
+  const currentQuestion = quizData.questions.find((q) => q.id === questionId);
+  currentQuestion.choosedOptionId = optionId;
+  // Save updated questions to localStorage with it's answer
+  console.log(quizData.questions);
+  localStorage.setItem(
+    "randomizedQuestions",
+    JSON.stringify(quizData.questions)
+  );
 }
 
 / * * * *  Shuffling question * * * * /;
@@ -102,17 +92,6 @@ function shuffleQuestions(questions) {
   return questions.sort(() => Math.random() - 0.5);
 }
 
-/ * * * * Tracking Answers * * * * /;
-function trackAnswer(questionId, optionId) {
-  const currentQuestion = quizData.questions.find((q) => q.id === questionId);
-  currentQuestion.choosedOptionId = optionId;
-  // Save updated questions to localStorage
-  console.log(quizData.questions);
-  localStorage.setItem(
-    "randomizedQuestions",
-    JSON.stringify(quizData.questions)
-  );
-}
 / * * * * * * * previous and next * * * * * * * * /;
 function updateButtonState() {
   const nextButton = document.getElementById("next");
@@ -151,23 +130,122 @@ document.getElementById("previous").addEventListener("click", () => {
 
 / * * * * * Need to submit on another json * * * * * /;
 /// includes  -- user-name & user email --- answers (correct and wrong )  --- score)
-function submitQuiz() {
+async function submitQuiz() {
+  const username = localStorage.getItem("username") || "user_101"; // Retrieve from localStorage or use default
+  const email = localStorage.getItem("email") || "john.doe@example.com";
+
   const questions = quizData.questions;
   let score = 0;
+  const answers = [];
 
-  questions.forEach((question) => {
-    if (question.choosedOptionId === question.correctOptionId) {
-      score++;
-    }
+  // Calculate the score and prepare answers
+  questions.forEach((question, index) => {
+    const isCorrect = question.choosedOptionId === question.correctOptionId;
+    if (isCorrect) score++;
+    answers.push({
+      questionIndex: index,
+      selectedOptionId: question.choosedOptionId || null,
+      isCorrect: isCorrect,
+    });
   });
 
-  alert(`Your score: ${score} out of ${questions.length}`);
+  try {
+    // Fetch existing grades for this user
+    const response = await fetch(
+      `http://localhost:3020/grades?username=${username}`
+    );
+    const userData = response.ok ? await response.json() : [];
 
-  // Clear local storage to reset quiz
-  localStorage.removeItem("randomizedQuestions");
-  localStorage.removeItem("currentQuestionIndex");
-  localStorage.removeItem("countdownFinishTime");
+    // Determine the new attempt number
+    let attemptNumber = 1;
+    if (userData.length > 0) {
+      const existingQuiz = userData[0].quizAttempts.find(
+        (q) => q.quizId === "quiz_101"
+      );
+      if (existingQuiz) {
+        attemptNumber = existingQuiz.attempts.length + 1;
+      }
+    }
+
+    // Prepare the quiz attempt data
+    const completedAt = new Date().toISOString();
+    const newAttempt = {
+      attemptId: attemptNumber,
+      score,
+      answers,
+      completedAt,
+    };
+
+    let payload;
+
+    if (userData.length > 0) {
+      // Append to existing user data
+      payload = { ...userData[0] };
+      const quizIndex = payload.quizAttempts.findIndex(
+        (q) => q.quizId === "quiz_101"
+      );
+
+      if (quizIndex >= 0) {
+        // Append new attempt to existing quizAttempts
+        payload.quizAttempts[quizIndex].attempts.push(newAttempt);
+        payload.quizAttempts[quizIndex].bestScore = Math.max(
+          payload.quizAttempts[quizIndex].bestScore,
+          score
+        );
+      } else {
+        // Add a new quizAttempts entry
+        payload.quizAttempts.push({
+          quizId: "quiz_101",
+          attempts: [newAttempt],
+          bestScore: score,
+        });
+      }
+    } else {
+      // New user data
+      payload = {
+        username,
+        email,
+        quizAttempts: [
+          {
+            quizId: "quiz_101",
+            attempts: [newAttempt],
+            bestScore: score,
+          },
+        ],
+      };
+    }
+
+    const postResponse = await fetch("http://localhost:3020/grades", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (postResponse.ok) {
+      alert(`Quiz submitted successfully! Your score: ${score}`);
+      console.log("Submitted data:", payload);
+
+      localStorage.removeItem("randomizedQuestions");
+      localStorage.removeItem("currentQuestionIndex");
+      localStorage.removeItem("countdownFinishTime");
+
+      window.location.href = "report.html";
+    } else {
+      throw new Error("Failed to submit quiz.");
+    }
+  } catch (error) {
+    console.error("Error submitting quiz:", error);
+    alert("An error occurred while submitting the quiz. Please try again.");
+  }
 }
+const submit = document.getElementById("submit");
+
+submit.addEventListener("click", () => {
+  submitQuiz();
+});
+
 / * * Timer logic  ✔✔    icon pulse* * /;
 function startCountdown(hours, minutes, seconds) {
   const finishTime = localStorage.getItem("countdownFinishTime");
@@ -178,7 +256,7 @@ function startCountdown(hours, minutes, seconds) {
     localStorage.setItem("countdownFinishTime", countdownFinishTime);
     console.log("Countdown finish time set to:", countdownFinishTime);
   }
-  initCountdown(); // Ensure the countdown starts
+  initCountdown();
 }
 function initCountdown() {
   console.log("Initializing countdown...");
@@ -235,4 +313,5 @@ function initCountdown() {
 window.onload = () => {
   fetchQuizData();
   initCountdown();
+  updateButtonState();
 };
