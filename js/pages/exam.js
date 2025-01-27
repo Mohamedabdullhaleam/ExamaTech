@@ -407,8 +407,6 @@ window.onload = () => {
   initCountdown();
   updateCardColor();
   updateButtonState();
-  const flagIcon = document.getElementById("flag-icon");
-  flagIcon.classList.add("text-main-color");
 
   const savedIndex = parseInt(localStorage.getItem("currentQuestionIndex"));
   if (!isNaN(savedIndex)) {

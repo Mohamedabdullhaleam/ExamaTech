@@ -3065,6 +3065,10 @@ h1 {
     height: 580px;
   }
 
+  .md\:h-screen {
+    height: 100vh;
+  }
+
   .md\:w-80 {
     width: 20rem;
   }
@@ -3079,6 +3083,10 @@ h1 {
 
   .md\:w-\[7rem\] {
     width: 7rem;
+  }
+
+  .md\:w-screen {
+    width: 100vw;
   }
 
   .md\:grid-cols-12 {
