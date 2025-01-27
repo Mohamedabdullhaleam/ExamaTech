@@ -79,9 +79,12 @@ function displayQuestion(question, index) {
 / * * * * Tracking Answers * * * * /;
 function trackAnswer(questionId, optionId) {
   const currentQuestion = quizData.questions.find((q) => q.id === questionId);
-  currentQuestion.choosedOptionId = optionId;
-  // Save updated questions to localStorage with it's answer
-  console.log(quizData.questions);
+  const selectedOption = currentQuestion.options.find((o) => o.id === optionId);
+
+  currentQuestion.choosedOptionId = optionId; // Store the selected option ID
+  currentQuestion.selectedAnswer = selectedOption.text; // Store the actual answer text
+
+  // Save updated questions to localStorage
   localStorage.setItem(
     "randomizedQuestions",
     JSON.stringify(quizData.questions)
@@ -158,7 +161,9 @@ function calculateScoreAndAnswers(questions) {
     if (isCorrect) score++;
     answers.push({
       questionIndex: index,
+      question: question.question, // Include the question text
       selectedOptionId: question.choosedOptionId || null,
+      selectedAnswer: question.selectedAnswer || "",
       isCorrect: isCorrect,
     });
   });
