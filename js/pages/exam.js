@@ -145,7 +145,7 @@ document.getElementById("previous").addEventListener("click", () => {
 /// includes  -- user-name & user email --- answers (correct and wrong )  --- score)
 // Retrieve user information from localStorage
 function getUserInfo() {
-  const username = localStorage.getItem("username") || "user_101"; /// sent from log-in
+  const username = localStorage.getItem("username") || "Ash_1803";
   const email = localStorage.getItem("email") || "john.doe@example.com"; // sent from login
   return { username, email };
 }

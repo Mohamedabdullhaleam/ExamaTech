@@ -169,6 +169,26 @@ async function displayQuestions() {
   });
 }
 
+const signOutButton = document.getElementById("sign-out");
+
+signOutButton.addEventListener("click", () => {
+  localStorage.removeItem("username");
+  window.location.href = "login.html";
+});
+
+// Prevent navigating back after signing out  ❌❌Not Working❌❌
+// if (!localStorage.getItem("username")) {
+//   history.pushState(null, null, window.location.href);
+//   window.addEventListener("popstate", () => {
+//     history.pushState(null, null, window.location.href);
+//   });
+// }
+
 document.addEventListener("DOMContentLoaded", () => {
   displayQuestions();
+
+  / * * * to prevent going back after sign-out * * * * /;
+  //   if (!localStorage.getItem("username")) {
+  //     window.location.href = "login.html";
+  //   }
 });
