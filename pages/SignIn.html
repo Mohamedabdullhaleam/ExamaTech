@@ -1,16 +1,93 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../css/output.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../css/output.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="icon" type="image/png" href="../assets/icons/icon3.png">
+    <title>Sign-In</title>
 </head>
 
-<body>
-    <h1 class="text-3xl bg-red-700 font-bold underline">
-        Hello world!
-    </h1>
+
+<body class="bg-light-green flex items-center justify-center h-screen">
+    <!-- pop-up -->
+    <div id="popup-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50">
+        <div class="bg-white w-[90%] sm:w-[28rem] md:w-[32rem] lg:w-[36rem] p-6 sm:p-8 rounded-xl shadow-lg">
+
+            <div class="flex justify-center items-center mb-4">
+                <img class="w-25 sm:w-28 md:w-[7rem]" src="../assets/images/Timer.svg" alt="confirmation">
+            </div>
+
+            <h2 class="text-lg sm:text-xl font-semibold text-center text-main-color mb-4">DONE</h2>
+
+            <p id="username-reveal" class="text-gray-600 text-sm sm:text-base text-center mb-6">
+                Your Exam will start after <span id="timer" class="font-bold text-main-color">7</span> seconds
+            </p>
+
+            <div class="flex justify-center gap-4">
+                <button id="cancel-btn"
+                    class="px-4 py-2 min-w-[7rem] text-white bg-main-color rounded-md active:bg-sec-color">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Login -->
+    <div
+        class="sign-in xl:h-[600px] lg:w-[1000px] bg-main-color rounded-3xl shadow-2xl shadow-text-color flex md:h-[580px] w-[400px] h-[600px] md:w-[700px] sm:w-[400px]">
+        <div class="grid grid-cols-1 md:grid-cols-12 w-full h-full">
+            <div class="hidden md:col-span-6 md:flex md:flex-col md:justify-between mr-1  p-10""
+        >
+          <h1 class=" font-weight-bold text-3xl text-white ">Exama-Tech</h1>
+          <img
+            src=" ../assets/images/registration.svg" class="w-full self-end" alt="Registration" />
+        </div>
+
+        <div class="md:col-span-6 bg-white rounded-3xl items-center p-16 flex flex-col">
+            <h2 class="font-medium text-3xl">Log In</h2>
+            <div id="invalid-credentials" class="invisible pt-5 "><i
+                    class="fa-solid fa-circle-exclamation text-red-400"></i>
+                <span class="text-red-400">Invalid credentials. Try again 🤡</span>
+            </div>
+
+            <form id="sign-in-form" class="md:w-80 sm:w-60">
+                <input id="username-or-email" type="text" placeholder="Enter your Email or Username"
+                    class="w-full border-b-2 border-b-main-color ps-1 pb-1 mt-11 outline-none" />
+
+                <p id="username-error-msg" class="text-red-500 invisible">
+                    Please enter a valid email or username
+                </p>
+
+                <div class="relative mt-5">
+                    <input id="password-input" type="password" placeholder="Password"
+                        class="w-full border-b-2 border-b-main-color pb-1 ps-1 outline-none pr-10" />
+                    <span class="absolute inset-y-0 right-0 flex items-center cursor-pointer pr-3"
+                        onclick="togglePassword()">
+                        <i id="password-icon" class="fa-solid fa-eye-slash text-main-color"></i>
+                    </span>
+                </div>
+
+                <p id="password-error-msg" class="text-red-500 invisible">
+                    Please enter a valid password
+                </p>
+
+                <input type="submit" value="LOG IN"
+                    class="w-full bg-main-color p-2 mt-5 mb-2 outline-none rounded-xl text-white cursor-pointer active:bg-sec-color" />
+
+                <p class="text-light-color text-sm">
+                    Don’t have an account?
+                    <a id="sign-up" class="text-sec-color font-semibold cursor-pointer">Sign up</a>
+                </p>
+            </form>
+        </div>
+    </div>
+    </div>
+    <script src="../js/PassIcon.js"></script>
+    <script src="../js/pages/signIn.js"></script>
 </body>
 
 </html>
+

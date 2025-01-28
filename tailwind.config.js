@@ -10,6 +10,8 @@ module.exports = {
         "light-color": "#8E8C92",
         "light-green": "#EBEBEB",
         "Btn-color": "#73826F",
+        "flag-color": "#EFA721",
+
       },
     },
   },
