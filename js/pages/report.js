@@ -1,7 +1,6 @@
 function getCurrentUsername() {
   return localStorage.getItem("username") || "Ash_1803";
 }
-
 // Async function to fetch user data by username
 async function fetchGradesByUsername() {
   const username = getCurrentUsername();
@@ -25,8 +24,6 @@ async function fetchGradesByUsername() {
     / * * * *  ERROR * * * * * * /;
   }
 }
-
-// Function to animate the username with typing and blinking effect
 
 / * * * * * * * * * JS animation file * * * * * * * /;
 function displayUserNameWithEffect(messageElement, message) {
@@ -124,6 +121,7 @@ async function displayQuestions() {
   const container = document.getElementById("question-container");
   if (!container) {
     console.error("Container element not found!");
+    / * * * * I thin no error may happen here * * * * /;
     return;
   }
 
