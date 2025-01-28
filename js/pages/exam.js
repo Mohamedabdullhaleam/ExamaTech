@@ -467,14 +467,27 @@ window.onload = () => {
 
   const title = document.getElementById("title");
   displayUserNameWithEffect(title, "Exama-Tech");
-  const userName = document.getElementById("user");
-  displayUserNameWithEffect(
-    userName,
-    `Welcome ${localStorage.getItem("loggedInUser")} , Good Luck ❣`
-  );
+
+  // const userName = document.getElementById("user");
+  // if (localStorage.getItem("loggedInUser")) {
+  //   displayUserNameWithEffect(
+  //     userName,
+  //     `Welcome ${localStorage.getItem("loggedInUser")} , Good Luck ❣`
+  //   );
+  // }
 
   const savedIndex = parseInt(localStorage.getItem("currentQuestionIndex"));
   if (!isNaN(savedIndex)) {
     currentQuestionIndex = savedIndex;
   }
 };
+setTimeout(() => {
+  const userName = document.getElementById("user");
+  const loggedInUser = localStorage.getItem("loggedInUser");
+  if (loggedInUser) {
+    displayUserNameWithEffect(
+      userName,
+      `Welcome ${loggedInUser} , Good Luck ❣`
+    );
+  }
+}, 100); // Delay by 100ms or adjust as needed

@@ -469,6 +469,24 @@
       "email": "mohamedabdull236@gmail.com",
       "password": "Mohamedabdull236@gmail.com",
       "confirmPassword": "Mohamedabdull236@gmail.com"
+    },
+    {
+      "id": "aba1",
+      "username": "al_eisa8746",
+      "firstname": "alaa",
+      "lastname": "eisa",
+      "email": "3laaeisa@gmail.com",
+      "password": "Amr@12345",
+      "confirmPassword": "Amr@12345"
+    },
+    {
+      "id": "6f42",
+      "username": "ma_mansour1057",
+      "firstname": "marina",
+      "lastname": "mansour",
+      "email": "marina@gmail.com",
+      "password": "Manosamans@123",
+      "confirmPassword": "Manosamans@123"
     }
   ]
 }
