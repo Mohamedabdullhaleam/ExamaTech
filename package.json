@@ -1,10 +1,11 @@
 {
-  "devDependencies": {
-    "tailwindcss": "^3.4.17"
-  },
   "name": "examatech",
   "version": "1.0.0",
+  "description": "",
   "main": "tailwind.config.js",
+  "type": "module",
+  "author": "",
+  "license": "ISC",
   "directories": {
     "doc": "docs"
   },
@@ -99,11 +100,14 @@
     "wrap-ansi-cjs": "^7.0.0",
     "yaml": "^2.7.0"
   },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:css": "npx tailwindcss -i ./css/styles.css -o ./css/output.css --watch"
-  },
-  "author": "",
-  "license": "ISC",
-  "description": ""
+    "build:css": "npx tailwindcss -i ./css/styles.css -o ./css/output.css --watch",
+    "users": "json-server --watch json/Users.json --port 3000",
+    "questions": "json-server --watch json/Questions.json --port 3010",
+    "grades": "json-server --watch json/User-grades.json --port 3020"
+  }
 }
