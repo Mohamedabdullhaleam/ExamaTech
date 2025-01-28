@@ -1,7 +1,6 @@
 let quizData = {};
 let currentQuestionIndex = 0;
 
-// Fetch quiz data
 async function fetchQuizData() {
   // get data from local storage first
   try {
@@ -171,7 +170,6 @@ function calculateScoreAndAnswers(questions) {
   return { score, answers };
 }
 
-// Fetch existing grades for the user
 async function fetchUserGrades(username) {
   try {
     const response = await fetch(
@@ -191,7 +189,7 @@ function preparePayload(userData, username, email, score, answers, timeTaken) {
     attemptId: 1,
     score,
     answers,
-    timeTaken, // Add time taken
+    timeTaken,
     completedAt,
   };
 
@@ -411,14 +409,11 @@ function updateFlagUI(index, isFlagged) {
 }
 
 function updateCardColor() {
-  // Retrieve the saved questions from localStorage
   const savedQuestions = JSON.parse(
     localStorage.getItem("randomizedQuestions")
   );
-
   if (savedQuestions) {
     savedQuestions.forEach((question, index) => {
-      // Ensure flags object exists before applying styles
       const isFlagged = question.flags && question.flags.isFlagged;
       updateFlagUI(index, isFlagged);
     });
@@ -427,7 +422,7 @@ function updateCardColor() {
 const cards = document.getElementById("cards");
 cards.addEventListener("click", (event) => {
   const liElement = event.target;
-  console.log("Hiiiiiiiiiiiiii", event.target.tagName);
+  // console.log("Hiiiiiiiiiiiiii", event.target.tagName);
   if (liElement.tagName === "LI") {
     const index = Array.from(cards.children).indexOf(liElement);
     currentQuestionIndex = index;
@@ -439,13 +434,11 @@ cards.addEventListener("click", (event) => {
     );
   }
 });
-
 window.onload = () => {
   fetchQuizData();
   initCountdown();
   updateCardColor();
   updateButtonState();
-
   const savedIndex = parseInt(localStorage.getItem("currentQuestionIndex"));
   if (!isNaN(savedIndex)) {
     currentQuestionIndex = savedIndex;

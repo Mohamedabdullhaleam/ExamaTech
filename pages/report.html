@@ -15,12 +15,12 @@
   class="bg-gradient-to-br from-white to-main-color w-screen flex flex-col items-center justify-center overflow-x-hidden">
   <div class="w-screen flex sm:flex-row flex-col sm:justify-between sm:p-10 gap-7 sm:gap-0">
     <div class="pl-5 pt-5 sm:pl-0 sm:pt-0">
-      <h1 id="message" class="font-bold text-4xl sm:text-5xl">Exama-Tech</h1>
+      <h1 id="title" class="font-bold text-4xl sm:text-5xl">Exama-Tech</h1>
       <h6 class="mt-3 font-mono text-lg">Your Exam Reporting</h6>
     </div>
     <div class="dash flex flex-col justify-center items-center">
-      <h6 id="message2" class="message font-mono text-sm">Hello Ash🥰</h6>
-      <input type="submit" value="Visit Dashboard"
+      <h6 id="user-name" class="message font-mono text-sm"></h6>
+      <input type="submit" value="Sign Out"
         class="items-center w-40 h-11 text-xl cursor-pointer active:bg-sec-color text-white bg-Btn-color rounded" />
     </div>
   </div>
@@ -31,7 +31,7 @@
       class="grade border rounded-lg flex justify-around items-center text-xl border-main-color h-28 w-64 shadow-xl shadow-sec-color cursor-pointer">
       <div class="flex flex-col text-center">
         <p class="text-xl">Grade</p>
-        <span class="text-xl font-semibold">100%</span>
+        <span id="grade" class="text-xl font-semibold">100%</span>
       </div>
       <i class="fa-solid fa-medal text-5xl text-sec-color"></i>
     </div>
@@ -39,7 +39,7 @@
       class="time border rounded-lg flex justify-around items-center text-xl border-main-color h-28 w-64 shadow-xl shadow-sec-color cursor-pointer">
       <div class="flex flex-col text-center">
         <p class="text-xl">Time Taken</p>
-        <span class="text-xl font-semibold">5min</span>
+        <span id="time" class="text-xl font-semibold">5min</span>
       </div>
       <i class="fa-regular fa-hourglass-half text-5xl text-sec-color"></i>
     </div>
@@ -47,7 +47,7 @@
       class="date border rounded-lg flex justify-around items-center text-xl border-main-color h-28 w-64 shadow-xl shadow-sec-color cursor-pointer">
       <div class="flex flex-col text-center">
         <p class="text-xl">Date</p>
-        <span class="text-xl font-semibold">18 March 2025</span>
+        <span id="date" class="text-xl font-semibold">18 March 2025</span>
       </div>
       <i class="fa-solid fa-calendar-days text-5xl text-sec-color"></i>
     </div>
@@ -55,9 +55,10 @@
 
   <div class="container mb-4 w-screen">
     <div class="flex justify-center">
-      <div class="correction pt-7 w-[400px] md:w-[550px] lg:w-full lg:max-w-4xl flex flex-col gap-4 mx-auto">
+      <div id="question-container"
+        class="correction pt-7 w-[400px] md:w-[550px] lg:w-full lg:max-w-4xl flex flex-col gap-4 mx-auto">
         <!-- Correction items -->
-        <div
+        <!-- <div
           class="border-2 rounded-lg flex justify-center items-center gap-2 border-main-color h-16 w-full transition duration-500 ease-in-out cursor-pointer">
           <i class="fa-regular fa-circle-check text-xl text-green-500"></i>
           <p class="text-xl">1. What is the color of the sky?</p>
@@ -86,69 +87,12 @@
           class="border-2 border-red-500 rounded-lg flex justify-center items-center gap-2 h-16 w-full transition duration-300 ease-in-out cursor-pointer">
           <i class="fa-regular fa-circle-xmark text-xl text-red-500"></i>
           <p class="text-xl">2. What is the color of the sky?</p>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
-  <script src="../js/pages/exam.js"></script>
+  <script src="../js/pages/report.js"></script>
   <script>
-    ///
-    document.addEventListener("DOMContentLoaded", () => {
-      const message = "Exama-Tech";
-      const messageElement = document.getElementById("message");
-      let index = 0;
-
-      if (messageElement) {
-        const intervalId = setInterval(() => {
-          messageElement.textContent = message.substring(0, index + 1);
-
-          index++;
-          if (index >= message.length) {
-            clearInterval(intervalId);
-            const blinkInterval = setInterval(() => {
-              messageElement.textContent =
-                message + (index % 2 === 0 ? "|" : "");
-              index++;
-              if (index >= message.length + 6) {
-                clearInterval(blinkInterval);
-                messageElement.textContent = message;
-              }
-            }, 500);
-          }
-        }, 150);
-      } else {
-        console.error('Element with ID "message" not found.');
-      }
-    });
-    ////
-    document.addEventListener("DOMContentLoaded", () => {
-      const message = "Hello Ash🥰";
-      const messageElement = document.getElementById("message2");
-      let index = 0;
-
-      if (messageElement) {
-        const intervalId = setInterval(() => {
-          messageElement.textContent = message.substring(0, index + 1);
-
-          index++;
-          if (index >= message.length) {
-            clearInterval(intervalId);
-            const blinkInterval = setInterval(() => {
-              messageElement.textContent =
-                message + (index % 2 === 0 ? "|" : "");
-              index++;
-              if (index >= message.length + 6) {
-                clearInterval(blinkInterval);
-                messageElement.textContent = message;
-              }
-            }, 500);
-          }
-        }, 150);
-      } else {
-        console.error('Element with ID "message" not found.');
-      }
-    });
-    ////
     document.addEventListener("DOMContentLoaded", () => {
       // Select exam-info cards and respective icons
       const gradeCard = document.querySelector(".grade");
@@ -181,41 +125,42 @@
       });
     });
     ////
-    document.addEventListener("DOMContentLoaded", () => {
-      const corrections = document.querySelectorAll(".correction > div");
 
-      corrections.forEach((correction) => {
-        const originalText = correction.querySelector("p").textContent;
-        const originalIconClass = correction.querySelector("i").className;
+    // document.addEventListener("DOMContentLoaded", () => {
+    //   const corrections = document.querySelectorAll(".correction > div");
 
-        correction.addEventListener("click", () => {
-          const p = correction.querySelector("p");
-          const icon = correction.querySelector("i");
+    //   corrections.forEach((correction) => {
+    //     const originalText = correction.querySelector("p").textContent;
+    //     const originalIconClass = correction.querySelector("i").className;
 
-          // Toggle logic
-          if (p.textContent === originalText) {
-            // Update text based on icon type
-            if (icon && icon.classList.contains("fa-circle-check")) {
-              p.textContent = "Corrected!";
-            } else if (icon && icon.classList.contains("fa-circle-xmark")) {
-              p.textContent = "Wrong text!";
-            }
-            // Remove the icon
-            if (icon) icon.remove();
-          } else {
-            // Revert to original text
-            p.textContent = originalText;
+    //     correction.addEventListener("click", () => {
+    //       const p = correction.querySelector("p");
+    //       const icon = correction.querySelector("i");
 
-            // Re-add the correct icon
-            const newIcon = document.createElement("i");
-            newIcon.className = originalIconClass;
-            correction.prepend(newIcon);
-          }
-          correction.classList.add("scale-105");
-          setTimeout(() => correction.classList.remove("scale-105"), 300);
-        });
-      });
-    });
+    //       // Toggle logic
+    //       if (p.textContent === originalText) {
+    //         // Update text based on icon type
+    //         if (icon && icon.classList.contains("fa-circle-check")) {
+    //           p.textContent = "Corrected!";
+    //         } else if (icon && icon.classList.contains("fa-circle-xmark")) {
+    //           p.textContent = "Wrong text!";
+    //         }
+    //         // Remove the icon
+    //         if (icon) icon.remove();
+    //       } else {
+    //         // Revert to original text
+    //         p.textContent = originalText;
+
+    //         // Re-add the correct icon
+    //         const newIcon = document.createElement("i");
+    //         newIcon.className = originalIconClass;
+    //         correction.prepend(newIcon);
+    //       }
+    //       correction.classList.add("scale-105");
+    //       setTimeout(() => correction.classList.remove("scale-105"), 300);
+    //     });
+    //   });
+    // });
   </script>
 </body>
 
