@@ -1,3 +1,5 @@
+import { displayUserNameWithEffect } from "./textAnimation.js";
+
 function getCurrentUsername() {
   return localStorage.getItem("loggedInUser");
 }
@@ -26,24 +28,6 @@ async function fetchGradesByUsername() {
 }
 
 / * * * * * * * * * JS animation file * * * * * * * /;
-function displayUserNameWithEffect(messageElement, message) {
-  let index = 0;
-  const intervalId = setInterval(() => {
-    messageElement.textContent = message.substring(0, index + 1);
-    index++;
-    if (index >= message.length) {
-      clearInterval(intervalId);
-      const blinkInterval = setInterval(() => {
-        messageElement.textContent = message + (index % 2 === 0 ? "|" : ""); // Blink cursor effect
-        index++;
-        if (index >= message.length + 6) {
-          clearInterval(blinkInterval);
-          messageElement.textContent = message; // Stop blinking and show complete message
-        }
-      }, 500);
-    }
-  }, 150);
-}
 / * * * * * heading * * * /;
 const title = document.getElementById("title");
 displayUserNameWithEffect(title, "Exama-Tech");
@@ -185,7 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
   displayQuestions();
 
   / * * * to prevent going back after sign-out * * * * /;
-  //   if (!localStorage.getItem("loggedInUser")) {
-  //     window.location.href = "signIn.html";
-  //   }
+  if (!localStorage.getItem("loggedInUser")) {
+    window.location.href = "signIn.html";
+  }
 });

@@ -1,5 +1,6 @@
 let quizData = {};
 let currentQuestionIndex = 0;
+import { displayUserNameWithEffect } from "./textAnimation.js";
 
 async function fetchQuizData() {
   // get data from local storage first
@@ -52,6 +53,12 @@ function initQuiz() {
 function displayQuestion(question, index) {
   localStorage.setItem("currentQuestionIndex", index);
 
+  quizData.questions.forEach((q) => {
+    if (!q.flags) {
+      q.flags = { isFlagged: false };
+    }
+  });
+
   const questionNumberElement = document.getElementById("q-number-text");
   questionNumberElement.innerHTML = `${
     index + 1
@@ -70,6 +77,7 @@ function displayQuestion(question, index) {
       radioInput.checked = question.choosedOptionId === option.id; // / Pre-select the radio button if the option was previously chosen
       // console.log("option-id:", option.id);
       console.log("aaaa", question.flags.isFlagged);
+      updateButtonState();
       radioInput.onclick = () => trackAnswer(question.id, option.id);
     }
   });
@@ -101,10 +109,12 @@ function updateButtonState() {
   const prevButton = document.getElementById("previous");
   const flagIcon = document.getElementById("flag-icon");
   const currentQuestion = quizData.questions[currentQuestionIndex];
+  console.log("FROM UPDATE", currentQuestion.flags.isFlagged);
   if (!currentQuestion.flags.isFlagged) {
     flagIcon.classList.remove("text-flag-color");
     flagIcon.classList.add("text-main-color");
   } else {
+    flagIcon.classList.remove("text-main-color");
     flagIcon.classList.add("text-flag-color");
   }
 
@@ -249,7 +259,7 @@ function clearLocalStorageAndRedirect() {
   localStorage.removeItem("randomizedQuestions");
   localStorage.removeItem("currentQuestionIndex");
   localStorage.removeItem("countdownFinishTime");
-  window.location.href = "report.html";
+  window.location.replace("report.html");
 }
 
 // Main function to handle quiz submission
@@ -315,12 +325,12 @@ function startCountdown(hours, minutes, seconds) {
     const countdownFinishTime = currentTime + totalMilliseconds;
     localStorage.setItem("countdownFinishTime", countdownFinishTime);
     localStorage.setItem("quizStartTime", currentTime);
-    console.log("Countdown finish time set to:", countdownFinishTime);
+    // console.log("Countdown finish time set to:", countdownFinishTime);
   }
   initCountdown();
 }
 function initCountdown() {
-  console.log("Initializing countdown...");
+  // console.log("Initializing countdown...");
   const timerElement = document.getElementById("timer");
   const warningTimer = document.getElementById("warning-timer");
   const warningIcon = document.getElementById("warning-icon");
@@ -339,7 +349,7 @@ function initCountdown() {
     if (remainingTime <= 0) {
       clearInterval(intervalId);
       localStorage.removeItem("countdownFinishTime");
-      window.location.href = "TimeOut.html";
+      window.replace("TimeOut.html");
       return;
     }
 
@@ -349,7 +359,7 @@ function initCountdown() {
     );
 
     const remainingSeconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
-    console.log(remainingHours, remainingMinutes, remainingSeconds); // nothing displayed //
+    // console.log(remainingHours, remainingMinutes, remainingSeconds); // nothing displayed //
 
     timerElement.textContent = `${String(remainingHours).padStart(
       2,
@@ -372,7 +382,7 @@ function initCountdown() {
   }, 1000);
 }
 
-console.log(currentQuestionIndex);
+// console.log(currentQuestionIndex);
 / * * * * Flags functionality * * * * /;
 const flagIcon = document.getElementById("flag-icon");
 flagIcon.addEventListener("click", () => {
@@ -442,8 +452,15 @@ window.onload = () => {
   initCountdown();
   updateCardColor();
   updateButtonState();
+  displayUserWelcome();
   const savedIndex = parseInt(localStorage.getItem("currentQuestionIndex"));
   if (!isNaN(savedIndex)) {
     currentQuestionIndex = savedIndex;
   }
 };
+
+function displayUserWelcome() {
+  const userInfo = getUserInfo();
+  const user = document.getElementById("user");
+  user.textContent = ` Welcome ${userInfo.username} to Exama-Tech , Good Luck`;
+}

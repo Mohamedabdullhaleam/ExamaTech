@@ -16,10 +16,9 @@
   <div class="w-screen flex sm:flex-row flex-col sm:justify-between sm:p-10 gap-7 sm:gap-0">
     <div class="pl-5 pt-5 sm:pl-0 sm:pt-0">
       <h1 id="title" class="font-bold text-4xl sm:text-5xl">Exama-Tech</h1>
-      <h6 class="mt-3 font-mono text-lg">Your Exam Reporting</h6>
+      <h6 id="user-name" class="message font-mono text-sm"></h6>
     </div>
     <div class="dash flex flex-col justify-center items-center">
-      <h6 id="user-name" class="message font-mono text-sm"></h6>
       <input id="sign-out" type="submit" value="Sign Out"
         class="items-center w-40 h-11 text-xl cursor-pointer active:bg-sec-color text-white bg-Btn-color rounded" />
     </div>
@@ -91,7 +90,7 @@
       </div>
     </div>
   </div>
-  <script src="../js/pages/report.js"></script>
+  <script src="../js/pages/report.js" type="module"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       // Select exam-info cards and respective icons
