@@ -11,6 +11,7 @@ module.exports = {
         "light-green": "#EBEBEB",
         "Btn-color": "#73826F",
         "flag-color": "#EFA721",
+
       },
     },
   },
