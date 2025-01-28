@@ -21,6 +21,7 @@ window.onload = () => {
       const data = await response.json();
       return data.length > 0 ? data[0] : null;
     } catch (error) {
+      window.location.replace("notFound.html");
       console.error("Error fetching grades:", error);
       return null;
     }

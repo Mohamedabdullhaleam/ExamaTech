@@ -59,6 +59,7 @@ export async function checkEmailExists(email) {
     return `<i class="fa-solid fa-circle-exclamation text-red-500"></i>
     <span>Account already exists. Please try logging in.</span>`;
   } catch (error) {
+    window.location.replace("notFound.html");
     console.error("Error checking email:", error);
     return null;
   }

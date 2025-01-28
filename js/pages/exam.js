@@ -35,7 +35,7 @@ async function fetchQuizData() {
     startCountdown(hours, minutes, seconds);
     initQuiz();
   } catch (error) {
-    //////////////////////NOTFOUND/////////////////
+    window.location.replace("notFound.html");
     console.error("Error fetching quiz data:", error);
     / * * * * Redirect to error page * * * * * /;
   }
@@ -191,7 +191,7 @@ async function fetchUserGrades(username) {
     );
     return response.ok ? await response.json() : [];
   } catch (error) {
-    //////////////////////NOTFOUND/////////////////
+    window.location.replace("notFound.html");
     console.error("Error fetching user grades:", error);
     return [];
   }
@@ -254,7 +254,7 @@ async function submitQuizData(payload) {
     });
     return response.ok;
   } catch (error) {
-    //////////////////////NOTFOUND/////////////////
+    window.location.replace("notFound.html");
     console.error("Error submitting quiz data:", error);
     return false;
   }

@@ -16,19 +16,16 @@ async function fetchGradesByUsername() {
       return data[0];
     } else {
       console.error("No grades found for the user.");
-
-      / * * * Handling Empty state * * * /;
-
+      window.location.replace("notFound.html");
       return null;
     }
   } catch (error) {
-        //////////////////////NOTFOUND/////////////////
+    window.location.replace("notFound.html");
     console.error("Error fetching grades data:", error);
     / * * * *  ERROR * * * * * * /;
   }
 }
 
-/ * * * * * * * * * JS animation file * * * * * * * /;
 / * * * * * heading * * * /;
 const title = document.getElementById("title");
 displayUserNameWithEffect(title, "Exama-Tech");
@@ -71,7 +68,6 @@ function calculateGradePercentage(userData) {
   const score = userData.quizAttempts[0].bestScore;
   //   console.log("Sc", score);
   const percentage = (score / totalQuestions) * 100;
-  //   console.log("percent", percentage);
   return percentage.toFixed(2);
 }
 function formatDate(dateString) {
@@ -105,7 +101,7 @@ async function displayQuestions() {
   const container = document.getElementById("question-container");
   if (!container) {
     console.error("Container element not found!");
-    / * * * * I thin no error may happen here * * * * /;
+    / * * * * I think no error may happen here * * * * /;
     return;
   }
 

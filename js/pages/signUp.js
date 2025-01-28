@@ -110,6 +110,7 @@ async function postUserData(newUser) {
     window.location.href = "SignIn.html";
     // popUp(result.userName);
   } catch (error) {
+    window.location.replace("notFound.html");
     console.error("Error posting data:", error);
   }
 }
@@ -174,23 +175,6 @@ async function checkEmailExists(email) {
     return null;
   }
 }
-
-// function popUp(userName, user) {
-//   const popUp = document.getElementById("popup-modal");
-//   const okButton = document.getElementById("ok-btn");
-//   const msg = document.getElementById("username-reveal");
-
-//   popUp.classList.remove("hidden");
-//   popUp.classList.add("flex");
-
-//   msg.innerHTML = `Your UserName is <span id="copyUserName" class="font-semibold cursor-pointer active:text-main-color">"${userName}"</span>. Keep it in mind!`;
-
-//   okButton.onclick = () => {
-//     popUp.classList.remove("flex");
-//     popUp.classList.add("hidden");
-//     postUserData(user);
-//   };
-// }
 
 function popUp(userName, user) {
   const popUp = document.getElementById("popup-modal");

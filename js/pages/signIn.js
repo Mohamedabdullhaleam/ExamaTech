@@ -32,17 +32,10 @@ async function checkUserCredentials(userNameOrEmail, password) {
     return null; // No user found
   } catch (error) {
     console.error("Error checking user credentials:", error);
+    window.location.replace("notFound.html");
     return null;
   }
 }
-
-// async function run() {
-//   const userName = await checkUserCredentials(
-//     "kholoud_ddddd_58540",
-//     "Hashed_password_456"
-//   );
-//   console.log(userName);
-// }
 
 document
   .getElementById("sign-in-form")
