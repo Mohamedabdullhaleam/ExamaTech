@@ -1,5 +1,5 @@
 function getCurrentUsername() {
-  return localStorage.getItem("username") || "Ash_1803";
+  return localStorage.getItem("loggedInUser");
 }
 // Async function to fetch user data by username
 async function fetchGradesByUsername() {
@@ -102,9 +102,8 @@ function formatTime(timeString) {
 
 getUserQuizReport().then((data) => {
   if (data) {
-    document.getElementById(
-      "user-name"
-    ).textContent = `Hello ${data.username}🥰`;
+    const userName = document.getElementById("user-name");
+    displayUserNameWithEffect(userName, `Hello ${data.username}🥰`);
     document.getElementById("grade").textContent = `${data.gradePercentage}%`;
     document.getElementById("date").textContent = `${data.formattedDate}`;
     document.getElementById("time").textContent = `${data.formattedTime}`;
@@ -170,8 +169,8 @@ async function displayQuestions() {
 const signOutButton = document.getElementById("sign-out");
 
 signOutButton.addEventListener("click", () => {
-  localStorage.removeItem("username");
-  window.location.href = "login.html";
+  localStorage.removeItem("loggedInUser");
+  window.location.href = "signIn.html";
 });
 
 // Prevent navigating back after signing out  ❌❌Not Working❌❌
@@ -186,7 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
   displayQuestions();
 
   / * * * to prevent going back after sign-out * * * * /;
-  //   if (!localStorage.getItem("username")) {
-  //     window.location.href = "login.html";
+  //   if (!localStorage.getItem("loggedInUser")) {
+  //     window.location.href = "signIn.html";
   //   }
 });

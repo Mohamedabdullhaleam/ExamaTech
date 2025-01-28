@@ -87,14 +87,14 @@ function startTimer() {
     }
     if (timerValue <= 0) {
       clearInterval(interval);
-      window.location.href = "ExamPage.html";
+      window.location.href = "exam.html";
     }
     timerValue--;
   }, 1000);
 
   cancelButton.addEventListener("click", () => {
     clearInterval(interval);
-    window.location.href = "Dashboard.html";
+    window.location.href = "report.html";
   });
 }
 
