@@ -1,40 +1,34 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="../css/output.css" rel="stylesheet" />
-  </head>
 
-  <body
-    class="bg-gradient-to-br from-white to-main-color h-screen w-screen flex flex-col items-center"
-  >
-    <h1 class="font-bold text-4xl sm:text-5xl p-6 sm:p-10 self-start">
-      Exama-Tech
-    </h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="../css/output.css" rel="stylesheet" />
+</head>
 
-    <div
-      class="flex flex-row w-[90%] md:w-[75%] justify-center gap-6 md:gap-10"
-    >
-      <div class="flex flex-col md:flex-row justify-around gap-5">
-        <img
-          src="../assets/images/timeout.svg"
-          alt="clap"
-          class="h-60 sm:h-72 md:h-[400px] self-center md:self-start"
-        />
+<body class="bg-gradient-to-br from-white to-main-color h-screen w-screen flex flex-col items-center">
+  <h1 id="title" class="font-bold text-4xl sm:text-5xl p-6 sm:p-10 self-start">
+    Exama-Tech
+  </h1>
 
-        <div class="text-center self-center md:self-end">
-          <p class="text-lg sm:text-xl md:text-2xl">
-            Exam closed. <br />
-            Sorry <span class="font-bold">Kholoud Ahmed</span>, Timeout!
-          </p>
-          <button
-            class="bg-Btn-color text-white rounded w-32 sm:w-48 md:w-56 h-10 active:bg-sec-color text-base sm:text-lg md:text-xl mt-4"
-          >
-            View Report
-          </button>
-        </div>
+  <div class="flex flex-row w-[90%] md:w-[75%] justify-center gap-6 md:gap-10">
+    <div class="flex flex-col md:flex-row justify-around gap-5">
+      <img src="../assets/images/timeout.svg" alt="clap" class="h-60 sm:h-72 md:h-[400px] self-center md:self-start" />
+
+      <div class="text-center self-center md:self-end">
+        <p class="text-lg sm:text-xl md:text-2xl">
+          Exam closed. <br />
+          Sorry <span id="user-name" class="font-bold">Kholoud Ahmed</span>, Timeout!
+        </p>
+        <button id="try-again"
+          class="bg-Btn-color text-white rounded w-32 sm:w-48 md:w-56 h-10 active:bg-sec-color text-base sm:text-lg md:text-xl mt-4">
+          Try Again
+        </button>
       </div>
     </div>
-  </body>
+  </div>
+  <script src="../js/pages/timeOut.js" type="module"></script>
+</body>
+
 </html>

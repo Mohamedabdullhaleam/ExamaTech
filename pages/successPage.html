@@ -1,46 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="../css/output.css" rel="stylesheet" />
-  </head>
 
-  <body
-    class="bg-gradient-to-br from-white to-main-color h-screen w-screen flex flex-col items-center"
-  >
-    <h1 class="font-bold text-4xl sm:text-5xl p-6 sm:p-10 self-start">
-      Exama-Tech
-    </h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="../css/output.css" rel="stylesheet" />
+</head>
 
-    <div
-      class="flex flex-row w-[90%] md:w-[75%] justify-center gap-6 md:gap-10"
-    >
-      <img
-        src="../assets/images/bravo.svg"
-        alt="clap"
-        class="h-72 sm:h-72 md:h-96 self-center"
-      />
+<body class="bg-gradient-to-br from-white to-main-color h-screen w-screen flex flex-col items-center">
+  <h1 id="title" class="font-bold text-4xl sm:text-5xl p-6 sm:p-10 self-start">
+    Exama-Tech
+  </h1>
 
-      <div class="flex flex-col justify-between">
-        <img
-          src="../assets/images/thanks.svg"
-          alt="thanks"
-          class="h-32 sm:h-32 md:h-40 self-start"
-        />
+  <div class="flex flex-row w-[90%] md:w-[75%] justify-center gap-6 md:gap-10">
+    <img src="../assets/images/bravo.svg" alt="clap" class="h-72 sm:h-72 md:h-96 self-center" />
 
-        <div class="text-center self-center md:self-end">
-          <p class="text-lg sm:text-xl md:text-2xl">
-            Your grade is <span class="font-bold">100%</span> <br />
-            Congratulations <span class="font-bold">Kholoud Ahmed</span>
-          </p>
-          <button
-            class="bg-Btn-color text-white rounded w-40 sm:w-48 md:w-56 h-10 active:bg-sec-color text-base sm:text-lg md:text-xl mt-4"
-          >
-            View Report
-          </button>
-        </div>
+    <div class="flex flex-col justify-between">
+      <img src="../assets/images/thanks.svg" alt="thanks" class="h-32 sm:h-32 md:h-40 self-start" />
+
+      <div class="text-center self-center md:self-end">
+        <p class="text-lg sm:text-xl md:text-2xl">
+          Your grade is <span id="grade" class="font-bold">100%</span> <br />
+          Congratulations <span id="user-name" class="font-bold">Kholoud Ahmed</span>
+        </p>
+        <button id="report"
+          class="bg-Btn-color text-white rounded w-40 sm:w-48 md:w-56 h-10 active:bg-sec-color text-base sm:text-lg md:text-xl mt-4">
+          View Report
+        </button>
       </div>
     </div>
-  </body>
+  </div>
+  <script src="../js/pages/totalGrade.js" type="module"></script>
+</body>
+
 </html>

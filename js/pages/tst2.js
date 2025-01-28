@@ -168,7 +168,6 @@ function calculateScoreAndAnswers(questions) {
   questions.forEach((question, index) => {
     const isCorrect = question.choosedOptionId === question.correctOptionId;
     if (isCorrect) score++;
-
     answers.push({
       questionIndex: index,
       question: question.question, // Include the question text
@@ -260,7 +259,7 @@ function clearLocalStorageAndRedirect() {
   localStorage.removeItem("randomizedQuestions");
   localStorage.removeItem("currentQuestionIndex");
   localStorage.removeItem("countdownFinishTime");
-  // window.location.replace("report.html");
+  window.location.replace("report.html");
 }
 
 // Main function to handle quiz submission
@@ -282,13 +281,19 @@ async function submitQuiz() {
     answers,
     formattedTimeTaken
   );
+
   const success = await submitQuizData(payload);
-  if (score > 5) {
+  if (success) {
+    // alert(
+    //   `Quiz submitted successfully! Your score: ${score}. Time taken: ${formattedTimeTaken}`
+    // );
+    // clearLocalStorageAndRedirect();
+    // console.log("Hi mooooo");
     clearLocalStorageAndRedirect();
-    window.location.replace("successPage.html");
+    // console.log("Submitted data:", payload);
+    // clearLocalStorageAndRedirect();
   } else {
-    clearLocalStorageAndRedirect();
-    window.location.replace("failurePage.html");
+    alert("An error occurred while submitting the quiz. Please try again.");
   }
 }
 
@@ -344,7 +349,7 @@ function initCountdown() {
     if (remainingTime <= 0) {
       clearInterval(intervalId);
       localStorage.removeItem("countdownFinishTime");
-      window.location.replace("timeOut.html");
+      window.replace("TimeOut.html");
       return;
     }
 
@@ -444,19 +449,18 @@ cards.addEventListener("click", (event) => {
 });
 window.onload = () => {
   fetchQuizData();
-
   initCountdown();
   updateCardColor();
   updateButtonState();
-
-  const userName = document.getElementById("user");
-  displayUserNameWithEffect(
-    userName,
-    `Welcome ${localStorage.getItem("loggedInUser")} , Good Luck ❣`
-  );
-
+  displayUserWelcome();
   const savedIndex = parseInt(localStorage.getItem("currentQuestionIndex"));
   if (!isNaN(savedIndex)) {
     currentQuestionIndex = savedIndex;
   }
 };
+
+function displayUserWelcome() {
+  const userInfo = getUserInfo();
+  const user = document.getElementById("user");
+  user.textContent = ` Welcome ${userInfo.username} to Exama-Tech , Good Luck`;
+}
