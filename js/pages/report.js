@@ -22,6 +22,7 @@ async function fetchGradesByUsername() {
       return null;
     }
   } catch (error) {
+        //////////////////////NOTFOUND/////////////////
     console.error("Error fetching grades data:", error);
     / * * * *  ERROR * * * * * * /;
   }

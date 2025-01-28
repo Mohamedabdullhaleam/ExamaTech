@@ -15,7 +15,7 @@
   class="bg-gradient-to-br from-white to-main-color md:h-screen w-screen flex flex-col items-center overflow-x-hidden">
   <div class="p-6 sm:p-10 grid grid-cols-1 md:grid-cols-12 w-full">
     <div class="col-span-8">
-      <h1 id="message" class="font-bold text-4xl sm:text-5xl">Exama-Tech</h1>
+      <h1 id="title" class="font-bold text-4xl sm:text-5xl">Exama-Tech</h1>
       <h6 id="user" class="mt-3 font-mono text-sm">
 
       </h6>
@@ -166,44 +166,17 @@
       });
     });
     ///////
-    document.addEventListener("DOMContentLoaded", () => {
-      const listItems = document.querySelectorAll(".question-number li");
+    // document.addEventListener("DOMContentLoaded", () => {
+    //   const listItems = document.querySelectorAll(".question-number li");
 
-      listItems.forEach((item) => {
-        item.addEventListener("click", () => {
-          listItems.forEach((li) => li.classList.remove("bg-main-color"));
+    //   listItems.forEach((item) => {
+    //     item.addEventListener("click", () => {
+    //       listItems.forEach((li) => li.classList.remove("bg-main-color"));
 
-          item.classList.add("bg-main-color");
-        });
-      });
-    });
-    document.addEventListener("DOMContentLoaded", () => {
-      const message = "Exama-Tech";
-      const messageElement = document.getElementById("message");
-      let index = 0;
-
-      if (messageElement) {
-        const intervalId = setInterval(() => {
-          messageElement.textContent = message.substring(0, index + 1);
-
-          index++;
-          if (index >= message.length) {
-            clearInterval(intervalId);
-            const blinkInterval = setInterval(() => {
-              messageElement.textContent =
-                message + (index % 2 === 0 ? "|" : "");
-              index++;
-              if (index >= message.length + 6) {
-                clearInterval(blinkInterval);
-                messageElement.textContent = message;
-              }
-            }, 500);
-          }
-        }, 150);
-      } else {
-        console.error('Element with ID "message" not found.');
-      }
-    });
+    //       item.classList.add("bg-main-color");
+    //     });
+    //   });
+    // });
   </script>
 </body>
 

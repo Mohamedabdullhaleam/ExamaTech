@@ -35,6 +35,7 @@ async function fetchQuizData() {
     startCountdown(hours, minutes, seconds);
     initQuiz();
   } catch (error) {
+    //////////////////////NOTFOUND/////////////////
     console.error("Error fetching quiz data:", error);
     / * * * * Redirect to error page * * * * * /;
   }
@@ -135,6 +136,7 @@ document.getElementById("next").addEventListener("click", () => {
       quizData.questions[currentQuestionIndex],
       currentQuestionIndex
     );
+    checkCardColor();
     updateButtonState();
   }
 });
@@ -147,6 +149,7 @@ document.getElementById("previous").addEventListener("click", () => {
       quizData.questions[currentQuestionIndex],
       currentQuestionIndex
     );
+    checkCardColor();
     updateButtonState();
   }
 });
@@ -188,6 +191,7 @@ async function fetchUserGrades(username) {
     );
     return response.ok ? await response.json() : [];
   } catch (error) {
+    //////////////////////NOTFOUND/////////////////
     console.error("Error fetching user grades:", error);
     return [];
   }
@@ -250,6 +254,7 @@ async function submitQuizData(payload) {
     });
     return response.ok;
   } catch (error) {
+    //////////////////////NOTFOUND/////////////////
     console.error("Error submitting quiz data:", error);
     return false;
   }
@@ -415,7 +420,18 @@ function updateFlagUI(index, isFlagged) {
 
 / * * * *  Cards Color and clicks * * * * * */;
 // / * * * * also check next prev to combine the logic * * * * * * /
+function checkCardColor() {
+  const listItems = document.querySelectorAll(".question-number li");
 
+  // Ensure currentQuestionIndex is used to set the active background
+  listItems.forEach((item, i) => {
+    if (i === currentQuestionIndex) {
+      item.classList.add("bg-main-color");
+    } else {
+      item.classList.remove("bg-main-color");
+    }
+  });
+}
 function updateCardColor() {
   const savedQuestions = JSON.parse(
     localStorage.getItem("randomizedQuestions")
@@ -430,7 +446,6 @@ function updateCardColor() {
 const cards = document.getElementById("cards");
 cards.addEventListener("click", (event) => {
   const liElement = event.target;
-  // console.log("Hiiiiiiiiiiiiii", event.target.tagName);
   if (liElement.tagName === "LI") {
     const index = Array.from(cards.children).indexOf(liElement);
     currentQuestionIndex = index;
@@ -440,15 +455,18 @@ cards.addEventListener("click", (event) => {
       quizData.questions[currentQuestionIndex],
       currentQuestionIndex
     );
+    checkCardColor();
   }
 });
 window.onload = () => {
   fetchQuizData();
-
+  checkCardColor();
   initCountdown();
   updateCardColor();
   updateButtonState();
 
+  const title = document.getElementById("title");
+  displayUserNameWithEffect(title, "Exama-Tech");
   const userName = document.getElementById("user");
   displayUserNameWithEffect(
     userName,

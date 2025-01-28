@@ -2,6 +2,7 @@ import { displayUserNameWithEffect } from "./textAnimation.js";
 const tryAgain = document.getElementById("try-again");
 
 tryAgain.addEventListener("click", () => {
+  localStorage.clear();
   window.location.href = "signIn.html";
 });
 

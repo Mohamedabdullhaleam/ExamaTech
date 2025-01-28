@@ -1,3 +1,7 @@
+import { displayUserNameWithEffect } from "./textAnimation.js";
+const title = document.getElementById("title");
+displayUserNameWithEffect(title, "Exama-Tech");
+
 async function checkUserCredentials(userNameOrEmail, password) {
   try {
     const emailUrl = `http://localhost:3000/users?email=${userNameOrEmail}`;
@@ -94,7 +98,7 @@ function startTimer() {
 
   cancelButton.addEventListener("click", () => {
     clearInterval(interval);
-    window.location.href = "report.html";
+    window.location.replace("SignIn.html");
   });
 }
 

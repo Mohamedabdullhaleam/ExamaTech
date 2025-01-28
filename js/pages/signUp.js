@@ -7,6 +7,10 @@ import {
   validateUser,
 } from "./userValidation.js";
 
+import { displayUserNameWithEffect } from "./textAnimation.js";
+const title = document.getElementById("title");
+displayUserNameWithEffect(title, "Exama-Tech");
+
 / * * DOM * * /;
 
 / * * Showing error msgs in front * * /;
