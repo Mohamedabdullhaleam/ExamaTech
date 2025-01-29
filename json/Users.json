@@ -487,6 +487,24 @@
       "email": "marina@gmail.com",
       "password": "Manosamans@123",
       "confirmPassword": "Manosamans@123"
+    },
+    {
+      "id": "e51c",
+      "username": "Mo_Ahmed4987",
+      "firstname": "Mohamed",
+      "lastname": "Ahmed",
+      "email": "mohamedabdullhaleappm236@gmail.com",
+      "password": "Mohaleem236@",
+      "confirmPassword": "Mohaleem236@"
+    },
+    {
+      "id": "becf",
+      "username": "Mo_Abdullhaleam7768",
+      "firstname": "Mohamed",
+      "lastname": "Abdullhaleam",
+      "email": "mohamedabdullhaleamkkkk236@gmail.com",
+      "password": "Mohaleem236@",
+      "confirmPassword": "Mohaleem236@"
     }
   ]
 }

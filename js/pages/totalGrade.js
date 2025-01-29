@@ -19,7 +19,7 @@ window.onload = () => {
       if (!response.ok)
         throw new Error(`Failed to fetch grades: ${response.status}`);
       const data = await response.json();
-      return data.length > 0 ? data[0] : null;
+      return data.length > 0 ? data[data.length - 1] : null;
     } catch (error) {
       window.location.replace("notFound.html");
       console.error("Error fetching grades:", error);
@@ -29,7 +29,9 @@ window.onload = () => {
 
   function calculateGradePercentage(userData) {
     const totalQuestions = userData.quizAttempts[0].attempts[0].answers.length;
-    const score = userData.quizAttempts[0].bestScore;
+    const quizAttempts = userData.quizAttempts[0].attempts; // Get all attempts
+    const lastAttempt = quizAttempts[quizAttempts.length - 1]; // Fetch last attempt
+    const score = lastAttempt.score;
     if (totalQuestions === 0) return "0.00";
     const percentage = (score / totalQuestions) * 100;
     return percentage.toFixed(2);

@@ -728,10 +728,6 @@ video {
   z-index: 50;
 }
 
-.col-span-4 {
-  grid-column: span 4 / span 4;
-}
-
 .col-span-7 {
   grid-column: span 7 / span 7;
 }
@@ -789,6 +785,10 @@ video {
   margin-right: auto;
 }
 
+.mb-10 {
+  margin-bottom: 2.5rem;
+}
+
 .mb-2 {
   margin-bottom: 0.5rem;
 }
@@ -831,10 +831,6 @@ video {
 
 .mt-5 {
   margin-top: 1.25rem;
-}
-
-.mb-10 {
-  margin-bottom: 2.5rem;
 }
 
 .box-border {
@@ -976,6 +972,10 @@ video {
   height: 600px;
 }
 
+.h-\[60px\] {
+  height: 60px;
+}
+
 .h-full {
   height: 100%;
 }
@@ -984,20 +984,12 @@ video {
   height: 100vh;
 }
 
-.h-\[60px\] {
-  height: 60px;
-}
-
 .min-h-\[1\.2rem\] {
   min-height: 1.2rem;
 }
 
 .min-h-\[1rem\] {
   min-height: 1rem;
-}
-
-.w-12 {
-  width: 3rem;
 }
 
 .w-32 {
@@ -1024,8 +1016,16 @@ video {
   width: 400px;
 }
 
+.w-\[450px\] {
+  width: 450px;
+}
+
 .w-\[60\%\] {
   width: 60%;
+}
+
+.w-\[60px\] {
+  width: 60px;
 }
 
 .w-\[90\%\] {
@@ -1050,14 +1050,6 @@ video {
 
 .w-screen {
   width: 100vw;
-}
-
-.w-\[450px\] {
-  width: 450px;
-}
-
-.w-\[60px\] {
-  width: 60px;
 }
 
 .min-w-\[7rem\] {
@@ -1609,8 +1601,8 @@ video {
   justify-items: stretch;
 }
 
-.gap-14 {
-  gap: 3.5rem;
+.gap-11 {
+  gap: 2.75rem;
 }
 
 .gap-16 {
@@ -1643,10 +1635,6 @@ video {
 
 .gap-9 {
   gap: 2.25rem;
-}
-
-.gap-11 {
-  gap: 2.75rem;
 }
 
 .space-x-2 > :not([hidden]) ~ :not([hidden]) {
@@ -3244,12 +3232,12 @@ h1 {
 }
 
 @media (min-width: 768px) {
-  .md\:col-span-6 {
-    grid-column: span 6 / span 6;
-  }
-
   .md\:col-span-4 {
     grid-column: span 4 / span 4;
+  }
+
+  .md\:col-span-6 {
+    grid-column: span 6 / span 6;
   }
 
   .md\:ml-auto {
@@ -3278,10 +3266,6 @@ h1 {
 
   .md\:h-\[580px\] {
     height: 580px;
-  }
-
-  .md\:h-screen {
-    height: 100vh;
   }
 
   .md\:w-56 {
@@ -3320,12 +3304,12 @@ h1 {
     width: 100%;
   }
 
-  .md\:grid-cols-12 {
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-  }
-
   .md\:grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
   }
 
   .md\:flex-row {
@@ -3372,16 +3356,16 @@ h1 {
     width: 1000px;
   }
 
+  .lg\:w-\[1200px\] {
+    width: 1200px;
+  }
+
   .lg\:w-\[36rem\] {
     width: 36rem;
   }
 
   .lg\:w-full {
     width: 100%;
-  }
-
-  .lg\:w-\[1200px\] {
-    width: 1200px;
   }
 
   .lg\:max-w-4xl {

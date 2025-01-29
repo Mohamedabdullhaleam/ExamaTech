@@ -13,7 +13,7 @@ async function fetchGradesByUsername() {
     if (!response.ok) throw new Error(`Error: ${response.status}`);
     const data = await response.json();
     if (data.length > 0) {
-      return data[0];
+      return data[data.length - 1];
     } else {
       console.error("No grades found for the user.");
       window.location.replace("notFound.html");
@@ -34,12 +34,11 @@ displayUserNameWithEffect(title, "Exama-Tech");
 async function getUserQuizReport() {
   const userData = await fetchGradesByUsername();
   if (userData) {
-    // console.log(userData);
-    const quizData = userData.quizAttempts[0].attempts[0];
-    const bestScore = userData.quizAttempts[0].bestScore;
-    // console.log("bestScore", bestScore);
-    const date = quizData.completedAt;
-    const timeTaken = quizData.timeTaken;
+    const quizAttempts = userData.quizAttempts[0].attempts;
+    const lastAttempt = quizAttempts[quizAttempts.length - 1];
+    const bestScore = lastAttempt.score;
+    const date = lastAttempt.completedAt;
+    const timeTaken = lastAttempt.timeTaken;
     const username = userData.username;
 
     const gradePercentage = calculateGradePercentage(userData);
@@ -64,8 +63,9 @@ async function getUserQuizReport() {
 // 1- grade percentage
 function calculateGradePercentage(userData) {
   const totalQuestions = userData.quizAttempts[0].attempts[0].answers.length;
-  //   console.log("tq", totalQuestions);
-  const score = userData.quizAttempts[0].bestScore;
+  const quizAttempts = userData.quizAttempts[0].attempts;
+  const lastAttempt = quizAttempts[quizAttempts.length - 1];
+  const score = lastAttempt.score;
   //   console.log("Sc", score);
   const percentage = (score / totalQuestions) * 100;
   return percentage.toFixed(2);
@@ -95,7 +95,8 @@ getUserQuizReport().then((data) => {
 // Function to display questions dynamically
 async function displayQuestions() {
   const userData = await fetchGradesByUsername();
-  const questions = userData.quizAttempts[0].attempts[0].answers;
+  const quizAttempts = userData.quizAttempts[0].attempts;
+  const questions = quizAttempts[quizAttempts.length - 1].answers;
 
   // Container to append the questions dynamically
   const container = document.getElementById("question-container");
