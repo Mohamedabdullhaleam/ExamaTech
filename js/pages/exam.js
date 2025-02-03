@@ -75,22 +75,57 @@ function displayQuestion(question, index) {
       radioLabel.setAttribute("for", radioInput.id);
       radioLabel.textContent = option.text;
 
-      radioInput.checked = question.choosedOptionId === option.id; // / Pre-select the radio button if the option was previously chosen
-      // console.log("option-id:", option.id);
-      console.log("aaaa", question.flags.isFlagged);
-      updateButtonState();
-      radioInput.onclick = () => trackAnswer(question.id, option.id);
+      radioInput.checked = question.choosedOptionId === option.id;
+
+      radioInput.addEventListener("click", (event) =>
+        handleOptionClick(event, optionElement, option.id)
+      );
     }
   });
+  updateButtonState();
 }
+
+// Unified function to handle answer selection
+function handleOptionClick(event, optionElement, optionId = null) {
+  const input = optionElement.querySelector("input");
+  const questionIndex = localStorage.getItem("currentQuestionIndex");
+
+  document.querySelectorAll("input[name='choice']").forEach((el) => {
+    el.checked = false;
+  });
+
+  input.checked = true;
+
+  const selectedOptionId =
+    optionId ||
+    quizData.questions[questionIndex].options[
+      parseInt(input.id.split("-").pop())
+    ].id;
+
+  console.log("Q-id", quizData.questions[questionIndex].id);
+  console.log("A.id", selectedOptionId);
+
+  trackAnswer(quizData.questions[questionIndex].id, selectedOptionId);
+}
+
+// Attach event listeners after DOM loads
+document.addEventListener("DOMContentLoaded", () => {
+  const options = document.querySelectorAll(".option");
+
+  options.forEach((option) => {
+    option.addEventListener("click", (event) =>
+      handleOptionClick(event, option)
+    );
+  });
+});
 
 / * * * * Tracking Answers * * * * /;
 function trackAnswer(questionId, optionId) {
   const currentQuestion = quizData.questions.find((q) => q.id === questionId);
   const selectedOption = currentQuestion.options.find((o) => o.id === optionId);
 
-  currentQuestion.choosedOptionId = optionId; // Store the selected option ID
-  currentQuestion.selectedAnswer = selectedOption.text; // Store the actual answer text
+  currentQuestion.choosedOptionId = optionId;
+  currentQuestion.selectedAnswer = selectedOption.text;
 
   // Save updated questions to localStorage
   localStorage.setItem(
