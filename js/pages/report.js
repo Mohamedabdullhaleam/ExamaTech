@@ -84,7 +84,7 @@ function formatTime(timeString) {
 getUserQuizReport().then((data) => {
   if (data) {
     const userName = document.getElementById("user-name");
-    displayUserNameWithEffect(userName, `Hello ${data.username}🥰`);
+    displayUserNameWithEffect(userName, `Hello ${data.username}🖤`);
     document.getElementById("grade").textContent = `${data.gradePercentage}%`;
     document.getElementById("date").textContent = `${data.formattedDate}`;
     document.getElementById("time").textContent = `${data.formattedTime}`;

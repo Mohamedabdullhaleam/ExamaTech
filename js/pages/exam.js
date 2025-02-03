@@ -53,6 +53,9 @@ function initQuiz() {
 / * * * *   Disply  * * * * /;
 function displayQuestion(question, index) {
   localStorage.setItem("currentQuestionIndex", index);
+  document.querySelectorAll(".option").forEach((el) => {
+    el.classList.remove("bg-main-color");
+  });
 
   quizData.questions.forEach((q) => {
     if (!q.flags) {
@@ -76,6 +79,11 @@ function displayQuestion(question, index) {
       radioLabel.textContent = option.text;
 
       radioInput.checked = question.choosedOptionId === option.id;
+      if (question.choosedOptionId === option.id) {
+        optionElement.classList.add("bg-main-color");
+      } else {
+        optionElement.classList.remove("bg-main-color");
+      }
 
       radioInput.addEventListener("click", (event) =>
         handleOptionClick(event, optionElement, option.id)
@@ -89,6 +97,13 @@ function displayQuestion(question, index) {
 function handleOptionClick(event, optionElement, optionId = null) {
   const input = optionElement.querySelector("input");
   const questionIndex = localStorage.getItem("currentQuestionIndex");
+  // Remove 'bg-main-color' from all options in the current question
+  document.querySelectorAll(`#options-container .option`).forEach((el) => {
+    el.classList.remove("bg-main-color");
+  });
+
+  // Add 'bg-main-color' to the clicked option
+  optionElement.classList.add("bg-main-color");
 
   document.querySelectorAll("input[name='choice']").forEach((el) => {
     el.checked = false;
@@ -106,6 +121,31 @@ function handleOptionClick(event, optionElement, optionId = null) {
   console.log("A.id", selectedOptionId);
 
   trackAnswer(quizData.questions[questionIndex].id, selectedOptionId);
+  // Save selected option styling to localStorage
+  saveSelectedOptionStyle(questionIndex, optionElement.id);
+}
+
+// Save selected option styles to localStorage
+function saveSelectedOptionStyle(questionIndex, optionId) {
+  let savedStyles =
+    JSON.parse(localStorage.getItem("selectedOptionsStyles")) || {};
+  savedStyles[questionIndex] = optionId;
+  localStorage.setItem("selectedOptionsStyles", JSON.stringify(savedStyles));
+}
+
+// Load selected options styles from localStorage
+function loadSelectedOptionStyles() {
+  let savedStyles =
+    JSON.parse(localStorage.getItem("selectedOptionsStyles")) || {};
+  const questionIndex = localStorage.getItem("currentQuestionIndex");
+
+  if (savedStyles[questionIndex]) {
+    const optionId = savedStyles[questionIndex];
+    const optionElement = document.getElementById(optionId);
+    if (optionElement) {
+      optionElement.classList.add("bg-main-color");
+    }
+  }
 }
 
 // Attach event listeners after DOM loads
@@ -117,6 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
       handleOptionClick(event, option)
     );
   });
+  loadSelectedOptionStyles(); // Load saved styles on page reload
 });
 
 / * * * * Tracking Answers * * * * /;
