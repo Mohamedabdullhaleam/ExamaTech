@@ -3134,6 +3134,21 @@ h1 {
   background-color: rgb(85 99 82 / var(--tw-bg-opacity, 1));
 }
 
+.active\:bg-light-green:active {
+  --tw-bg-opacity: 1;
+  background-color: rgb(235 235 235 / var(--tw-bg-opacity, 1));
+}
+
+.active\:bg-main-color:active {
+  --tw-bg-opacity: 1;
+  background-color: rgb(143 163 139 / var(--tw-bg-opacity, 1));
+}
+
+.active\:bg-Btn-color:active {
+  --tw-bg-opacity: 1;
+  background-color: rgb(115 130 111 / var(--tw-bg-opacity, 1));
+}
+
 .active\:text-main-color:active {
   --tw-text-opacity: 1;
   color: rgb(143 163 139 / var(--tw-text-opacity, 1));
