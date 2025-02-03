@@ -98,7 +98,7 @@ function handleOptionClick(event, optionElement, optionId = null) {
   const input = optionElement.querySelector("input");
   const questionIndex = localStorage.getItem("currentQuestionIndex");
   // Remove 'bg-main-color' from all options in the current question
-  document.querySelectorAll(`#options-container .option`).forEach((el) => {
+  document.querySelectorAll(".option").forEach((el) => {
     el.classList.remove("bg-main-color");
   });
 
