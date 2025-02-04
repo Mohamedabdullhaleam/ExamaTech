@@ -1,3 +1,4 @@
+let currentFilter = "all";
 let quizData = {};
 let currentQuestionIndex = 0;
 import { displayUserNameWithEffect } from "./textAnimation.js";
@@ -123,6 +124,9 @@ function handleOptionClick(event, optionElement, optionId = null) {
   trackAnswer(quizData.questions[questionIndex].id, selectedOptionId);
   // Save selected option styling to localStorage
   saveSelectedOptionStyle(questionIndex, optionElement.id);
+
+  // Update the card UI after answering
+  updateCardUI(questionIndex);
 }
 
 // Save selected option styles to localStorage
@@ -167,12 +171,20 @@ function trackAnswer(questionId, optionId) {
 
   currentQuestion.choosedOptionId = optionId;
   currentQuestion.selectedAnswer = selectedOption.text;
+  // Update flags.isAnswered to true
+  if (!currentQuestion.flags) {
+    currentQuestion.flags = { isAnswered: false };
+  }
+
+  currentQuestion.flags.isAnswered = true;
 
   // Save updated questions to localStorage
   localStorage.setItem(
     "randomizedQuestions",
     JSON.stringify(quizData.questions)
   );
+  filterQuestions(currentFilter); // Refresh the filter
+  updateCardUI(currentQuestionIndex);
 }
 
 / * * * *  Shuffling question * * * * /;
@@ -463,20 +475,24 @@ function initCountdown() {
 const flagIcon = document.getElementById("flag-icon");
 flagIcon.addEventListener("click", () => {
   const currentQuestion = quizData.questions[currentQuestionIndex];
-  flagIcon.classList.toggle("text-main-color");
-  flagIcon.classList.toggle("text-flag-color");
-  console.log("flag--orange");
   if (!currentQuestion.flags) {
     currentQuestion.flags = { isFlagged: false };
   }
   currentQuestion.flags.isFlagged = !currentQuestion.flags.isFlagged;
 
+  flagIcon.classList.toggle("text-main-color");
+  flagIcon.classList.toggle("text-flag-color");
+  console.log("flag--orange");
+
   localStorage.setItem(
     "randomizedQuestions",
     JSON.stringify(quizData.questions)
   );
+  filterQuestions(currentFilter); // Refresh the filter
 
   updateFlagUI(currentQuestionIndex, currentQuestion.flags.isFlagged);
+  // Update the card UI
+  updateCardUI(currentQuestionIndex);
 
   console.log(
     `Question ${currentQuestionIndex + 1} is ${
@@ -495,6 +511,7 @@ function updateFlagUI(index, isFlagged) {
 }
 
 / * * * *  Cards Color and clicks * * * * * */;
+
 // / * * * * also check next prev to combine the logic * * * * * * /
 function checkCardColor() {
   const listItems = document.querySelectorAll(".question-number li");
@@ -534,8 +551,84 @@ cards.addEventListener("click", (event) => {
     checkCardColor();
   }
 });
+////////
+function updateCardUI(index) {
+  const cardElement = document.getElementById(`card-${index + 1}`);
+  const question = quizData.questions[index];
+
+  cardElement.classList.toggle("answered", question.flags.isAnswered);
+  cardElement.classList.toggle("flagged", question.flags.isFlagged);
+}
+////////////////
+function filterQuestions(filterType) {
+  const cards = document.querySelectorAll("#cards li");
+  currentFilter = filterType;
+  const savedQuestions =
+    JSON.parse(localStorage.getItem("randomizedQuestions")) || [];
+
+  cards.forEach((card, index) => {
+    const question = savedQuestions[index];
+    const isAnswered = question.flags?.isAnswered || false; // Check if the question is answered
+    const isFlagged = question.flags?.isFlagged || false; // Check if the question is flagged
+
+    let shouldShow = false;
+
+    switch (filterType) {
+      case "all":
+        shouldShow = true; // Show all questions
+        break;
+      case "answered":
+        shouldShow = isAnswered; // Show only answered questions
+        break;
+      case "not-answered":
+        shouldShow = !isAnswered; // Show only not-answered questions
+        break;
+      case "flagged":
+        shouldShow = isFlagged; // Show only flagged questions
+        break;
+      default:
+        shouldShow = true;
+    }
+
+    // Use visibility instead of display
+    if (shouldShow) {
+      card.style.visibility = "visible";
+      card.style.opacity = "1"; // Ensure the card is fully visible
+    } else {
+      card.style.visibility = "hidden";
+      card.style.opacity = "0"; // Smoothly hide the card
+    }
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const listItems = document.querySelectorAll(".questions-list li");
+
+  listItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      listItems.forEach((li) => {
+        li.classList.remove("bg-main-color");
+        li.classList.remove("text-white");
+      });
+
+      item.classList.add("bg-main-color");
+      item.classList.add("text-white");
+
+      // Get the filter type from the clicked item's text content
+      const filterType = item.textContent.trim().toLowerCase();
+      currentFilter = filterType;
+      filterQuestions(filterType);
+    });
+  });
+
+  // Initially show all questions
+  filterQuestions("all");
+});
+
 window.onload = () => {
   fetchQuizData();
+  filterQuestions("all"); // Show all questions initially
+  updateCardUI(currentQuestionIndex); // Update the UI for the current question
   checkCardColor();
   initCountdown();
   updateCardColor();
