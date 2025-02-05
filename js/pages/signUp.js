@@ -9,7 +9,7 @@ import {
   dynamicValidation,
 } from "../utils/regestration/userValidation.js";
 import { generateUserName } from "../utils/regestration/userData.js";
-// import { displayError } from "../utils/regestration/display.js";
+import { displayError } from "../utils/regestration/display.js";
 import { displayUserNameWithEffect } from "./textAnimation.js";
 
 / * * * Animation * * * /;
@@ -73,24 +73,6 @@ async function validate() {
   } else {
     popUp(newUser.username, newUser);
   }
-}
-function displayError(errors) {
-  // 1- clear all previous errors
-  document.querySelectorAll(".text-red-500").forEach(function (errorElement) {
-    errorElement.textContent = "";
-    errorElement.classList.add("invisible");
-  });
-  // 2- display new errors
-  errors.forEach(function (error) {
-    const errorElement = document.getElementById(error.id);
-    if (error.id === "account-exists-alert") {
-      errorElement.classList.remove("invisible");
-      errorElement.innerHTML = error.message;
-    } else {
-      errorElement.textContent = error.message;
-      errorElement.classList.remove("invisible");
-    }
-  });
 }
 
 / * * * Post User Data * * * /;
