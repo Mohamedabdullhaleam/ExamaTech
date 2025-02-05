@@ -11,7 +11,7 @@ import {
 import { generateUserName } from "../utils/regestration/userData.js";
 import { displayError, showToolTip } from "../utils/regestration/display.js";
 import { displayUserNameWithEffect } from "./textAnimation.js";
-
+import { togglePassword } from "../utils/regestration/passIcon.js";
 / * * * Animation * * * /;
 const title = document.getElementById("title");
 displayUserNameWithEffect(title, "Exama-Tech");
@@ -149,3 +149,6 @@ document.addEventListener("DOMContentLoaded", () => {
 document.getElementById("log-in").addEventListener("click", () => {
   window.location.href = "SignIn.html";
 });
+
+/ * * * Toggle PassIcon * * * /;
+document.getElementById("pass-icon").addEventListener("click", togglePassword);

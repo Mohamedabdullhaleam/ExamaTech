@@ -44,6 +44,7 @@ export function validatePasswordMatch(password, confirmPassword) {
   }
   return null;
 }
+
 /// Show error msg only without prevent posting
 export async function checkEmailExists(email) {
   if (!email.trim()) {
@@ -94,7 +95,7 @@ export function validateUser(user) {
   return errors;
 }
 
-/ * * * Dynamic Validation * * * /;
+/ * * * Dynamic Sign-up Validation  * * * /;
 export function dynamicValidation() {
   const fields = [
     { id: "first-name", errorId: "error-first-name" },
@@ -135,4 +136,16 @@ export function validateSignInFields(emailOrUsername, password) {
     return "Both credentials are required.";
   }
   return null;
+}
+
+/ * * * Dynamic Login-Validation * * * /;
+export function clearErrorOnInput(inputId, errorIds) {
+  document.getElementById(inputId).addEventListener("input", () => {
+    errorIds.forEach((errorId) => {
+      const errorMsg = document.getElementById(errorId);
+      if (errorMsg) {
+        errorMsg.classList.add("invisible");
+      }
+    });
+  });
 }

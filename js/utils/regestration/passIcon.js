@@ -1,4 +1,4 @@
-function togglePassword() {
+export function togglePassword() {
   const passwordInput = document.getElementById("password-input");
   const passwordIcon = document.getElementById("password-icon");
 

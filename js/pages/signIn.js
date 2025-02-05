@@ -1,7 +1,13 @@
 import { displayUserNameWithEffect } from "./textAnimation.js";
+import { popUp, toggleErrorMessage } from "../utils/regestration/display.js";
+import { clearErrorOnInput } from "../utils/regestration/userValidation.js";
+import { togglePassword } from "../utils/regestration/passIcon.js";
+
+/ * * * Animation * * * /;
 const title = document.getElementById("title");
 displayUserNameWithEffect(title, "Exama-Tech");
 
+/ * * * Check User Credentials * * * /;
 async function checkUserCredentials(userNameOrEmail, password) {
   try {
     const emailUrl = `http://localhost:3000/users?email=${userNameOrEmail}`;
@@ -20,7 +26,6 @@ async function checkUserCredentials(userNameOrEmail, password) {
     const usernameUrl = `http://localhost:3000/users?username=${userNameOrEmail}`;
     const usernameResponse = await fetch(usernameUrl);
     const usernameData = await usernameResponse.json();
-
     // Check if the user was found by username
     if (usernameData.length > 0) {
       const user = usernameData[0];
@@ -37,87 +42,52 @@ async function checkUserCredentials(userNameOrEmail, password) {
   }
 }
 
-document
-  .getElementById("sign-in-form")
-  .addEventListener("submit", async function (event) {
-    event.preventDefault();
+/ * * * * Validate User Credintials * * * * /;
+async function validate() {
+  const userNameOrEmail = document.getElementById("username-or-email").value;
+  const password = document.getElementById("password-input").value;
+  const userNameErrorMsg = document.getElementById("username-error-msg");
+  const passwordErrorMsg = document.getElementById("password-error-msg");
+  const credintials = document.getElementById("invalid-credentials");
 
-    const userNameOrEmail = document.getElementById("username-or-email").value;
-    const password = document.getElementById("password-input").value;
-    const userNameErrorMsg = document.getElementById("username-error-msg");
-    const passwordErrorMsg = document.getElementById("password-error-msg");
-    const credintials = document.getElementById("invalid-credentials");
+  toggleErrorMessage(userNameErrorMsg, !userNameOrEmail);
+  toggleErrorMessage(passwordErrorMsg, !password);
 
-    // Validate inputs
-    toggleErrorMessage(userNameErrorMsg, !userNameOrEmail);
-    toggleErrorMessage(passwordErrorMsg, !password);
+  if (!userNameOrEmail || !password) return;
 
-    if (!userNameOrEmail || !password) return;
+  const userName = await checkUserCredentials(userNameOrEmail, password);
 
-    const userName = await checkUserCredentials(userNameOrEmail, password);
-
-    if (userName) {
-      console.log("Login successful: ", userName);
-      localStorage.setItem("loggedInUser", userName);
-      popUp();
-      // window.location.href = "Confirmation.html";
-    } else {
-      console.log("Invalid login credentials");
-      toggleErrorMessage(credintials, true);
-    }
-  });
-
-document.getElementById("sign-up").addEventListener("click", function (e) {
-  window.location.href = "SignUp.html";
-});
-
-function startTimer() {
-  let timerValue = 6;
-  const timerElement = document.getElementById("timer");
-  const cancelButton = document.getElementById("cancel-btn");
-
-  // Update the timer every second
-  const interval = setInterval(() => {
-    timerElement.textContent = timerValue;
-    if (timerValue < 4) {
-      timerElement.style.color = "red";
-    }
-    if (timerValue <= 0) {
-      clearInterval(interval);
-      window.location.href = "exam.html";
-    }
-    timerValue--;
-  }, 1000);
-
-  cancelButton.addEventListener("click", () => {
-    clearInterval(interval);
-    window.location.replace("SignIn.html");
-  });
-}
-
-function popUp() {
-  const popUp = document.getElementById("popup-modal");
-  popUp.classList.remove("hidden");
-  popUp.classList.add("flex");
-  startTimer();
-}
-
-function toggleErrorMessage(element, condition) {
-  if (condition) {
-    element.classList.remove("invisible");
+  if (userName) {
+    console.log("Login successful: ", userName);
+    localStorage.setItem("loggedInUser", userName);
+    popUp();
   } else {
-    element.classList.add("invisible");
+    console.log("Invalid login credentials");
+    toggleErrorMessage(credintials, true);
   }
 }
 
-document.getElementById("username-or-email").addEventListener("input", () => {
-  const userNameErrorMsg = document.getElementById("username-error-msg");
-  const emailErrorMsg = document.getElementById("invalid-credentials");
-  userNameErrorMsg.classList.add("invisible");
-  emailErrorMsg.classList.add("invisible");
+/ * * * Dynamic Validation * * * /;
+clearErrorOnInput("username-or-email", [
+  "username-error-msg",
+  "invalid-credentials",
+]);
+
+clearErrorOnInput("password-input", ["password-error-msg"]);
+
+/ * * * * * * * * * * * * * * * * Event-Listeners * * * * * * * * * * * * * * * * /;
+/ * * * Validation on submit * * * /;
+document
+  .getElementById("sign-in-form")
+  .addEventListener("submit", async (e) => {
+    e.preventDefault();
+    validate();
+  });
+
+/ * * * Redirection * * * /;
+document.getElementById("sign-up").addEventListener("click", (e) => {
+  window.location.href = "SignUp.html";
 });
 
-document.getElementById("password-input").addEventListener("input", () => {
-  const passwordErrorMsg = document.getElementById("password-error-msg");
-  passwordErrorMsg.classList.add("invisible");
-});
+/ * * * Toggle PassIcon * * * /;
+document.getElementById("pass-icon").addEventListener("click", togglePassword);

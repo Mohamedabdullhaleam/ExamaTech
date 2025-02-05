@@ -49,3 +49,45 @@ export function showToolTip(userName) {
       });
   });
 }
+
+/ * * * * * * * * * * * * * * LogIn * * * * * * * * * * * * * * /;
+
+/ * * * popUp * * * /;
+export function popUp() {
+  const popUp = document.getElementById("popup-modal");
+  popUp.classList.remove("hidden");
+  popUp.classList.add("flex");
+  startTimer();
+}
+/ * * * popUp Timer * * * /;
+export function startTimer() {
+  let timerValue = 6;
+  const timerElement = document.getElementById("timer");
+  const cancelButton = document.getElementById("cancel-btn");
+
+  // Update the timer every second
+  const interval = setInterval(() => {
+    timerElement.textContent = timerValue;
+    if (timerValue < 4) {
+      timerElement.style.color = "red";
+    }
+    if (timerValue <= 0) {
+      clearInterval(interval);
+      window.location.href = "exam.html";
+    }
+    timerValue--;
+  }, 1000);
+
+  cancelButton.addEventListener("click", () => {
+    clearInterval(interval);
+    window.location.replace("SignIn.html");
+  });
+}
+
+export function toggleErrorMessage(element, condition) {
+  if (condition) {
+    element.classList.remove("invisible");
+  } else {
+    element.classList.add("invisible");
+  }
+}
