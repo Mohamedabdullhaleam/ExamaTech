@@ -6,7 +6,7 @@ export function validateRequiredFields(user) {
     !user.password ||
     !user.confirmPassword
   ) {
-    return "All fields are required.";
+    return "All fields are required.👹";
   }
   return null;
 }
@@ -44,7 +44,7 @@ export function validatePasswordMatch(password, confirmPassword) {
   }
   return null;
 }
-
+/// Show error msg only without prevent posting
 export async function checkEmailExists(email) {
   if (!email.trim()) {
     return false;
@@ -56,10 +56,14 @@ export async function checkEmailExists(email) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    return `<i class="fa-solid fa-circle-exclamation text-red-500"></i>
-    <span>Account already exists. Please try logging in.</span>`;
+
+    if (data.length > 0) {
+      return `<i class="fa-solid fa-circle-exclamation text-red-500"></i>
+        <span>Account already exists. Please try logging in.</span>`;
+    } else {
+      return null;
+    }
   } catch (error) {
-    window.location.replace("notFound.html");
     console.error("Error checking email:", error);
     return null;
   }
@@ -88,6 +92,41 @@ export function validateUser(user) {
   }
 
   return errors;
+}
+
+/ * * * Dynamic Validation * * * /;
+export function dynamicValidation() {
+  const fields = [
+    { id: "first-name", errorId: "error-first-name" },
+    { id: "last-name", errorId: "error-last-name" },
+    { id: "email", errorId: "error-email" },
+    { id: "password-input", errorId: "error-password" },
+    { id: "confirm-password", errorId: "error-confirm-password" },
+  ];
+
+  fields.forEach((field) => {
+    const inputField = document.getElementById(field.id);
+    const errorElement = document.getElementById(field.errorId);
+    const emailExist = document.getElementById("account-exists-alert");
+    // console.log("Input Field:", inputField, "Error Element:", errorElement);
+    if (inputField && errorElement) {
+      if (field.id === "email") {
+        console.log("email changed");
+        inputField.addEventListener("input", () => {
+          errorElement.textContent = "";
+          emailExist.textContent = "";
+          emailExist.classList.add("invisible");
+          errorElement.classList.add("invisible");
+        });
+      }
+      inputField.addEventListener("input", () => {
+        errorElement.textContent = "";
+        errorElement.classList.add("invisible");
+      });
+    } else {
+      console.error(`Missing field or error element for ${field.id}`);
+    }
+  });
 }
 
 / * * * Log-In * * * /;

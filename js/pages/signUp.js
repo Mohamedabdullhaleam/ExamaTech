@@ -5,28 +5,26 @@ import {
   validatePasswordStrength,
   validatePasswordMatch,
   validateUser,
-} from "./userValidation.js";
-
+  checkEmailExists,
+  dynamicValidation,
+} from "../utils/regestration/userValidation.js";
+import { generateUserName } from "../utils/regestration/userData.js";
+// import { displayError } from "../utils/regestration/display.js";
 import { displayUserNameWithEffect } from "./textAnimation.js";
+
+/ * * * Animation * * * /;
 const title = document.getElementById("title");
 displayUserNameWithEffect(title, "Exama-Tech");
 
-/ * * DOM * * /;
-
-/ * * Showing error msgs in front * * /;
-document.getElementById("signup-form").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  validate();
-});
-
+/ * * * Combine all validation logic * * * /;
 async function validate() {
+  / * * * Dom * * */;
   const firstName = document.getElementById("first-name").value.trim();
   const lastName = document.getElementById("last-name").value.trim();
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password-input").value;
   const confirmPassword = document.getElementById("confirm-password").value;
-  // console.log(firstName, lastName, email, password, confirmPassword);
-
+  / * * * JSON User object to be posted * * * /;
   const newUser = {
     username: generateUserName(firstName, lastName),
     firstname: firstName,
@@ -35,7 +33,6 @@ async function validate() {
     password: password,
     confirmPassword: confirmPassword,
   };
-
   / * * * * setting the array of object that holds all errors  * * * * /;
   const errors = []; // array of object to save and display errors
   const firstNameError = validateName(firstName);
@@ -61,6 +58,7 @@ async function validate() {
       message: passwordMatchError,
     });
   }
+  //// Check if all fields are filled
   const requiredFieldsError = validateRequiredFields(newUser);
   if (requiredFieldsError)
     errors.push({ id: "error-first-name", message: requiredFieldsError });
@@ -71,18 +69,34 @@ async function validate() {
   }
 
   if (errors.length > 0) {
-    displyError(errors);
+    displayError(errors);
   } else {
     popUp(newUser.username, newUser);
   }
 }
-document.addEventListener("DOMContentLoaded", () => {
-  setupInputListeners(); // Initialize input listeners
-});
+function displayError(errors) {
+  // 1- clear all previous errors
+  document.querySelectorAll(".text-red-500").forEach(function (errorElement) {
+    errorElement.textContent = "";
+    errorElement.classList.add("invisible");
+  });
+  // 2- display new errors
+  errors.forEach(function (error) {
+    const errorElement = document.getElementById(error.id);
+    if (error.id === "account-exists-alert") {
+      errorElement.classList.remove("invisible");
+      errorElement.innerHTML = error.message;
+    } else {
+      errorElement.textContent = error.message;
+      errorElement.classList.remove("invisible");
+    }
+  });
+}
 
+/ * * * Post User Data * * * /;
 async function postUserData(newUser) {
+  /// prevent posting data if the email already exists
   const emailExists = await checkEmailExists(newUser.email);
-
   if (emailExists) {
     // console.error("Error: Email is already in use.");
     return;
@@ -108,74 +122,13 @@ async function postUserData(newUser) {
     console.log("Data posted successfully:", result);
     console.log(`HI : result.userName`);
     window.location.href = "SignIn.html";
-    // popUp(result.userName);
   } catch (error) {
-    window.location.replace("notFound.html");
     console.error("Error posting data:", error);
+    window.location.replace("notFound.html");
   }
 }
 
-const logIn = document
-  .getElementById("log-in")
-  .addEventListener("click", () => {
-    window.location.href = "SignIn.html";
-  });
-
-/ * * *  Helper functions * * * /;
-
-/ * * *  user_name generation * * * /;
-const generateUserName = function (firstName, lastName) {
-  const timestamp = Date.now().toString().slice(-4);
-  return `${firstName.slice(0, 2)}_${lastName}${timestamp}`;
-};
-
-function displyError(errors) {
-  // 1- clear all previous errors
-  document.querySelectorAll(".text-red-500").forEach(function (errorElement) {
-    errorElement.textContent = "";
-    errorElement.classList.add("invisible");
-  });
-  // 2- display new errors
-  errors.forEach(function (error) {
-    const errorElement = document.getElementById(error.id);
-    if (error.id === "account-exists-alert") {
-      errorElement.classList.remove("invisible");
-      errorElement.innerHTML = error.message;
-    } else {
-      errorElement.textContent = error.message;
-      errorElement.classList.remove("invisible");
-    }
-  });
-}
-
-document.getElementById("sign-in").addEventListener("click", function (e) {
-  window.location.href = "SignIn.html";
-});
-
-async function checkEmailExists(email) {
-  if (!email.trim()) {
-    return false;
-  }
-  const url = `http://localhost:3000/users?email=${email}`;
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-
-    if (data.length > 0) {
-      return `<i class="fa-solid fa-circle-exclamation text-red-500"></i>
-        <span>Account already exists. Please try logging in.</span>`;
-    } else {
-      return null;
-    }
-  } catch (error) {
-    console.error("Error checking email:", error);
-    return null;
-  }
-}
-
+/ * * * * pop-up * * */;
 function popUp(userName, user) {
   const popUp = document.getElementById("popup-modal");
   const okButton = document.getElementById("ok-btn");
@@ -226,40 +179,20 @@ function popUp(userName, user) {
   };
 }
 
-function setupInputListeners() {
-  const fields = [
-    { id: "first-name", errorId: "error-first-name" },
-    { id: "last-name", errorId: "error-last-name" },
-    { id: "email", errorId: "error-email" },
-    { id: "password-input", errorId: "error-password" },
-    { id: "confirm-password", errorId: "error-confirm-password" },
-  ];
+/ * * * * * * * * * * * * * * * * Event-Listeners * * * * * * * * * * * * * * * * /;
+/ * * * Validation on submit * * * /;
+// event listener that call the validate function when submit button kicked
+document.getElementById("signup-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  validate();
+});
 
-  fields.forEach((field) => {
-    const inputField = document.getElementById(field.id);
-    const errorElement = document.getElementById(field.errorId);
-    const emailExist = document.getElementById("account-exists-alert");
-    // console.log("Input Field:", inputField, "Error Element:", errorElement);
-    if (inputField && errorElement) {
-      if (field.id === "email") {
-        console.log("email changed");
-        inputField.addEventListener("input", () => {
-          errorElement.textContent = "";
-          emailExist.textContent = "";
-          emailExist.classList.add("invisible");
-          errorElement.classList.add("invisible");
-        });
-      }
-      inputField.addEventListener("input", () => {
-        errorElement.textContent = "";
-        errorElement.classList.add("invisible");
-      });
-    } else {
-      console.error(`Missing field or error element for ${field.id}`);
-    }
-  });
-}
-
+/ * * * Dynamic validation * * * /;
 document.addEventListener("DOMContentLoaded", () => {
-  setupInputListeners();
+  dynamicValidation();
+});
+
+/ * * * Redirection to LogIn * * */;
+document.getElementById("log-in").addEventListener("click", () => {
+  window.location.href = "SignIn.html";
 });
