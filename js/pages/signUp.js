@@ -59,14 +59,13 @@ async function validate() {
     });
   }
   //// Check if all fields are filled
-  const requiredFieldsError = validateRequiredFields(newUser);
-  if (requiredFieldsError)
-    errors.push({ id: "error-first-name", message: requiredFieldsError });
-
   const emailExists = await checkEmailExists(newUser.email);
   if (emailExists) {
     errors.push({ id: "account-exists-alert", message: emailExists });
   }
+  const requiredFieldsError = validateRequiredFields(newUser);
+  if (requiredFieldsError)
+    errors.push({ id: "account-exists-alert", message: requiredFieldsError });
 
   if (errors.length > 0) {
     displayError(errors);
