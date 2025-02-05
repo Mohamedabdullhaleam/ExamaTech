@@ -132,7 +132,7 @@ export function dynamicValidation() {
 / * * * Log-In * * * /;
 export function validateSignInFields(emailOrUsername, password) {
   if (!emailOrUsername || !password) {
-    return "Both email/username and password are required.";
+    return "Both credentials are required.";
   }
   return null;
 }

@@ -9,7 +9,7 @@ import {
   dynamicValidation,
 } from "../utils/regestration/userValidation.js";
 import { generateUserName } from "../utils/regestration/userData.js";
-import { displayError } from "../utils/regestration/display.js";
+import { displayError, showToolTip } from "../utils/regestration/display.js";
 import { displayUserNameWithEffect } from "./textAnimation.js";
 
 / * * * Animation * * * /;
@@ -113,40 +113,12 @@ async function postUserData(newUser) {
 function popUp(userName, user) {
   const popUp = document.getElementById("popup-modal");
   const okButton = document.getElementById("ok-btn");
-  const msg = document.getElementById("username-reveal");
   const close = document.getElementById("close");
 
   popUp.classList.remove("hidden");
   popUp.classList.add("flex");
 
-  msg.innerHTML = `Your UserName is <span id="copyUserName" class="relative text-Btn-color font-semibold cursor-pointer active:text-main-color">"${userName}"<span class="tooltip hidden absolute -top-8 left-1/2 transform -translate-x-1/2 bg-text-color text-white text-xs py-1 px-2 rounded-lg">Copy</span></span>. Keep it in mind!`;
-
-  const copyUserName = document.getElementById("copyUserName");
-  const tooltip = copyUserName.querySelector(".tooltip");
-
-  copyUserName.addEventListener("mouseenter", () => {
-    tooltip.classList.remove("hidden");
-  });
-
-  copyUserName.addEventListener("mouseleave", () => {
-    tooltip.classList.add("hidden");
-  });
-
-  copyUserName.addEventListener("click", () => {
-    const text = userName;
-    navigator.clipboard
-      .writeText(text)
-      .then(() => {
-        console.log(`Copied: ${text}`);
-        tooltip.textContent = "Copied!";
-        setTimeout(() => {
-          tooltip.textContent = "Copy";
-        }, 2000);
-      })
-      .catch((err) => {
-        console.error("Failed to copy text:", err);
-      });
-  });
+  showToolTip(userName);
 
   close.onclick = () => {
     popUp.classList.remove("flex");
