@@ -1,7 +1,7 @@
 let currentFilter = "all";
 let quizData = {};
 let currentQuestionIndex = 0;
-import { displayUserNameWithEffect } from "./textAnimation.js";
+import { displayUserNameWithEffect } from "../utils/textAnimation.js";
 
 async function fetchQuizData() {
   // get data from local storage first

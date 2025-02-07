@@ -1,9 +1,24 @@
-import { displayUserNameWithEffect } from "./textAnimation.js";
+import { displayUserNameWithEffect } from "../utils/textAnimation.js";
+
+/ * * *  Animation * * * /;
+const title = document.getElementById("title");
+displayUserNameWithEffect(title, "Exama-Tech");
 
 function getCurrentUsername() {
   return localStorage.getItem("loggedInUser");
 }
-// Async function to fetch user data by username
+
+/ * * * * *  * * * * * * * *  * * * * * *  * * * /;
+function calculateGradePercentage(userData) {
+  const totalQuestions = userData.quizAttempts[0].attempts[0].answers.length;
+  const quizAttempts = userData.quizAttempts[0].attempts;
+  const lastAttempt = quizAttempts[quizAttempts.length - 1];
+  const score = lastAttempt.score;
+  //   console.log("Sc", score);
+  const percentage = (score / totalQuestions) * 100;
+  return percentage.toFixed(2);
+}
+
 async function fetchGradesByUsername() {
   const username = getCurrentUsername();
   const url = `http://localhost:3020/grades?username=${username}`;
@@ -22,14 +37,10 @@ async function fetchGradesByUsername() {
   } catch (error) {
     window.location.replace("notFound.html");
     console.error("Error fetching grades data:", error);
-    / * * * *  ERROR * * * * * * /;
   }
 }
 
-/ * * * * * heading * * * /;
-const title = document.getElementById("title");
-displayUserNameWithEffect(title, "Exama-Tech");
-
+/ * * * * * * *  * * * *  * * * *  * * * * * *  * * * /;
 // Get and display the user data
 async function getUserQuizReport() {
   const userData = await fetchGradesByUsername();
@@ -40,7 +51,6 @@ async function getUserQuizReport() {
     const date = lastAttempt.completedAt;
     const timeTaken = lastAttempt.timeTaken;
     const username = userData.username;
-
     const gradePercentage = calculateGradePercentage(userData);
     const formattedDate = formatDate(date);
     const formattedTime = formatTime(timeTaken);
@@ -61,30 +71,25 @@ async function getUserQuizReport() {
 / * * * * * Calculations functions * * * * * /;
 // Function to calculate the grade percentage
 // 1- grade percentage
-function calculateGradePercentage(userData) {
-  const totalQuestions = userData.quizAttempts[0].attempts[0].answers.length;
-  const quizAttempts = userData.quizAttempts[0].attempts;
-  const lastAttempt = quizAttempts[quizAttempts.length - 1];
-  const score = lastAttempt.score;
-  //   console.log("Sc", score);
-  const percentage = (score / totalQuestions) * 100;
-  return percentage.toFixed(2);
-}
+
+/ * * * Format Data to be displayed * * * /;
 function formatDate(dateString) {
   const date = new Date(dateString);
   const options = { year: "numeric", month: "long", day: "numeric" };
   return date.toLocaleDateString("en-GB", options);
 }
+
 function formatTime(timeString) {
   const [hours, minutes, seconds] = timeString.split(":").map(Number);
   const totalMinutes = hours * 60 + minutes;
   return `${totalMinutes} mins`;
 }
 
+/ * * * Display all data * * * /;
 getUserQuizReport().then((data) => {
   if (data) {
     const userName = document.getElementById("user-name");
-    displayUserNameWithEffect(userName, `Hello ${data.username}🖤`);
+    displayUserNameWithEffect(userName, `Hello ${data.username} 🖤`);
     document.getElementById("grade").textContent = `${data.gradePercentage}%`;
     document.getElementById("date").textContent = `${data.formattedDate}`;
     document.getElementById("time").textContent = `${data.formattedTime}`;
@@ -163,4 +168,35 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!localStorage.getItem("loggedInUser")) {
     window.location.href = "signIn.html";
   }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const gradeCard = document.querySelector(".grade");
+  const timeCard = document.querySelector(".time");
+  const dateCard = document.querySelector(".date");
+
+  const medalIcon = gradeCard.querySelector(".fa-medal");
+  const sandIcon = timeCard.querySelector(".fa-hourglass-half");
+  const calendarIcon = dateCard.querySelector(".fa-calendar-days");
+
+  // Function to add a temporary class
+  const addTemporaryClass = (element, className, duration) => {
+    element.classList.add(className);
+    setTimeout(() => {
+      element.classList.remove(className);
+    }, duration);
+  };
+
+  // Add hover event listeners
+  gradeCard.addEventListener("mouseenter", () => {
+    addTemporaryClass(medalIcon, "fa-flip", 1000);
+  });
+
+  timeCard.addEventListener("mouseenter", () => {
+    addTemporaryClass(sandIcon, "fa-flip", 1000);
+  });
+
+  dateCard.addEventListener("mouseenter", () => {
+    addTemporaryClass(calendarIcon, "fa-bounce", 500);
+  });
 });

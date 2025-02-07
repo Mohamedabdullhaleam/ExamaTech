@@ -1,4 +1,4 @@
-import { displayUserNameWithEffect } from "./textAnimation.js";
+import { displayUserNameWithEffect } from "../utils/textAnimation.js";
 import { popUp, toggleErrorMessage } from "../utils/regestration/display.js";
 import { clearErrorOnInput } from "../utils/regestration/userValidation.js";
 import { togglePassword } from "../utils/regestration/passIcon.js";

@@ -10,7 +10,7 @@ import {
 } from "../utils/regestration/userValidation.js";
 import { generateUserName } from "../utils/regestration/userData.js";
 import { displayError, showToolTip } from "../utils/regestration/display.js";
-import { displayUserNameWithEffect } from "./textAnimation.js";
+import { displayUserNameWithEffect } from "../utils/textAnimation.js";
 import { togglePassword } from "../utils/regestration/passIcon.js";
 / * * * Animation * * * /;
 const title = document.getElementById("title");

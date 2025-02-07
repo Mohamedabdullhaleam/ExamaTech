@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8" />
@@ -91,76 +91,6 @@
     </div>
   </div>
   <script src="../js/pages/report.js" type="module"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      // Select exam-info cards and respective icons
-      const gradeCard = document.querySelector(".grade");
-      const timeCard = document.querySelector(".time");
-      const dateCard = document.querySelector(".date");
-
-      const medalIcon = gradeCard.querySelector(".fa-medal");
-      const sandIcon = timeCard.querySelector(".fa-hourglass-half");
-      const calendarIcon = dateCard.querySelector(".fa-calendar-days");
-
-      // Function to add a temporary class
-      const addTemporaryClass = (element, className, duration) => {
-        element.classList.add(className);
-        setTimeout(() => {
-          element.classList.remove(className);
-        }, duration);
-      };
-
-      // Add hover event listeners
-      gradeCard.addEventListener("mouseenter", () => {
-        addTemporaryClass(medalIcon, "fa-flip", 1000);
-      });
-
-      timeCard.addEventListener("mouseenter", () => {
-        addTemporaryClass(sandIcon, "fa-flip", 1000);
-      });
-
-      dateCard.addEventListener("mouseenter", () => {
-        addTemporaryClass(calendarIcon, "fa-bounce", 500);
-      });
-    });
-    ////
-
-    // document.addEventListener("DOMContentLoaded", () => {
-    //   const corrections = document.querySelectorAll(".correction > div");
-
-    //   corrections.forEach((correction) => {
-    //     const originalText = correction.querySelector("p").textContent;
-    //     const originalIconClass = correction.querySelector("i").className;
-
-    //     correction.addEventListener("click", () => {
-    //       const p = correction.querySelector("p");
-    //       const icon = correction.querySelector("i");
-
-    //       // Toggle logic
-    //       if (p.textContent === originalText) {
-    //         // Update text based on icon type
-    //         if (icon && icon.classList.contains("fa-circle-check")) {
-    //           p.textContent = "Corrected!";
-    //         } else if (icon && icon.classList.contains("fa-circle-xmark")) {
-    //           p.textContent = "Wrong text!";
-    //         }
-    //         // Remove the icon
-    //         if (icon) icon.remove();
-    //       } else {
-    //         // Revert to original text
-    //         p.textContent = originalText;
-
-    //         // Re-add the correct icon
-    //         const newIcon = document.createElement("i");
-    //         newIcon.className = originalIconClass;
-    //         correction.prepend(newIcon);
-    //       }
-    //       correction.classList.add("scale-105");
-    //       setTimeout(() => correction.classList.remove("scale-105"), 300);
-    //     });
-    //   });
-    // });
-  </script>
 </body>
 
 </html>

@@ -1,347 +1,274 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="../css/output.css" rel="stylesheet" />
-    <link rel="icon" type="image/png" href="../assets/icons/icon3.png" />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-      rel="stylesheet"
-    />
 
-    <title>Exam</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="../css/output.css" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="../assets/icons/icon3.png" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
 
-  <body
-    class="bg-gradient-to-br from-white to-main-color lg:h-screen w-screen flex flex-col items-center overflow-x-hidden"
-  >
-    <div class="p-6 sm:p-10 md:grid grid-cols-1 md:grid-cols-12 w-full">
-      <div class="col-span-8">
-        <h1 id="title" class="font-bold text-4xl sm:text-5xl">Exama-Tech</h1>
-        <h6 id="user" class="mt-3 font-mono text-sm"></h6>
-      </div>
-      <div
-        id="warning-timer"
-        class="invisible self-end flex items-center space-x-2"
-      >
-        <i
-          id="warning-icon"
-          class="fa-solid fa-hourglass-start text-sec-color text-4xl"
-        ></i>
-        <!-- <i class="fa-solid fa-clock fa-spin text-sec-color text-4xl"></i> -->
-        <div class="flex items-baseline"></div>
-        <p class="text-xl font-semibold">Timer:</p>
-        <span id="timer" class="text-xl font-semibold"></span>
-      </div>
+  <title>Exam</title>
+</head>
+
+<body
+  class="bg-gradient-to-br from-white to-main-color lg:h-screen w-screen flex flex-col items-center overflow-x-hidden">
+  <div class="p-6 sm:p-10 md:grid grid-cols-1 md:grid-cols-12 w-full">
+    <div class="col-span-8">
+      <h1 id="title" class="font-bold text-4xl sm:text-5xl">Exama-Tech</h1>
+      <h6 id="user" class="mt-3 font-mono text-sm"></h6>
     </div>
+    <div id="warning-timer" class="invisible self-end flex items-center space-x-2">
+      <i id="warning-icon" class="fa-solid fa-hourglass-start text-sec-color text-4xl"></i>
+      <!-- <i class="fa-solid fa-clock fa-spin text-sec-color text-4xl"></i> -->
+      <div class="flex items-baseline"></div>
+      <p class="text-xl font-semibold">Timer:</p>
+      <span id="timer" class="text-xl font-semibold"></span>
+    </div>
+  </div>
 
-    <!-- Questions Section -->
-    <div
-      class="container gap-9 flex flex-col md:flex-row justify-center content-center items-center md:w-[700px] lg:w-[1200px] md:grid md:grid-cols-1 lg:grid-cols-12 xl:h-[600px]"
-    >
-      <div class="col-span-7 flex flex-col w-[450px] md:w-full">
-        <i
-          id="flag-icon"
-          class="fa-solid fa-flag text-main-color cursor-pointer"
-        ></i>
-        <p id="q-number-text" class="question pt-3 text-2xl font-semibold">
-          <span id="question-text" class="font-bold"></span>
+  <!-- Questions Section -->
+  <div
+    class="container gap-9 flex flex-col md:flex-row justify-center content-center items-center md:w-[700px] lg:w-[1200px] md:grid md:grid-cols-1 lg:grid-cols-12 xl:h-[600px]">
+    <div class="col-span-7 flex flex-col w-[450px] md:w-full">
+      <i id="flag-icon" class="fa-solid fa-flag text-main-color cursor-pointer"></i>
+      <p id="q-number-text" class="question pt-3 text-2xl font-semibold">
+        <span id="question-text" class="font-bold"></span>
+      </p>
+
+      <div class="answer pt-7 w-full space-y-4">
+        <div id="option-1"
+          class="option border-2 rounded-lg border-main-color w-full h-12 p-3 cursor-pointer active:bg-main-color">
+          <input class="accent-sec-color cursor-pointer" type="radio" name="choice" />
+          <label class="cursor-pointer" for="choice-1">Red</label>
+        </div>
+        <!--  -->
+        <div id="option-2"
+          class="option border-2 rounded-lg border-main-color w-full h-12 p-3 cursor-pointer active:bg-main-color">
+          <input class="accent-sec-color cursor-pointer" type="radio" name="choice" />
+          <label class="cursor-pointer" for="choice-2">Red</label>
+        </div>
+        <!--  -->
+        <div id="option-3"
+          class="option border-2 rounded-lg border-main-color w-full h-12 p-3 cursor-pointer active:bg-main-color">
+          <input class="accent-sec-color cursor-pointer" type="radio" name="choice" />
+          <label class="cursor-pointer" for="choice-3">Red</label>
+        </div>
+        <!--  -->
+        <div id="option-4"
+          class="option border-2 rounded-lg border-main-color w-full h-12 p-3 cursor-pointer active:bg-main-color">
+          <input class="accent-sec-color cursor-pointer" type="radio" name="choice" />
+          <label class="cursor-pointer" for="choice-4">Red</label>
+        </div>
+      </div>
+      <!-- end of answers div -->
+      <div class="controls flex w-full p-3 justify-between">
+        <p id="previous" class="cursor-pointer active:text-sec-color">
+          <i class="fa-solid fa-angle-left"></i> Previous
         </p>
-
-        <div class="answer pt-7 w-full space-y-4">
-          <div
-            id="option-1"
-            class="option border-2 rounded-lg border-main-color w-full h-12 p-3 cursor-pointer active:bg-main-color"
-          >
-            <input
-              class="accent-sec-color cursor-pointer"
-              type="radio"
-              name="choice"
-            />
-            <label class="cursor-pointer" for="choice-1">Red</label>
-          </div>
-          <!--  -->
-          <div
-            id="option-2"
-            class="option border-2 rounded-lg border-main-color w-full h-12 p-3 cursor-pointer active:bg-main-color"
-          >
-            <input
-              class="accent-sec-color cursor-pointer"
-              type="radio"
-              name="choice"
-            />
-            <label class="cursor-pointer" for="choice-2">Red</label>
-          </div>
-          <!--  -->
-          <div
-            id="option-3"
-            class="option border-2 rounded-lg border-main-color w-full h-12 p-3 cursor-pointer active:bg-main-color"
-          >
-            <input
-              class="accent-sec-color cursor-pointer"
-              type="radio"
-              name="choice"
-            />
-            <label class="cursor-pointer" for="choice-3">Red</label>
-          </div>
-          <!--  -->
-          <div
-            id="option-4"
-            class="option border-2 rounded-lg border-main-color w-full h-12 p-3 cursor-pointer active:bg-main-color"
-          >
-            <input
-              class="accent-sec-color cursor-pointer"
-              type="radio"
-              name="choice"
-            />
-            <label class="cursor-pointer" for="choice-4">Red</label>
-          </div>
-        </div>
-        <!-- end of answers div -->
-        <div class="controls flex w-full p-3 justify-between">
-          <p id="previous" class="cursor-pointer active:text-sec-color">
-            <i class="fa-solid fa-angle-left"></i> Previous
-          </p>
-          <p id="next" class="cursor-pointer active:text-sec-color">
-            Next <i class="fa-solid fa-angle-right"></i>
-          </p>
-        </div>
-
-        <input
-          id="submit"
-          type="submit"
-          value="Submit"
-          class="mt-5 w-36 h-11 text-xl cursor-pointer active:bg-sec-color text-white bg-Btn-color rounded"
-        />
+        <p id="next" class="cursor-pointer active:text-sec-color">
+          Next <i class="fa-solid fa-angle-right"></i>
+        </p>
       </div>
-      <!-- end of the left section div -->
 
-      <!-- start right section div -->
-      <div
-        class="right-section flex flex-col md:flex-row items-center justify-center md:col-span-4 md:ml-auto mb-10"
-      >
-        <div class="flec flex-col">
-          <!-- Filters  -->
-          <ul class="list-none gap-3 flex h-9 questions-list mb-4">
-            <li
-              class="border border-main-color flex items-center bg-main-color text-white rounded-full px-5 py-2 cursor-pointer transition-colors duration-500"
-            >
-              All
-            </li>
-            <li
-              class="border border-main-color flex items-center rounded-full px-5 py-2 cursor-pointer transition-colors duration-500"
-            >
-              Answered
-            </li>
-            <li
-              class="border border-main-color flex items-center px-5 py-2 rounded-full cursor-pointer whitespace-nowrap transition-colors duration-500"
-            >
-              Not-Answered
-            </li>
-            <li
-              class="border border-main-color flex items-center rounded-full px-5 py-2 cursor-pointer transition-colors duration-500"
-            >
-              Flagged
-            </li>
-          </ul>
+      <input id="submit" type="submit" value="Submit"
+        class="mt-5 w-36 h-11 text-xl cursor-pointer active:bg-sec-color text-white bg-Btn-color rounded" />
+    </div>
+    <!-- end of the left section div -->
 
-          <!-- Cards -->
-          <ul
-            id="cards"
-            class="question-number grid grid-cols-4 gap-11 list-none w-full ml-auto"
-          >
-            <li
-              id="card-1"
-              class="text-white bg-main-color w-[60px] h-[60px] flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color"
-            >
-              1
-            </li>
-            <li
-              id="card-2"
-              class="text-white w-[60px] h-[60px] flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color"
-            >
-              2
-            </li>
-            <li
-              id="card-3"
-              class="text-white w-[60px] h-[60px] flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color"
-            >
-              3
-            </li>
-            <li
-              id="card-4"
-              class="text-white w-[60px] h-[60px] flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color"
-            >
-              4
-            </li>
-            <li
-              id="card-5"
-              class="text-white w-[60px] h-[60px] flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color"
-            >
-              5
-            </li>
-            <li
-              id="card-6"
-              class="text-white w-[60px] h-[60px] flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color"
-            >
-              6
-            </li>
-            <li
-              id="card-7"
-              class="text-white w-[60px] h-[60px] flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color"
-            >
-              7
-            </li>
-            <li
-              id="card-8"
-              class="text-white w-[60px] h-[60px] flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color"
-            >
-              8
-            </li>
-            <li
-              id="card-9"
-              class="text-white w-[60px] h-[60px] flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color"
-            >
-              9
-            </li>
-            <li
-              id="card-10"
-              class="text-white w-[60px] h-[60px] flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color"
-            >
-              10
-            </li>
-            <li
-              id="card-11"
-              class="text-white w-[60px] h-[60px] flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color"
-            >
-              11
-            </li>
-            <li
-              id="card-12"
-              class="text-white w-[60px] h-[60px] flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color"
-            >
-              12
-            </li>
-          </ul>
-        </div>
+    <!-- start right section div -->
+    <div class="right-section flex flex-col md:flex-row items-center justify-center md:col-span-4 md:ml-auto mb-10">
+      <div class="flec flex-col">
+        <!-- Filters  -->
+        <ul class="list-none gap-3 flex h-9 questions-list mb-4">
+          <li
+            class="border border-main-color flex items-center bg-main-color text-white rounded-full px-5 py-2 cursor-pointer transition-colors duration-500">
+            All
+          </li>
+          <li
+            class="border border-main-color flex items-center rounded-full px-5 py-2 cursor-pointer transition-colors duration-500">
+            Answered
+          </li>
+          <li
+            class="border border-main-color flex items-center px-5 py-2 rounded-full cursor-pointer whitespace-nowrap transition-colors duration-500">
+            Not-Answered
+          </li>
+          <li
+            class="border border-main-color flex items-center rounded-full px-5 py-2 cursor-pointer transition-colors duration-500">
+            Flagged
+          </li>
+        </ul>
+
+        <!-- Cards -->
+        <ul id="cards" class="question-number grid grid-cols-4 gap-11 list-none w-full ml-auto">
+          <li id="card-1"
+            class="text-white bg-main-color w-[60px] h-[60px] flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color">
+            1
+          </li>
+          <li id="card-2"
+            class="text-white w-[60px] h-[60px] flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color">
+            2
+          </li>
+          <li id="card-3"
+            class="text-white w-[60px] h-[60px] flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color">
+            3
+          </li>
+          <li id="card-4"
+            class="text-white w-[60px] h-[60px] flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color">
+            4
+          </li>
+          <li id="card-5"
+            class="text-white w-[60px] h-[60px] flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color">
+            5
+          </li>
+          <li id="card-6"
+            class="text-white w-[60px] h-[60px] flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color">
+            6
+          </li>
+          <li id="card-7"
+            class="text-white w-[60px] h-[60px] flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color">
+            7
+          </li>
+          <li id="card-8"
+            class="text-white w-[60px] h-[60px] flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color">
+            8
+          </li>
+          <li id="card-9"
+            class="text-white w-[60px] h-[60px] flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color">
+            9
+          </li>
+          <li id="card-10"
+            class="text-white w-[60px] h-[60px] flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color">
+            10
+          </li>
+          <li id="card-11"
+            class="text-white w-[60px] h-[60px] flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color">
+            11
+          </li>
+          <li id="card-12"
+            class="text-white w-[60px] h-[60px] flex items-center justify-center rounded cursor-pointer hover:border hover:border-main-color">
+            12
+          </li>
+        </ul>
       </div>
     </div>
+  </div>
 
-    <script src="../js/pages/exam.js" type="module"></script>
-    <script>
-      // document.addEventListener("DOMContentLoaded", () => {
-      //     const listItems = document.querySelectorAll(".questions-list li");
+  <script src="../js/pages/exam.js" type="module"></script>
+  <script>
+    // document.addEventListener("DOMContentLoaded", () => {
+    //     const listItems = document.querySelectorAll(".questions-list li");
 
-      //     listItems.forEach((item) => {
-      //         item.addEventListener("click", () => {
-      //             listItems.forEach((li) => {
-      //                 li.classList.remove("bg-main-color");
-      //                 li.classList.remove("text-white");
-      //             });
+    //     listItems.forEach((item) => {
+    //         item.addEventListener("click", () => {
+    //             listItems.forEach((li) => {
+    //                 li.classList.remove("bg-main-color");
+    //                 li.classList.remove("text-white");
+    //             });
 
-      //             item.classList.add("bg-main-color");
-      //             item.classList.add("text-white");
-      //         });
-      //     });
-      // });
-      //////////////////
+    //             item.classList.add("bg-main-color");
+    //             item.classList.add("text-white");
+    //         });
+    //     });
+    // });
+    //////////////////
 
-      // Add event listeners to filter tabs
-      //   document.addEventListener("DOMContentLoaded", () => {
-      //     const listItems = document.querySelectorAll(".questions-list li");
+    // Add event listeners to filter tabs
+    //   document.addEventListener("DOMContentLoaded", () => {
+    //     const listItems = document.querySelectorAll(".questions-list li");
 
-      //     listItems.forEach((item) => {
-      //       item.addEventListener("click", () => {
-      //         listItems.forEach((li) => {
-      //           li.classList.remove("bg-main-color");
-      //           li.classList.remove("text-white");
-      //         });
+    //     listItems.forEach((item) => {
+    //       item.addEventListener("click", () => {
+    //         listItems.forEach((li) => {
+    //           li.classList.remove("bg-main-color");
+    //           li.classList.remove("text-white");
+    //         });
 
-      //         item.classList.add("bg-main-color");
-      //         item.classList.add("text-white");
+    //         item.classList.add("bg-main-color");
+    //         item.classList.add("text-white");
 
-      //         // Get the filter type from the clicked item's text content
-      //         const filterType = item.textContent.trim().toLowerCase();
-      //         filterQuestions(filterType);
-      //       });
-      //     });
+    //         // Get the filter type from the clicked item's text content
+    //         const filterType = item.textContent.trim().toLowerCase();
+    //         filterQuestions(filterType);
+    //       });
+    //     });
 
-      //     // Initially show all questions
-      //     filterQuestions("all");
-      //   });
+    //     // Initially show all questions
+    //     filterQuestions("all");
+    //   });
 
-      //   // Function to filter questions based on the selected filter type
-      //   function filterQuestions(filterType) {
-      //     const cards = document.querySelectorAll("#cards li");
-      //     const savedQuestions =
-      //       JSON.parse(localStorage.getItem("randomizedQuestions")) || [];
+    //   // Function to filter questions based on the selected filter type
+    //   function filterQuestions(filterType) {
+    //     const cards = document.querySelectorAll("#cards li");
+    //     const savedQuestions =
+    //       JSON.parse(localStorage.getItem("randomizedQuestions")) || [];
 
-      //     cards.forEach((card, index) => {
-      //       const question = savedQuestions[index];
-      //       const isAnswered = question.flags?.isAnswered || false; // Check if the question is answered
-      //       const isFlagged = question.flags?.isFlagged || false; // Check if the question is flagged
+    //     cards.forEach((card, index) => {
+    //       const question = savedQuestions[index];
+    //       const isAnswered = question.flags?.isAnswered || false; // Check if the question is answered
+    //       const isFlagged = question.flags?.isFlagged || false; // Check if the question is flagged
 
-      //       let shouldShow = false;
+    //       let shouldShow = false;
 
-      //       switch (filterType) {
-      //         case "all":
-      //           shouldShow = true; // Show all questions
-      //           break;
-      //         case "answered":
-      //           shouldShow = isAnswered; // Show only answered questions
-      //           break;
-      //         case "not-answered":
-      //           shouldShow = !isAnswered; // Show only not-answered questions
-      //           break;
-      //         case "flagged":
-      //           shouldShow = isFlagged; // Show only flagged questions
-      //           break;
-      //         default:
-      //           shouldShow = true;
-      //       }
+    //       switch (filterType) {
+    //         case "all":
+    //           shouldShow = true; // Show all questions
+    //           break;
+    //         case "answered":
+    //           shouldShow = isAnswered; // Show only answered questions
+    //           break;
+    //         case "not-answered":
+    //           shouldShow = !isAnswered; // Show only not-answered questions
+    //           break;
+    //         case "flagged":
+    //           shouldShow = isFlagged; // Show only flagged questions
+    //           break;
+    //         default:
+    //           shouldShow = true;
+    //       }
 
-      //       // Use visibility instead of display
-      //       if (shouldShow) {
-      //         card.style.visibility = "visible";
-      //         card.style.opacity = "1"; // Ensure the card is fully visible
-      //       } else {
-      //         card.style.visibility = "hidden";
-      //         card.style.opacity = "0"; // Smoothly hide the card
-      //       }
-      //     });
-      //   }
-      ///////////////
+    //       // Use visibility instead of display
+    //       if (shouldShow) {
+    //         card.style.visibility = "visible";
+    //         card.style.opacity = "1"; // Ensure the card is fully visible
+    //       } else {
+    //         card.style.visibility = "hidden";
+    //         card.style.opacity = "0"; // Smoothly hide the card
+    //       }
+    //     });
+    //   }
+    ///////////////
 
-      // document.addEventListener("DOMContentLoaded", () => {
-      //     const options = document.querySelectorAll(".option");
+    // document.addEventListener("DOMContentLoaded", () => {
+    //     const options = document.querySelectorAll(".option");
 
-      //     options.forEach((option) => {
-      //         option.addEventListener("click", (event) => {
-      //             // Prevent event if clicking directly on input or label
-      //             if (
-      //                 event.target.tagName === "INPUT" ||
-      //                 event.target.tagName === "LABEL"
-      //             ) {
-      //                 return;
-      //             }
+    //     options.forEach((option) => {
+    //         option.addEventListener("click", (event) => {
+    //             // Prevent event if clicking directly on input or label
+    //             if (
+    //                 event.target.tagName === "INPUT" ||
+    //                 event.target.tagName === "LABEL"
+    //             ) {
+    //                 return;
+    //             }
 
-      //             const input = option.querySelector("input");
+    //             const input = option.querySelector("input");
 
-      //             if (!input.checked) {
-      //                 // Uncheck all other inputs
-      //                 document
-      //                     .querySelectorAll("input[name='choice']")
-      //                     .forEach((el) => {
-      //                         el.checked = false;
-      //                     });
+    //             if (!input.checked) {
+    //                 // Uncheck all other inputs
+    //                 document
+    //                     .querySelectorAll("input[name='choice']")
+    //                     .forEach((el) => {
+    //                         el.checked = false;
+    //                     });
 
-      //                 // Check the clicked input
-      //                 input.checked = true;
-      //             }
-      //         });
-      //     });
-      // });
-    </script>
-  </body>
+    //                 // Check the clicked input
+    //                 input.checked = true;
+    //             }
+    //         });
+    //     });
+    // });
+  </script>
+</body>
+
 </html>
