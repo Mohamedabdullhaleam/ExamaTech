@@ -16,3 +16,34 @@ export function displayUserNameWithEffect(messageElement, message) {
     }
   }, 150);
 }
+
+/ * * * * * * * * * * * * * * Icon Animation * * * * * * * * * * * * * * /;
+export function animateIcons() {
+  const gradeCard = document.querySelector(".grade");
+  const timeCard = document.querySelector(".time");
+  const dateCard = document.querySelector(".date");
+
+  const medalIcon = gradeCard.querySelector(".fa-medal");
+  const sandIcon = timeCard.querySelector(".fa-hourglass-half");
+  const calendarIcon = dateCard.querySelector(".fa-calendar-days");
+
+  // Add hover event listeners
+  gradeCard.addEventListener("mouseenter", () => {
+    addTemporaryClass(medalIcon, "fa-flip", 1000);
+  });
+
+  timeCard.addEventListener("mouseenter", () => {
+    addTemporaryClass(sandIcon, "fa-flip", 1000);
+  });
+
+  dateCard.addEventListener("mouseenter", () => {
+    addTemporaryClass(calendarIcon, "fa-bounce", 500);
+  });
+}
+
+function addTemporaryClass(element, className, duration) {
+  element.classList.add(className);
+  setTimeout(() => {
+    element.classList.remove(className);
+  }, duration);
+}

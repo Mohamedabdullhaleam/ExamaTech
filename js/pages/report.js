@@ -1,53 +1,28 @@
-import { displayUserNameWithEffect } from "../utils/textAnimation.js";
+import {
+  displayUserNameWithEffect,
+  animateIcons,
+} from "../utils/textAnimation.js";
+import {
+  calculateGradePercentage,
+  fetchGradesByUsername,
+} from "../utils/gradeCalculations/examStats.js";
 
 / * * *  Animation * * * /;
+//1- Text
 const title = document.getElementById("title");
 displayUserNameWithEffect(title, "Exama-Tech");
+//2- Icon
+document.addEventListener("DOMContentLoaded", () => {
+  animateIcons();
+});
 
-function getCurrentUsername() {
-  return localStorage.getItem("loggedInUser");
-}
-
-/ * * * * *  * * * * * * * *  * * * * * *  * * * /;
-function calculateGradePercentage(userData) {
-  const totalQuestions = userData.quizAttempts[0].attempts[0].answers.length;
-  const quizAttempts = userData.quizAttempts[0].attempts;
-  const lastAttempt = quizAttempts[quizAttempts.length - 1];
-  const score = lastAttempt.score;
-  //   console.log("Sc", score);
-  const percentage = (score / totalQuestions) * 100;
-  return percentage.toFixed(2);
-}
-
-async function fetchGradesByUsername() {
-  const username = getCurrentUsername();
-  const url = `http://localhost:3020/grades?username=${username}`;
-
-  try {
-    const response = await fetch(url);
-    if (!response.ok) throw new Error(`Error: ${response.status}`);
-    const data = await response.json();
-    if (data.length > 0) {
-      return data[data.length - 1];
-    } else {
-      console.error("No grades found for the user.");
-      window.location.replace("notFound.html");
-      return null;
-    }
-  } catch (error) {
-    window.location.replace("notFound.html");
-    console.error("Error fetching grades data:", error);
-  }
-}
-
-/ * * * * * * *  * * * *  * * * *  * * * * * *  * * * /;
-// Get and display the user data
+/ * * * prepare the data to be displayed * * * /;
 async function getUserQuizReport() {
   const userData = await fetchGradesByUsername();
   if (userData) {
     const quizAttempts = userData.quizAttempts[0].attempts;
     const lastAttempt = quizAttempts[quizAttempts.length - 1];
-    const bestScore = lastAttempt.score;
+    const score = lastAttempt.score;
     const date = lastAttempt.completedAt;
     const timeTaken = lastAttempt.timeTaken;
     const username = userData.username;
@@ -57,7 +32,7 @@ async function getUserQuizReport() {
 
     return {
       username,
-      bestScore,
+      score,
       date,
       timeTaken,
       gradePercentage,
@@ -67,10 +42,6 @@ async function getUserQuizReport() {
   }
   return null;
 }
-
-/ * * * * * Calculations functions * * * * * /;
-// Function to calculate the grade percentage
-// 1- grade percentage
 
 / * * * Format Data to be displayed * * * /;
 function formatDate(dateString) {
@@ -105,11 +76,6 @@ async function displayQuestions() {
 
   // Container to append the questions dynamically
   const container = document.getElementById("question-container");
-  if (!container) {
-    console.error("Container element not found!");
-    / * * * * I think no error may happen here * * * * /;
-    return;
-  }
 
   questions.forEach((element, index) => {
     const questionDiv = document.createElement("div");
@@ -153,50 +119,20 @@ async function displayQuestions() {
   });
 }
 
+/ * * *  Event Listeners * * * /;
+/ * * Sign-Out * */;
 const signOutButton = document.getElementById("sign-out");
-
 signOutButton.addEventListener("click", () => {
-  localStorage.removeItem("loggedInUser");
   localStorage.clear();
   window.location.href = "signIn.html";
 });
 
+// 💔💔💔 window.location.replace() 😥
+
 document.addEventListener("DOMContentLoaded", () => {
   displayQuestions();
-
   / * * * to prevent going back after sign-out * * * * /;
   if (!localStorage.getItem("loggedInUser")) {
     window.location.href = "signIn.html";
   }
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  const gradeCard = document.querySelector(".grade");
-  const timeCard = document.querySelector(".time");
-  const dateCard = document.querySelector(".date");
-
-  const medalIcon = gradeCard.querySelector(".fa-medal");
-  const sandIcon = timeCard.querySelector(".fa-hourglass-half");
-  const calendarIcon = dateCard.querySelector(".fa-calendar-days");
-
-  // Function to add a temporary class
-  const addTemporaryClass = (element, className, duration) => {
-    element.classList.add(className);
-    setTimeout(() => {
-      element.classList.remove(className);
-    }, duration);
-  };
-
-  // Add hover event listeners
-  gradeCard.addEventListener("mouseenter", () => {
-    addTemporaryClass(medalIcon, "fa-flip", 1000);
-  });
-
-  timeCard.addEventListener("mouseenter", () => {
-    addTemporaryClass(sandIcon, "fa-flip", 1000);
-  });
-
-  dateCard.addEventListener("mouseenter", () => {
-    addTemporaryClass(calendarIcon, "fa-bounce", 500);
-  });
 });
