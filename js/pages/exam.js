@@ -1,10 +1,29 @@
 let currentFilter = "all";
 let quizData = {};
 let currentQuestionIndex = 0;
-import { displayUserNameWithEffect } from "../utils/textAnimation.js";
 
+import { displayUserNameWithEffect } from "../utils/textAnimation.js";
+import { updateButtonState } from "../utils/ExamAssessment/buttonsUI.js";
+import { updateCardUI } from "../utils/ExamAssessment/cardsUI.js";
+
+/ * * *  Animation * * * /;
+setTimeout(() => {
+  const title = document.getElementById("title");
+  const userName = document.getElementById("user");
+  const loggedInUser = localStorage.getItem("loggedInUser");
+  if (loggedInUser) {
+    displayUserNameWithEffect(title, "Exama-Tech");
+    displayUserNameWithEffect(
+      userName,
+      `Welcome ${loggedInUser} , Good Luck ❣`
+    );
+  }
+}, 100);
+
+/ * * * Fetching Data * * * /;
+// check local storage first to get the data
+// if not found fetch from the Api
 async function fetchQuizData() {
-  // get data from local storage first
   try {
     const savedQuestions = localStorage.getItem("randomizedQuestions");
     if (savedQuestions) {
@@ -12,7 +31,7 @@ async function fetchQuizData() {
       initQuiz();
       return;
     }
-    // if not now fetch data
+    // no data in local storage // time to fetch data
     const response = await fetch("http://localhost:3010/quiz");
     if (!response.ok) {
       throw new Error("Failed to fetch quiz data");
@@ -23,7 +42,6 @@ async function fetchQuizData() {
     const randomizedQuestions = shuffleQuestions(quizData.questions);
     quizData.questions = randomizedQuestions; // Store shuffled questions in quizData
 
-    // Save shuffled questions in localStorage
     localStorage.setItem(
       "randomizedQuestions",
       JSON.stringify(randomizedQuestions) /// to make an instance of it and use it as frequent as you want "same instance"
@@ -32,16 +50,16 @@ async function fetchQuizData() {
       "quizTime",
       JSON.stringify({ hours, minutes, seconds })
     );
-
+    / * * * Start quiz displaying and logic * * * /;
     startCountdown(hours, minutes, seconds);
     initQuiz();
   } catch (error) {
     window.location.replace("notFound.html");
     console.error("Error fetching quiz data:", error);
-    / * * * * Redirect to error page * * * * * /;
   }
 }
 
+/ * * * intializing quiz from specific question * * * /;
 function initQuiz() {
   currentQuestionIndex =
     parseInt(localStorage.getItem("currentQuestionIndex")) || 0;
@@ -51,12 +69,9 @@ function initQuiz() {
   );
 }
 
-/ * * * *   Disply  * * * * /;
+/ * * * *   Display  * * * * /;
 function displayQuestion(question, index) {
   localStorage.setItem("currentQuestionIndex", index);
-  document.querySelectorAll(".option").forEach((el) => {
-    el.classList.remove("bg-main-color");
-  });
 
   quizData.questions.forEach((q) => {
     if (!q.flags) {
@@ -64,11 +79,13 @@ function displayQuestion(question, index) {
     }
   });
 
+  / * * * displaying questions  * * * /;
   const questionNumberElement = document.getElementById("q-number-text");
   questionNumberElement.innerHTML = `${
     index + 1
   }. <span id="question-text" class="font-bold">${question.question}</span>`;
 
+  / * * * displaying Answesrs  * * * /;
   question.options.forEach((option, optionIndex) => {
     const optionElement = document.getElementById(`option-${optionIndex + 1}`);
     if (optionElement) {
@@ -91,7 +108,7 @@ function displayQuestion(question, index) {
       );
     }
   });
-  updateButtonState();
+  updateButtonState(quizData);
 }
 
 // Unified function to handle answer selection
@@ -126,7 +143,7 @@ function handleOptionClick(event, optionElement, optionId = null) {
   saveSelectedOptionStyle(questionIndex, optionElement.id);
 
   // Update the card UI after answering
-  updateCardUI(questionIndex);
+  updateCardUI(questionIndex, quizData);
 }
 
 // Save selected option styles to localStorage
@@ -184,7 +201,7 @@ function trackAnswer(questionId, optionId) {
     JSON.stringify(quizData.questions)
   );
   filterQuestions(currentFilter); // Refresh the filter
-  updateCardUI(currentQuestionIndex);
+  updateCardUI(currentQuestionIndex, quizData);
 }
 
 / * * * *  Shuffling question * * * * /;
@@ -192,30 +209,8 @@ function shuffleQuestions(questions) {
   return questions.sort(() => Math.random() - 0.5);
 }
 
-/ * * * * * * * previous and next * * * * * * * * /;
-function updateButtonState() {
-  const nextButton = document.getElementById("next");
-  const prevButton = document.getElementById("previous");
-  const flagIcon = document.getElementById("flag-icon");
-  const currentQuestion = quizData.questions[currentQuestionIndex];
-  console.log("FROM UPDATE", currentQuestion.flags.isFlagged);
-  if (!currentQuestion.flags.isFlagged) {
-    flagIcon.classList.remove("text-flag-color");
-    flagIcon.classList.add("text-main-color");
-  } else {
-    flagIcon.classList.remove("text-main-color");
-    flagIcon.classList.add("text-flag-color");
-  }
-
-  // Disable/enable buttons based on the current index
-  prevButton.style.visibility =
-    currentQuestionIndex === 0 ? "hidden" : "visible";
-  nextButton.style.visibility =
-    currentQuestionIndex === quizData.questions.length - 1
-      ? "hidden"
-      : "visible";
-}
-
+/ * * * * Event listeners * * * * /;
+//1-Next
 document.getElementById("next").addEventListener("click", () => {
   if (currentQuestionIndex < quizData.questions.length - 1) {
     currentQuestionIndex++;
@@ -225,10 +220,10 @@ document.getElementById("next").addEventListener("click", () => {
       currentQuestionIndex
     );
     checkCardColor();
-    updateButtonState();
+    updateButtonState(quizData);
   }
 });
-
+//2-previous
 document.getElementById("previous").addEventListener("click", () => {
   if (currentQuestionIndex > 0) {
     currentQuestionIndex--;
@@ -238,8 +233,36 @@ document.getElementById("previous").addEventListener("click", () => {
       currentQuestionIndex
     );
     checkCardColor();
-    updateButtonState();
+    updateButtonState(quizData);
   }
+});
+//3-Flag
+const flagIcon = document.getElementById("flag-icon");
+flagIcon.addEventListener("click", () => {
+  const currentQuestion = quizData.questions[currentQuestionIndex];
+  if (!currentQuestion.flags) {
+    currentQuestion.flags = { isFlagged: false };
+  }
+  currentQuestion.flags.isFlagged = !currentQuestion.flags.isFlagged;
+
+  flagIcon.classList.toggle("text-main-color");
+  flagIcon.classList.toggle("text-flag-color");
+  console.log("flag--orange");
+
+  localStorage.setItem(
+    "randomizedQuestions",
+    JSON.stringify(quizData.questions)
+  );
+  filterQuestions(currentFilter); // Refresh the filter
+
+  updateFlagUI(currentQuestionIndex, currentQuestion.flags.isFlagged);
+  updateCardUI(currentQuestionIndex, quizData);
+
+  console.log(
+    `Question ${currentQuestionIndex + 1} is ${
+      currentQuestion.flags.isFlagged ? "flagged" : "unflagged"
+    }.`
+  );
 });
 
 / * * * * * Need to submit on another json * * * * * /;
@@ -472,34 +495,6 @@ function initCountdown() {
 
 // console.log(currentQuestionIndex);
 / * * * * Flags functionality * * * * /;
-const flagIcon = document.getElementById("flag-icon");
-flagIcon.addEventListener("click", () => {
-  const currentQuestion = quizData.questions[currentQuestionIndex];
-  if (!currentQuestion.flags) {
-    currentQuestion.flags = { isFlagged: false };
-  }
-  currentQuestion.flags.isFlagged = !currentQuestion.flags.isFlagged;
-
-  flagIcon.classList.toggle("text-main-color");
-  flagIcon.classList.toggle("text-flag-color");
-  console.log("flag--orange");
-
-  localStorage.setItem(
-    "randomizedQuestions",
-    JSON.stringify(quizData.questions)
-  );
-  filterQuestions(currentFilter); // Refresh the filter
-
-  updateFlagUI(currentQuestionIndex, currentQuestion.flags.isFlagged);
-  // Update the card UI
-  updateCardUI(currentQuestionIndex);
-
-  console.log(
-    `Question ${currentQuestionIndex + 1} is ${
-      currentQuestion.flags.isFlagged ? "flagged" : "unflagged"
-    }.`
-  );
-});
 
 function updateFlagUI(index, isFlagged) {
   const cardElement = document.getElementById(`card-${index + 1}`);
@@ -543,7 +538,7 @@ cards.addEventListener("click", (event) => {
     const index = Array.from(cards.children).indexOf(liElement);
     currentQuestionIndex = index;
     localStorage.setItem("currentQuestionIndex", index);
-    updateButtonState();
+    updateButtonState(quizData);
     displayQuestion(
       quizData.questions[currentQuestionIndex],
       currentQuestionIndex
@@ -551,15 +546,7 @@ cards.addEventListener("click", (event) => {
     checkCardColor();
   }
 });
-////////
-function updateCardUI(index) {
-  const cardElement = document.getElementById(`card-${index + 1}`);
-  const question = quizData.questions[index];
 
-  cardElement.classList.toggle("answered", question.flags.isAnswered);
-  cardElement.classList.toggle("flagged", question.flags.isFlagged);
-}
-////////////////
 function filterQuestions(filterType) {
   const cards = document.querySelectorAll("#cards li");
   currentFilter = filterType;
@@ -628,35 +615,14 @@ document.addEventListener("DOMContentLoaded", () => {
 window.onload = () => {
   fetchQuizData();
   filterQuestions("all"); // Show all questions initially
-  updateCardUI(currentQuestionIndex); // Update the UI for the current question
+  updateCardUI(currentQuestionIndex, quizData); // Update the UI for the current question
   checkCardColor();
   initCountdown();
   updateCardColor();
-  updateButtonState();
-
-  const title = document.getElementById("title");
-  displayUserNameWithEffect(title, "Exama-Tech");
-
-  // const userName = document.getElementById("user");
-  // if (localStorage.getItem("loggedInUser")) {
-  //   displayUserNameWithEffect(
-  //     userName,
-  //     `Welcome ${localStorage.getItem("loggedInUser")} , Good Luck ❣`
-  //   );
-  // }
+  updateButtonState(quizData);
 
   const savedIndex = parseInt(localStorage.getItem("currentQuestionIndex"));
   if (!isNaN(savedIndex)) {
     currentQuestionIndex = savedIndex;
   }
 };
-setTimeout(() => {
-  const userName = document.getElementById("user");
-  const loggedInUser = localStorage.getItem("loggedInUser");
-  if (loggedInUser) {
-    displayUserNameWithEffect(
-      userName,
-      `Welcome ${loggedInUser} , Good Luck ❣`
-    );
-  }
-}, 100); // Delay by 100ms or adjust as needed
