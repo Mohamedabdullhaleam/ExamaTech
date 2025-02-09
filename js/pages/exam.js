@@ -11,11 +11,17 @@ import {
   updateCardUI,
   checkCardColor,
   updateCardColor,
+  filterQuestions,
 } from "../utils/ExamAssessment/cardsUI.js";
 
 import { submitQuiz } from "../utils/ExamAssessment/quizSubmition.js";
 
 import { shuffleQuestions } from "../utils/ExamAssessment/helpers.js";
+
+import {
+  startCountdown,
+  initCountdown,
+} from "../utils/ExamAssessment/timer.js";
 
 / * * *  Animation * * * /;
 setTimeout(() => {
@@ -211,7 +217,7 @@ function trackAnswer(questionId, optionId) {
     "randomizedQuestions",
     JSON.stringify(quizData.questions)
   );
-  filterQuestions(currentFilter); // Refresh the filter
+  filterQuestions(currentFilter, currentFilter); // Refresh the filter
   updateCardUI(currentQuestionIndex, quizData);
 }
 
@@ -260,7 +266,7 @@ flagIcon.addEventListener("click", () => {
     "randomizedQuestions",
     JSON.stringify(quizData.questions)
   );
-  filterQuestions(currentFilter); // Refresh the filter
+  filterQuestions(currentFilter, currentFilter);
 
   updateFlagUI(currentQuestionIndex, currentQuestion.flags.isFlagged);
   updateCardUI(currentQuestionIndex, quizData);
@@ -293,113 +299,6 @@ const submit = document.getElementById("submit");
 submit.addEventListener("click", () => {
   submitQuiz(quizData);
 });
-/ * * * * * * * * * * * * * * *  * * Timer logic  ✔✔    icon pulse* * * * * * * * * * * * * * * * * * * * * * * * /;
-
-function startCountdown(hours, minutes, seconds) {
-  const finishTime = localStorage.getItem("countdownFinishTime");
-  if (!finishTime) {
-    const currentTime = new Date().getTime();
-    const totalMilliseconds = (hours * 3600 + minutes * 60 + seconds) * 1000;
-    const countdownFinishTime = currentTime + totalMilliseconds;
-    localStorage.setItem("countdownFinishTime", countdownFinishTime);
-    localStorage.setItem("quizStartTime", currentTime);
-    // console.log("Countdown finish time set to:", countdownFinishTime);
-  }
-  initCountdown();
-}
-function initCountdown() {
-  // console.log("Initializing countdown...");
-  const timerElement = document.getElementById("timer");
-  const warningTimer = document.getElementById("warning-timer");
-  const warningIcon = document.getElementById("warning-icon");
-
-  const intervalId = setInterval(() => {
-    const currentTime = new Date().getTime();
-    const finishTime = localStorage.getItem("countdownFinishTime");
-
-    if (!finishTime) {
-      clearInterval(intervalId);
-      return;
-    }
-
-    const remainingTime = Math.max(finishTime - currentTime, 0);
-
-    if (remainingTime <= 0) {
-      clearInterval(intervalId);
-      localStorage.removeItem("countdownFinishTime");
-      window.location.replace("timeOut.html");
-      return;
-    }
-
-    const remainingHours = Math.floor(remainingTime / (1000 * 60 * 60));
-    const remainingMinutes = Math.floor(
-      (remainingTime % (1000 * 60 * 60)) / (1000 * 60)
-    );
-
-    const remainingSeconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
-    // console.log(remainingHours, remainingMinutes, remainingSeconds); // nothing displayed //
-
-    timerElement.textContent = `${String(remainingHours).padStart(
-      2,
-      "0"
-    )}:${String(remainingMinutes).padStart(2, "0")}:${String(
-      remainingSeconds
-    ).padStart(2, "0")}`;
-    warningTimer.classList.remove("invisible");
-
-    // Handle the warning styles when less than 2 minutes remain
-    if (remainingHours === 0 && remainingMinutes < 2) {
-      warningTimer.classList.add("text-red-500");
-      warningIcon.classList.remove("text-sec-color");
-      warningIcon.classList.add("text-red-500", "fa-beat-fade");
-    } else {
-      warningTimer.classList.remove("text-red-500");
-      warningIcon.classList.remove("text-red-500", "fa-beat-fade");
-      warningIcon.classList.add("text-sec-color");
-    }
-  }, 1000);
-}
-
-function filterQuestions(filterType) {
-  const cards = document.querySelectorAll("#cards li");
-  currentFilter = filterType;
-  const savedQuestions =
-    JSON.parse(localStorage.getItem("randomizedQuestions")) || [];
-
-  cards.forEach((card, index) => {
-    const question = savedQuestions[index];
-    const isAnswered = question.flags?.isAnswered || false; // Check if the question is answered
-    const isFlagged = question.flags?.isFlagged || false; // Check if the question is flagged
-
-    let shouldShow = false;
-
-    switch (filterType) {
-      case "all":
-        shouldShow = true; // Show all questions
-        break;
-      case "answered":
-        shouldShow = isAnswered; // Show only answered questions
-        break;
-      case "not-answered":
-        shouldShow = !isAnswered; // Show only not-answered questions
-        break;
-      case "flagged":
-        shouldShow = isFlagged; // Show only flagged questions
-        break;
-      default:
-        shouldShow = true;
-    }
-
-    // Use visibility instead of display
-    if (shouldShow) {
-      card.style.visibility = "visible";
-      card.style.opacity = "1"; // Ensure the card is fully visible
-    } else {
-      card.style.visibility = "hidden";
-      card.style.opacity = "0"; // Smoothly hide the card
-    }
-  });
-}
 
 document.addEventListener("DOMContentLoaded", () => {
   const listItems = document.querySelectorAll(".questions-list li");
@@ -410,24 +309,23 @@ document.addEventListener("DOMContentLoaded", () => {
         li.classList.remove("bg-main-color");
         li.classList.remove("text-white");
       });
-
       item.classList.add("bg-main-color");
       item.classList.add("text-white");
 
-      // Get the filter type from the clicked item's text content
+      // Get the filter type from the clicked item's text content [answered - not answered - flagged]
       const filterType = item.textContent.trim().toLowerCase();
       currentFilter = filterType;
-      filterQuestions(filterType);
+      filterQuestions(filterType, currentFilter);
     });
   });
 
   // Initially show all questions
-  filterQuestions("all");
+  filterQuestions("all", currentFilter);
 });
 
 window.onload = () => {
   fetchQuizData();
-  filterQuestions("all"); // Show all questions initially
+  filterQuestions("all", currentFilter); // Show all questions initially
   updateCardUI(currentQuestionIndex, quizData); // Update the UI for the current question
   checkCardColor();
   initCountdown();

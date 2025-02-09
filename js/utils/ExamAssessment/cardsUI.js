@@ -33,3 +33,45 @@ export function updateCardColor() {
     });
   }
 }
+
+/ * * * * * * * Filters UI * * * * * * * /;
+export function filterQuestions(filterType, currentFilter) {
+  const cards = document.querySelectorAll("#cards li");
+  currentFilter = filterType;
+  const savedQuestions =
+    JSON.parse(localStorage.getItem("randomizedQuestions")) || [];
+
+  cards.forEach((card, index) => {
+    const question = savedQuestions[index];
+    const isAnswered = question.flags?.isAnswered || false;
+    const isFlagged = question.flags?.isFlagged || false;
+
+    let shouldShow = false;
+
+    switch (filterType) {
+      case "all":
+        shouldShow = true;
+        break;
+      case "answered":
+        shouldShow = isAnswered; // Show only answered questions
+        break;
+      case "not-answered":
+        shouldShow = !isAnswered; // Show only not-answered questions
+        break;
+      case "flagged":
+        shouldShow = isFlagged; // Show only flagged questions
+        break;
+      default:
+        shouldShow = true;
+    }
+
+    // Use visibility instead of display
+    if (shouldShow) {
+      card.style.visibility = "visible";
+      card.style.opacity = "1";
+    } else {
+      card.style.visibility = "hidden";
+      card.style.opacity = "0";
+    }
+  });
+}
