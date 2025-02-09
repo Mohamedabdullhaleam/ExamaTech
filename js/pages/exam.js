@@ -3,8 +3,19 @@ let quizData = {};
 let currentQuestionIndex = 0;
 
 import { displayUserNameWithEffect } from "../utils/textAnimation.js";
-import { updateButtonState } from "../utils/ExamAssessment/buttonsUI.js";
-import { updateCardUI } from "../utils/ExamAssessment/cardsUI.js";
+import {
+  updateButtonState,
+  updateFlagUI,
+} from "../utils/ExamAssessment/buttonsUI.js";
+import {
+  updateCardUI,
+  checkCardColor,
+  updateCardColor,
+} from "../utils/ExamAssessment/cardsUI.js";
+
+import { submitQuiz } from "../utils/ExamAssessment/quizSubmition.js";
+
+import { shuffleQuestions } from "../utils/ExamAssessment/helpers.js";
 
 / * * *  Animation * * * /;
 setTimeout(() => {
@@ -204,12 +215,8 @@ function trackAnswer(questionId, optionId) {
   updateCardUI(currentQuestionIndex, quizData);
 }
 
-/ * * * *  Shuffling question * * * * /;
-function shuffleQuestions(questions) {
-  return questions.sort(() => Math.random() - 0.5);
-}
-
-/ * * * * Event listeners * * * * /;
+/ * * * * * * * * * * * Event listeners * * * * * * * * * * * * * * */;
+/ * * * buttons * * * /;
 //1-Next
 document.getElementById("next").addEventListener("click", () => {
   if (currentQuestionIndex < quizData.questions.length - 1) {
@@ -264,169 +271,29 @@ flagIcon.addEventListener("click", () => {
     }.`
   );
 });
-
-/ * * * * * Need to submit on another json * * * * * /;
-/// includes  -- user-name & user email --- answers (correct and wrong )  --- score)
-// Retrieve user information from localStorage
-function getUserInfo() {
-  const username = localStorage.getItem("loggedInUser") || "Ash_1803";
-  const email = localStorage.getItem("email") || "john.doe@example.com"; // sent from login
-  return { username, email };
-}
-
-// Calculate score and prepare answers array
-function calculateScoreAndAnswers(questions) {
-  let score = 0;
-  const answers = [];
-
-  questions.forEach((question, index) => {
-    const isCorrect = question.choosedOptionId === question.correctOptionId;
-    if (isCorrect) score++;
-
-    answers.push({
-      questionIndex: index,
-      question: question.question, // Include the question text
-      selectedOptionId: question.choosedOptionId || null,
-      selectedAnswer: question.selectedAnswer || "",
-      isCorrect: isCorrect,
-    });
-  });
-
-  return { score, answers };
-}
-
-async function fetchUserGrades(username) {
-  try {
-    const response = await fetch(
-      `http://localhost:3020/grades?username=${username}`
+/ * * * Cards * * * /;
+const cards = document.getElementById("cards");
+cards.addEventListener("click", (event) => {
+  const liElement = event.target;
+  if (liElement.tagName === "LI") {
+    const index = Array.from(cards.children).indexOf(liElement);
+    currentQuestionIndex = index;
+    localStorage.setItem("currentQuestionIndex", index);
+    updateButtonState(quizData);
+    displayQuestion(
+      quizData.questions[currentQuestionIndex],
+      currentQuestionIndex
     );
-    return response.ok ? await response.json() : [];
-  } catch (error) {
-    window.location.replace("notFound.html");
-    console.error("Error fetching user grades:", error);
-    return [];
+    checkCardColor();
   }
-}
-
-// Prepare the payload based on the user data and new attempt
-function preparePayload(userData, username, email, score, answers, timeTaken) {
-  const completedAt = new Date().toISOString();
-  const newAttempt = {
-    attemptId: 1,
-    score,
-    answers,
-    timeTaken,
-    completedAt,
-  };
-
-  if (userData.length > 0) {
-    const payload = { ...userData[0] };
-    const quizIndex = payload.quizAttempts.findIndex(
-      (q) => q.quizId === "quiz_101"
-    );
-
-    if (quizIndex >= 0) {
-      const existingQuiz = payload.quizAttempts[quizIndex];
-      newAttempt.attemptId = existingQuiz.attempts.length + 1;
-      existingQuiz.attempts.push(newAttempt);
-      existingQuiz.bestScore = Math.max(existingQuiz.bestScore, score);
-    } else {
-      payload.quizAttempts.push({
-        quizId: "quiz_101",
-        attempts: [newAttempt],
-        bestScore: score,
-      });
-    }
-    return payload;
-  } else {
-    return {
-      username,
-      email,
-      quizAttempts: [
-        {
-          quizId: "quiz_101",
-          attempts: [newAttempt],
-          bestScore: score,
-        },
-      ],
-    };
-  }
-}
-
-// Submit the quiz data to the server
-async function submitQuizData(payload) {
-  try {
-    const response = await fetch("http://localhost:3020/grades", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
-    return response.ok;
-  } catch (error) {
-    window.location.replace("notFound.html");
-    console.error("Error submitting quiz data:", error);
-    return false;
-  }
-}
-
-// Clear localStorage and redirect after submission
-function clearLocalStorageAndRedirect() {
-  localStorage.removeItem("randomizedQuestions");
-  localStorage.removeItem("currentQuestionIndex");
-  localStorage.removeItem("countdownFinishTime");
-  // window.location.replace("report.html");
-}
-
-// Main function to handle quiz submission
-async function submitQuiz() {
-  const { username, email } = getUserInfo();
-  const { score, answers } = calculateScoreAndAnswers(quizData.questions);
-  const quizStartTime = localStorage.getItem("quizStartTime");
-  const quizEndTime = new Date().getTime();
-  const timeTaken = quizStartTime ? quizEndTime - parseInt(quizStartTime) : 0;
-
-  const formattedTimeTaken = formatTimeTaken(timeTaken); // Format time taken
-
-  const userData = await fetchUserGrades(username);
-  const payload = preparePayload(
-    userData,
-    username,
-    email,
-    score,
-    answers,
-    formattedTimeTaken
-  );
-  const success = await submitQuizData(payload);
-  if (score > 5) {
-    clearLocalStorageAndRedirect();
-    window.location.replace("successPage.html");
-  } else {
-    clearLocalStorageAndRedirect();
-    window.location.replace("failurePage.html");
-  }
-}
-
-const submit = document.getElementById("submit");
-
-submit.addEventListener("click", () => {
-  submitQuiz();
 });
 
+/ * * * * Event listener to Submit quiz * * * * /;
+const submit = document.getElementById("submit");
+submit.addEventListener("click", () => {
+  submitQuiz(quizData);
+});
 / * * * * * * * * * * * * * * *  * * Timer logic  ✔✔    icon pulse* * * * * * * * * * * * * * * * * * * * * * * * /;
-
-function formatTimeTaken(milliseconds) {
-  const totalSeconds = Math.floor(milliseconds / 1000);
-  const hours = Math.floor(totalSeconds / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const seconds = totalSeconds % 60;
-
-  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(
-    2,
-    "0"
-  )}:${String(seconds).padStart(2, "0")}`;
-}
 
 function startCountdown(hours, minutes, seconds) {
   const finishTime = localStorage.getItem("countdownFinishTime");
@@ -492,60 +359,6 @@ function initCountdown() {
     }
   }, 1000);
 }
-
-// console.log(currentQuestionIndex);
-/ * * * * Flags functionality * * * * /;
-
-function updateFlagUI(index, isFlagged) {
-  const cardElement = document.getElementById(`card-${index + 1}`);
-  if (isFlagged) {
-    cardElement.classList.add("bg-flag-color");
-  } else {
-    cardElement.classList.remove("bg-flag-color");
-  }
-}
-
-/ * * * *  Cards Color and clicks * * * * * */;
-
-// / * * * * also check next prev to combine the logic * * * * * * /
-function checkCardColor() {
-  const listItems = document.querySelectorAll(".question-number li");
-
-  // Ensure currentQuestionIndex is used to set the active background
-  listItems.forEach((item, i) => {
-    if (i === currentQuestionIndex) {
-      item.classList.add("bg-main-color");
-    } else {
-      item.classList.remove("bg-main-color");
-    }
-  });
-}
-function updateCardColor() {
-  const savedQuestions = JSON.parse(
-    localStorage.getItem("randomizedQuestions")
-  );
-  if (savedQuestions) {
-    savedQuestions.forEach((question, index) => {
-      const isFlagged = question.flags && question.flags.isFlagged;
-      updateFlagUI(index, isFlagged);
-    });
-  }
-}
-const cards = document.getElementById("cards");
-cards.addEventListener("click", (event) => {
-  const liElement = event.target;
-  if (liElement.tagName === "LI") {
-    const index = Array.from(cards.children).indexOf(liElement);
-    currentQuestionIndex = index;
-    localStorage.setItem("currentQuestionIndex", index);
-    updateButtonState(quizData);
-    displayQuestion(
-      quizData.questions[currentQuestionIndex],
-      currentQuestionIndex
-    );
-    checkCardColor();
-  }
-});
 
 function filterQuestions(filterType) {
   const cards = document.querySelectorAll("#cards li");

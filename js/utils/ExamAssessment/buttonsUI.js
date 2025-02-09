@@ -1,4 +1,5 @@
 / * * * * * * * Flags , previous and Next UI update* * * * * * * * /;
+
 export function updateButtonState(quizData) {
   const nextButton = document.getElementById("next");
   const prevButton = document.getElementById("previous");
@@ -22,4 +23,14 @@ export function updateButtonState(quizData) {
     currentQuestionIndex === quizData.questions.length - 1
       ? "hidden"
       : "visible";
+}
+
+/ * * * Toggle flag depending on its state * * * /;
+export function updateFlagUI(index, isFlagged) {
+  const cardElement = document.getElementById(`card-${index + 1}`);
+  if (isFlagged) {
+    cardElement.classList.add("bg-flag-color");
+  } else {
+    cardElement.classList.remove("bg-flag-color");
+  }
 }
