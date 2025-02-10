@@ -4,7 +4,7 @@ ExamaTech is a dynamic web-based quiz application designed for an engaging and i
 
 ## 📑 Table of Contents
 
-- [Overview](#overview)
+- [Overview](#-overview)
 - [Tech Stack](#-tech-stack)
 - [Project Structure](#-project-structure)
 - [Installation & Setup](#-installation--setup)
