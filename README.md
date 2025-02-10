@@ -2,6 +2,18 @@
 
 ExamaTech is a dynamic web-based quiz application designed for an engaging and insightful online exam experience. Built with HTML, Tailwind CSS, and JavaScript, it provides personalized quizzes, real-time tracking, and detailed performance reports.
 
+## 📑 Table of Contents
+
+- [Overview](#-overview)
+- [Tech Stack](#-tech-stack)
+- [Project Structure](#-project-structure)
+- [Installation & Setup](#-installation--setup)
+- [Features](#-features)
+- [Roadmap](#-roadmap)
+- [Contributing](#-contributing)
+- [Issues & Feedback](#-issues--feedback)
+- [License](#-license)
+
 ## 🚀 Overview
 
 - Secure user authentication (sign-up, sign-in, and session management).
@@ -11,6 +23,7 @@ ExamaTech is a dynamic web-based quiz application designed for an engaging and i
 - Detailed reports with correct/incorrect answers, time taken, and final grade.
 - JSON-based backend for lightweight data management.
 - Smooth UI with optimized error handling and loading states.
+- Future plans: Implementing a real database, multiple quizzes, and a user ranking dashboard.
 
 ## 🛠 Tech Stack
 
@@ -62,19 +75,29 @@ git clone https://github.com/your-repo/ExamaTech.git
 cd ExamaTech
 ```
 
-### 3️⃣ Install dependencies (if using npm):
+### 3️⃣ Install dependencies:
 
 ```sh
 npm install
 ```
 
-### 4️⃣ Build Tailwind CSS (if modified):
+### 4️⃣ Install JSON Server (if not installed):
+
+```sh
+npm install -g json-server
+```
+
+### 5️⃣ Build Tailwind CSS (if modified):
 
 ```sh
 npm run build:css
 ```
 
-### 5️⃣ Start JSON Servers:
+### 6️⃣ Start JSON Servers:
+
+#### JSON Server Setup
+
+The project uses `json-server` to simulate a backend. Run the following commands to start the servers:
 
 - Users data:
   ```sh
@@ -89,9 +112,9 @@ npm run build:css
   npm run grades
   ```
 
-### 6️⃣ Run the Project
+### 7️⃣ Run the Project
 
-- Open `index.html` in a browser.
+- Open `signup.html` in a browser.
 - OR use a live server extension in VS Code for a better development experience.
 
 ## 📜 Features
@@ -103,6 +126,23 @@ npm run build:css
 - **Detailed Reports** – View quiz performance, time taken, and grades.
 - **JSON-Based Backend** – No database needed.
 - **Smooth UI & Error Handling** – Includes loading states and error messages.
+
+## 🔥 Roadmap
+
+- **Phase 1**: Current implementation with JSON-based storage.
+- **Phase 2**: Migrate to a real database.
+- **Phase 3**: Support multiple quizzes and subjects.
+- **Phase 4**: Build a user ranking dashboard with performance insights.
+
+## 🤝 Contributing
+
+We welcome contributions! To contribute:
+
+1. Fork the repository.
+2. Create a new branch (`feature-branch`).
+3. Commit your changes.
+4. Push to your fork.
+5. Open a pull request.
 
 ## 🐞 Issues & Feedback
 
