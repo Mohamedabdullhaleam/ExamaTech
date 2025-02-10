@@ -13,11 +13,8 @@ import {
   updateCardColor,
   filterQuestions,
 } from "../utils/ExamAssessment/cardsUI.js";
-
 import { submitQuiz } from "../utils/ExamAssessment/quizSubmition.js";
-
 import { shuffleQuestions } from "../utils/ExamAssessment/helpers.js";
-
 import {
   startCountdown,
   initCountdown,
@@ -294,12 +291,13 @@ cards.addEventListener("click", (event) => {
   }
 });
 
-/ * * * * Event listener to Submit quiz * * * * /;
+/ * * *  Submit quiz * * * /;
 const submit = document.getElementById("submit");
 submit.addEventListener("click", () => {
   submitQuiz(quizData);
 });
 
+/ * * * Cards Colors & filters* * * /;
 document.addEventListener("DOMContentLoaded", () => {
   const listItems = document.querySelectorAll(".questions-list li");
 
@@ -319,7 +317,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Initially show all questions
   filterQuestions("all", currentFilter);
 });
 
