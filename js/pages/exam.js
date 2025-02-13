@@ -19,7 +19,7 @@ import {
   startCountdown,
   initCountdown,
 } from "../utils/ExamAssessment/timer.js";
-
+import { hideLoading, showLoading } from "../utils/loading/loadingState.js";
 / * * *  Animation * * * /;
 setTimeout(() => {
   const title = document.getElementById("title");
@@ -35,17 +35,20 @@ setTimeout(() => {
 }, 100);
 
 / * * * Fetching Data * * * /;
-// check local storage first to get the data
-// if not found fetch from the Api
+// Show the loader when fetching data
+showLoading();
+
 async function fetchQuizData() {
   try {
     const savedQuestions = localStorage.getItem("randomizedQuestions");
     if (savedQuestions) {
       quizData.questions = JSON.parse(savedQuestions);
       initQuiz();
+      hideLoading();
       return;
     }
-    // no data in local storage // time to fetch data
+
+    // No data in local storage, fetch from API
     const response = await fetch("http://localhost:3010/quiz");
     if (!response.ok) {
       throw new Error("Failed to fetch quiz data");
@@ -67,7 +70,9 @@ async function fetchQuizData() {
     / * * * Start quiz displaying and logic * * * /;
     startCountdown(hours, minutes, seconds);
     initQuiz();
+    hideLoading(); // Hide loader
   } catch (error) {
+    hideLoading(); // Hide loader
     window.location.replace("notFound.html");
     console.error("Error fetching quiz data:", error);
   }
@@ -137,6 +142,7 @@ function handleOptionClick(event, optionElement, optionId = null) {
   // Add 'bg-main-color' to the clicked option
   optionElement.classList.add("bg-main-color");
 
+  // Uncheck all other inputs
   document.querySelectorAll("input[name='choice']").forEach((el) => {
     el.checked = false;
   });
@@ -160,7 +166,7 @@ function handleOptionClick(event, optionElement, optionId = null) {
   updateCardUI(questionIndex, quizData);
 }
 
-// Save selected option styles to localStorage
+/ * * * Save Selected Option Style * * * /;
 function saveSelectedOptionStyle(questionIndex, optionId) {
   let savedStyles =
     JSON.parse(localStorage.getItem("selectedOptionsStyles")) || {};
@@ -202,14 +208,13 @@ function trackAnswer(questionId, optionId) {
 
   currentQuestion.choosedOptionId = optionId;
   currentQuestion.selectedAnswer = selectedOption.text;
-  // Update flags.isAnswered to true
+
   if (!currentQuestion.flags) {
     currentQuestion.flags = { isAnswered: false };
   }
 
   currentQuestion.flags.isAnswered = true;
 
-  // Save updated questions to localStorage
   localStorage.setItem(
     "randomizedQuestions",
     JSON.stringify(quizData.questions)

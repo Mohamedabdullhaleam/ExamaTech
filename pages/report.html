@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="../css/output.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/loaderOverlay.css">
   <link rel="icon" type="image/png" href="../assets/icons/icon3.png" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
 
@@ -14,6 +15,12 @@
 <body
   class="bg-gradient-to-br from-white to-main-color w-screen flex flex-col items-center justify-center overflow-x-hidden">
   <div class="w-screen flex sm:flex-row flex-col sm:justify-between sm:p-10 gap-7 sm:gap-0">
+
+    <!-- loading overlay -->
+    <div id="loading" class="loader-overlay">
+      <span class="loader">Load&nbsp;ng</span>
+    </div>
+
     <div class="pl-5 pt-5 sm:pl-0 sm:pt-0">
       <h1 id="title" class="font-bold text-4xl sm:text-5xl">Exama-Tech</h1>
       <h6 id="user-name" class="message font-mono text-sm"></h6>

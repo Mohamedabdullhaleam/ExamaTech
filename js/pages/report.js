@@ -6,6 +6,7 @@ import {
   calculateGradePercentage,
   fetchGradesByUsername,
 } from "../utils/gradeCalculations/examStats.js";
+import { hideLoading, showLoading } from "../utils/loading/loadingState.js";
 
 / * * *  Animation * * * /;
 //1- Text
@@ -18,7 +19,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 / * * * prepare the data to be displayed * * * /;
 async function getUserQuizReport() {
+  showLoading(); // Show loading indicator
   const userData = await fetchGradesByUsername();
+  hideLoading(); // Hide loading indicator once data is fetched
+
   if (userData) {
     const quizAttempts = userData.quizAttempts[0].attempts;
     const lastAttempt = quizAttempts[quizAttempts.length - 1];
@@ -70,7 +74,10 @@ getUserQuizReport().then((data) => {
 / * * * * * * * * * View Questions * * * * * * /;
 // Function to display questions dynamically
 async function displayQuestions() {
+  showLoading(); // Show loading before fetching data
   const userData = await fetchGradesByUsername();
+  hideLoading(); // Hide loading after data is fetched
+
   const quizAttempts = userData.quizAttempts[0].attempts;
   const questions = quizAttempts[quizAttempts.length - 1].answers;
 
@@ -105,7 +112,7 @@ async function displayQuestions() {
       if (paragraph.textContent === originalText) {
         // Update text based on the icon type
         paragraph.textContent = `Your Answer: ${
-          element.selectedAnswer ? element.selectedAnswer : "Not Answerd"
+          element.selectedAnswer ? element.selectedAnswer : "Not Answered"
         }`;
         if (icon) icon.style.display = "none";
       } else {
