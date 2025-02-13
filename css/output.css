@@ -940,6 +940,10 @@ video {
   height: 18rem;
 }
 
+.h-8 {
+  height: 2rem;
+}
+
 .h-9 {
   height: 2.25rem;
 }
@@ -960,12 +964,48 @@ video {
   height: 100vh;
 }
 
-.min-h-\[1\.2rem\] {
-  min-height: 1.2rem;
+.h-5 {
+  height: 1.25rem;
+}
+
+.min-h-10 {
+  min-height: 2.5rem;
+}
+
+.min-h-5 {
+  min-height: 1.25rem;
+}
+
+.min-h-\[1\.5-rem\] {
+  min-height: 1.5-rem;
 }
 
 .min-h-\[1rem\] {
   min-height: 1rem;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.min-h-\[1\.2-rem\] {
+  min-height: 1.2-rem;
+}
+
+.min-h-24 {
+  min-height: 6rem;
+}
+
+.min-h-20 {
+  min-height: 5rem;
+}
+
+.min-h-\[1\.2rem\] {
+  min-height: 1.2rem;
+}
+
+.min-h-\[1\.5rem\] {
+  min-height: 1.5rem;
 }
 
 .w-32 {

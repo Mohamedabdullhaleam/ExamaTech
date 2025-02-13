@@ -1,6 +1,6 @@
 / * * * Loading Indicator Logic * * * /;
 export function showLoading() {
-  document.getElementById("loading").style.display = "block";
+  document.getElementById("loading").style.display = "flex";
 }
 
 export function hideLoading() {

@@ -13,17 +13,17 @@
 </head>
 
 <body
-  class="bg-gradient-to-br from-white to-main-color w-screen flex flex-col items-center justify-center overflow-x-hidden">
+  class="bg-gradient-to-br from-white to-main-color min-h-screen w-screen flex flex-col items-center justify-center overflow-x-hidden">
+
+  <!-- loading overlay -->
+  <div id="loading" class="loader-overlay">
+    <span class="loader">Load&nbsp;ng</span>
+  </div>
+
   <div class="w-screen flex sm:flex-row flex-col sm:justify-between sm:p-10 gap-7 sm:gap-0">
-
-    <!-- loading overlay -->
-    <div id="loading" class="loader-overlay">
-      <span class="loader">Load&nbsp;ng</span>
-    </div>
-
     <div class="pl-5 pt-5 sm:pl-0 sm:pt-0">
       <h1 id="title" class="font-bold text-4xl sm:text-5xl">Exama-Tech</h1>
-      <h6 id="user-name" class="message font-mono text-sm"></h6>
+      <h6 id="user-name" class="message font-mono text-sm min-h-5"></h6>
     </div>
     <div class="dash flex flex-col justify-center items-center">
       <input id="sign-out" type="submit" value="Sign Out"
@@ -59,7 +59,7 @@
     </div>
   </div>
 
-  <div class="container mb-4 w-screen">
+  <div class="container mb-4 w-screen grow">
     <div class="flex justify-center">
       <div id="question-container"
         class="correction pt-7 w-[400px] md:w-[550px] lg:w-full lg:max-w-4xl flex flex-col gap-4 mx-auto">

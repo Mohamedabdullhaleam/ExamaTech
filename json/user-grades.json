@@ -2586,6 +2586,702 @@
           "bestScore": 2
         }
       ]
+    },
+    {
+      "id": "5cdd",
+      "username": "Mo_Ahmed4096",
+      "email": "john.doe@example.com",
+      "quizAttempts": [
+        {
+          "quizId": "quiz_101",
+          "attempts": [
+            {
+              "attemptId": 1,
+              "score": 1,
+              "answers": [
+                {
+                  "questionIndex": 0,
+                  "question": "What is the boiling point of water (at sea level)?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 1,
+                  "question": "Which planet is known as the Red Planet?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 2,
+                  "question": "Who wrote 'Romeo and Juliet'?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 3,
+                  "question": "Which country is known as the Land of the Rising Sun?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 4,
+                  "question": "Who painted the Mona Lisa?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 5,
+                  "question": "What is the freezing point of water (in °C)?",
+                  "selectedOptionId": "o3",
+                  "selectedAnswer": "5°C",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 6,
+                  "question": "What is the capital of France?",
+                  "selectedOptionId": "o1",
+                  "selectedAnswer": "Paris",
+                  "isCorrect": true
+                },
+                {
+                  "questionIndex": 7,
+                  "question": "What is the chemical symbol for gold?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 8,
+                  "question": "Which ocean is the largest?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 9,
+                  "question": "What is the smallest prime number?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 10,
+                  "question": "What is the square root of 64?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 11,
+                  "question": "What is the largest mammal?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                }
+              ],
+              "timeTaken": "00:02:07",
+              "completedAt": "2025-02-13T07:19:25.332Z"
+            }
+          ],
+          "bestScore": 1
+        }
+      ]
+    },
+    {
+      "id": "5cdd",
+      "username": "Mo_Ahmed4096",
+      "email": "john.doe@example.com",
+      "quizAttempts": [
+        {
+          "quizId": "quiz_101",
+          "attempts": [
+            {
+              "attemptId": 1,
+              "score": 1,
+              "answers": [
+                {
+                  "questionIndex": 0,
+                  "question": "What is the boiling point of water (at sea level)?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 1,
+                  "question": "Which planet is known as the Red Planet?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 2,
+                  "question": "Who wrote 'Romeo and Juliet'?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 3,
+                  "question": "Which country is known as the Land of the Rising Sun?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 4,
+                  "question": "Who painted the Mona Lisa?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 5,
+                  "question": "What is the freezing point of water (in °C)?",
+                  "selectedOptionId": "o3",
+                  "selectedAnswer": "5°C",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 6,
+                  "question": "What is the capital of France?",
+                  "selectedOptionId": "o1",
+                  "selectedAnswer": "Paris",
+                  "isCorrect": true
+                },
+                {
+                  "questionIndex": 7,
+                  "question": "What is the chemical symbol for gold?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 8,
+                  "question": "Which ocean is the largest?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 9,
+                  "question": "What is the smallest prime number?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 10,
+                  "question": "What is the square root of 64?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 11,
+                  "question": "What is the largest mammal?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                }
+              ],
+              "timeTaken": "00:02:07",
+              "completedAt": "2025-02-13T07:19:25.332Z"
+            },
+            {
+              "attemptId": 2,
+              "score": 0,
+              "answers": [
+                {
+                  "questionIndex": 0,
+                  "question": "What is the smallest prime number?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 1,
+                  "question": "What is the square root of 64?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 2,
+                  "question": "Who painted the Mona Lisa?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 3,
+                  "question": "What is the freezing point of water (in °C)?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 4,
+                  "question": "Which country is known as the Land of the Rising Sun?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 5,
+                  "question": "What is the chemical symbol for gold?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 6,
+                  "question": "What is the capital of France?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 7,
+                  "question": "Which planet is known as the Red Planet?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 8,
+                  "question": "Who wrote 'Romeo and Juliet'?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 9,
+                  "question": "What is the boiling point of water (at sea level)?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 10,
+                  "question": "Which ocean is the largest?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 11,
+                  "question": "What is the largest mammal?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                }
+              ],
+              "timeTaken": "00:00:03",
+              "completedAt": "2025-02-13T08:35:26.065Z"
+            }
+          ],
+          "bestScore": 1
+        }
+      ]
+    },
+    {
+      "id": "5cdd",
+      "username": "Mo_Ahmed4096",
+      "email": "john.doe@example.com",
+      "quizAttempts": [
+        {
+          "quizId": "quiz_101",
+          "attempts": [
+            {
+              "attemptId": 1,
+              "score": 1,
+              "answers": [
+                {
+                  "questionIndex": 0,
+                  "question": "What is the boiling point of water (at sea level)?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 1,
+                  "question": "Which planet is known as the Red Planet?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 2,
+                  "question": "Who wrote 'Romeo and Juliet'?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 3,
+                  "question": "Which country is known as the Land of the Rising Sun?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 4,
+                  "question": "Who painted the Mona Lisa?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 5,
+                  "question": "What is the freezing point of water (in °C)?",
+                  "selectedOptionId": "o3",
+                  "selectedAnswer": "5°C",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 6,
+                  "question": "What is the capital of France?",
+                  "selectedOptionId": "o1",
+                  "selectedAnswer": "Paris",
+                  "isCorrect": true
+                },
+                {
+                  "questionIndex": 7,
+                  "question": "What is the chemical symbol for gold?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 8,
+                  "question": "Which ocean is the largest?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 9,
+                  "question": "What is the smallest prime number?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 10,
+                  "question": "What is the square root of 64?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 11,
+                  "question": "What is the largest mammal?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                }
+              ],
+              "timeTaken": "00:02:07",
+              "completedAt": "2025-02-13T07:19:25.332Z"
+            },
+            {
+              "attemptId": 2,
+              "score": 0,
+              "answers": [
+                {
+                  "questionIndex": 0,
+                  "question": "Which ocean is the largest?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 1,
+                  "question": "Who wrote 'Romeo and Juliet'?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 2,
+                  "question": "What is the freezing point of water (in °C)?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 3,
+                  "question": "What is the capital of France?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 4,
+                  "question": "Who painted the Mona Lisa?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 5,
+                  "question": "Which country is known as the Land of the Rising Sun?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 6,
+                  "question": "Which planet is known as the Red Planet?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 7,
+                  "question": "What is the largest mammal?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 8,
+                  "question": "What is the smallest prime number?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 9,
+                  "question": "What is the square root of 64?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 10,
+                  "question": "What is the chemical symbol for gold?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 11,
+                  "question": "What is the boiling point of water (at sea level)?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                }
+              ],
+              "timeTaken": "00:06:05",
+              "completedAt": "2025-02-13T08:57:25.366Z"
+            }
+          ],
+          "bestScore": 1
+        }
+      ]
+    },
+    {
+      "id": "5cdd",
+      "username": "Mo_Ahmed4096",
+      "email": "john.doe@example.com",
+      "quizAttempts": [
+        {
+          "quizId": "quiz_101",
+          "attempts": [
+            {
+              "attemptId": 1,
+              "score": 1,
+              "answers": [
+                {
+                  "questionIndex": 0,
+                  "question": "What is the boiling point of water (at sea level)?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 1,
+                  "question": "Which planet is known as the Red Planet?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 2,
+                  "question": "Who wrote 'Romeo and Juliet'?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 3,
+                  "question": "Which country is known as the Land of the Rising Sun?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 4,
+                  "question": "Who painted the Mona Lisa?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 5,
+                  "question": "What is the freezing point of water (in °C)?",
+                  "selectedOptionId": "o3",
+                  "selectedAnswer": "5°C",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 6,
+                  "question": "What is the capital of France?",
+                  "selectedOptionId": "o1",
+                  "selectedAnswer": "Paris",
+                  "isCorrect": true
+                },
+                {
+                  "questionIndex": 7,
+                  "question": "What is the chemical symbol for gold?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 8,
+                  "question": "Which ocean is the largest?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 9,
+                  "question": "What is the smallest prime number?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 10,
+                  "question": "What is the square root of 64?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 11,
+                  "question": "What is the largest mammal?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                }
+              ],
+              "timeTaken": "00:02:07",
+              "completedAt": "2025-02-13T07:19:25.332Z"
+            },
+            {
+              "attemptId": 2,
+              "score": 1,
+              "answers": [
+                {
+                  "questionIndex": 0,
+                  "question": "What is the boiling point of water (at sea level)?",
+                  "selectedOptionId": "o2",
+                  "selectedAnswer": "100°C",
+                  "isCorrect": true
+                },
+                {
+                  "questionIndex": 1,
+                  "question": "What is the capital of France?",
+                  "selectedOptionId": "o3",
+                  "selectedAnswer": "Berlin",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 2,
+                  "question": "What is the smallest prime number?",
+                  "selectedOptionId": "o4",
+                  "selectedAnswer": "3",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 3,
+                  "question": "Which planet is known as the Red Planet?",
+                  "selectedOptionId": "o4",
+                  "selectedAnswer": "Saturn",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 4,
+                  "question": "What is the largest mammal?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 5,
+                  "question": "What is the freezing point of water (in °C)?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 6,
+                  "question": "Who painted the Mona Lisa?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 7,
+                  "question": "Who wrote 'Romeo and Juliet'?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 8,
+                  "question": "What is the square root of 64?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 9,
+                  "question": "Which ocean is the largest?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 10,
+                  "question": "What is the chemical symbol for gold?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                },
+                {
+                  "questionIndex": 11,
+                  "question": "Which country is known as the Land of the Rising Sun?",
+                  "selectedOptionId": null,
+                  "selectedAnswer": "",
+                  "isCorrect": false
+                }
+              ],
+              "timeTaken": "00:21:43",
+              "completedAt": "2025-02-13T09:44:28.816Z"
+            }
+          ],
+          "bestScore": 1
+        }
+      ]
     }
   ]
 }
