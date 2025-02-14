@@ -57,8 +57,7 @@ ExamaTech/
 ├── tailwind.config.js    # Tailwind CSS configuration
 ├── postcss.config.js     # PostCSS configuration
 ├── package.json          # Dependencies and scripts
-├── README.md             # Project documentation
-└── index.html            # Main entry point
+└── README.md             # Project documentation
 ```
 
 ## 🚀 Installation & Setup
