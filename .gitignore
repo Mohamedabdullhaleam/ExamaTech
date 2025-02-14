@@ -1,0 +1,24 @@
+# Node modules
+node_modules/
+
+# Tailwind and PostCSS output files
+css/output.css
+
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# JSON Server database files (if dynamically modified)
+json/*.json
+
+# Environment variables (if needed in the future)
+.env
+
+# VS Code settings
+.vscode/
+
+
+# Windows system files
+Thumbs.db
