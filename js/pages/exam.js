@@ -70,9 +70,9 @@ async function fetchQuizData() {
     / * * * Start quiz displaying and logic * * * /;
     startCountdown(hours, minutes, seconds);
     initQuiz();
-    hideLoading(); // Hide loader
+    hideLoading();
   } catch (error) {
-    hideLoading(); // Hide loader
+    hideLoading();
     window.location.replace("notFound.html");
     console.error("Error fetching quiz data:", error);
   }
@@ -327,8 +327,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 window.onload = () => {
   fetchQuizData();
-  filterQuestions("all", currentFilter); // Show all questions initially
-  updateCardUI(currentQuestionIndex, quizData); // Update the UI for the current question
+  filterQuestions("all", currentFilter);
+  updateCardUI(currentQuestionIndex, quizData);
   checkCardColor();
   initCountdown();
   updateCardColor();

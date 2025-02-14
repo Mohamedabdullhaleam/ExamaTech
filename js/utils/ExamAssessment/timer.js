@@ -1,5 +1,4 @@
-/ * * * * * * * * * * * * * * * * * Timer logic  ✔✔  icon pulse * * * * * * * * * * * * * * * * * * * * * * * * /;
-
+import { showLoading, hideLoading } from "../loading/loadingState.js";
 export function startCountdown(hours, minutes, seconds) {
   const finishTime = localStorage.getItem("countdownFinishTime");
   if (!finishTime) {
@@ -13,11 +12,13 @@ export function startCountdown(hours, minutes, seconds) {
 }
 
 export function initCountdown() {
+  showLoading(); // Show loading before processing the timer
+
   const timerElement = document.getElementById("timer");
   const warningTimer = document.getElementById("warning-timer");
   const warningIcon = document.getElementById("warning-icon");
 
-  const intervalId = setInterval(() => {
+  function updateTimer() {
     const currentTime = new Date().getTime();
     const finishTime = localStorage.getItem("countdownFinishTime");
 
@@ -58,5 +59,10 @@ export function initCountdown() {
       warningIcon.classList.remove("text-red-500", "fa-beat-fade");
       warningIcon.classList.add("text-sec-color");
     }
-  }, 1000);
+
+    hideLoading(); // Hide loading after the first timer update
+  }
+
+  updateTimer();
+  const intervalId = setInterval(updateTimer, 1000);
 }

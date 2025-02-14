@@ -56,10 +56,10 @@ export function filterQuestions(filterType, currentFilter) {
         shouldShow = isAnswered; // Show only answered questions
         break;
       case "not-answered":
-        shouldShow = !isAnswered; // Show only not-answered questions
+        shouldShow = !isAnswered;
         break;
       case "flagged":
-        shouldShow = isFlagged; // Show only flagged questions
+        shouldShow = isFlagged;
         break;
       default:
         shouldShow = true;

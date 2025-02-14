@@ -34,7 +34,7 @@ export function validatePasswordStrength(password) {
   if (!/[A-Z]/.test(password)) errors.push("1 uppercase");
   if (!/[0-9]/.test(password)) errors.push("1 number");
   if (!/[@$!%*?&#_]/.test(password)) errors.push("1 symbol");
-  return errors.length > 0 ? `Password: ${errors.join(", ")}.` : null;
+  return errors.length > 0 ? `${errors.join(", ")}.` : null;
 }
 
 // Checks if passwords match
