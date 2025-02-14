@@ -42,7 +42,6 @@ ExamaTech/
 │   ├── styles.css        # Input CSS file for Tailwind
 │   ├── output.css        # Compiled Tailwind CSS file
 ├── js/                   # JavaScript files
-│   ├── components/       # Reusable scripts for UI components
 │   ├── pages/            # Page-specific scripts
 │   ├── utils/            # Helper functions
 │   └── main.js           # Main script file
