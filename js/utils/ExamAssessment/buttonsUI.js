@@ -25,7 +25,7 @@ export function updateButtonState(quizData) {
       : "visible";
 }
 
-/ * * * Toggle flag depending on its state * * * /;
+/ * * * Toggle card depending on its state * * * /;
 export function updateFlagUI(index, isFlagged) {
   const cardElement = document.getElementById(`card-${index + 1}`);
   if (isFlagged) {

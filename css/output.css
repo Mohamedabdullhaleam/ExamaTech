@@ -972,6 +972,10 @@ video {
   min-height: 1.25rem;
 }
 
+.min-h-7 {
+  min-height: 1.75rem;
+}
+
 .min-h-\[1\.5rem\] {
   min-height: 1.5rem;
 }
@@ -982,14 +986,6 @@ video {
 
 .min-h-screen {
   min-height: 100vh;
-}
-
-.min-h-6 {
-  min-height: 1.5rem;
-}
-
-.min-h-7 {
-  min-height: 1.75rem;
 }
 
 .w-32 {
@@ -1052,16 +1048,12 @@ video {
   width: 100vw;
 }
 
-.min-w-\[7rem\] {
-  min-width: 7rem;
-}
-
-.min-w-20 {
-  min-width: 5rem;
-}
-
 .min-w-40 {
   min-width: 10rem;
+}
+
+.min-w-\[7rem\] {
+  min-width: 7rem;
 }
 
 .flex-shrink {
