@@ -1,4 +1,5 @@
 import { showLoading, hideLoading } from "../loading/loadingState.js";
+
 export function startCountdown(hours, minutes, seconds) {
   const finishTime = localStorage.getItem("countdownFinishTime");
   if (!finishTime) {

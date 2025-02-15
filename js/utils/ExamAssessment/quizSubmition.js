@@ -1,9 +1,10 @@
 import { clearLocalStorageAndRedirect, formatTimeTaken } from "./helpers.js";
 import { hideLoading, showLoading } from "../loading/loadingState.js";
+
 / * * * getting user info * * * /;
 export function getUserInfo() {
   const username = localStorage.getItem("loggedInUser") || "Ash_1803";
-  const email = localStorage.getItem("email") || "john.doe@example.com";
+  const email = localStorage.getItem("email") || "kholoud.haleem@ahmed.com";
   return { username, email };
 }
 

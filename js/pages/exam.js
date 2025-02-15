@@ -20,6 +20,7 @@ import {
   initCountdown,
 } from "../utils/ExamAssessment/timer.js";
 import { hideLoading, showLoading } from "../utils/loading/loadingState.js";
+
 / * * *  Animation * * * /;
 setTimeout(() => {
   const title = document.getElementById("title");
@@ -49,7 +50,7 @@ async function fetchQuizData() {
     }
 
     // No data in local storage, fetch from API
-    const response = await fetch("http://localhost:3010/quiz");
+    const response = await fetch("http://localhost:30100/quiz");
     if (!response.ok) {
       throw new Error("Failed to fetch quiz data");
     }
@@ -130,7 +131,7 @@ function displayQuestion(question, index) {
   updateButtonState(quizData);
 }
 
-// Unified function to handle answer selection
+/ * * * maintain only one checked option * * *  /;
 function handleOptionClick(event, optionElement, optionId = null) {
   const input = optionElement.querySelector("input");
   const questionIndex = localStorage.getItem("currentQuestionIndex");
@@ -139,10 +140,7 @@ function handleOptionClick(event, optionElement, optionId = null) {
     el.classList.remove("bg-main-color");
   });
 
-  // Add 'bg-main-color' to the clicked option
   optionElement.classList.add("bg-main-color");
-
-  // Uncheck all other inputs
   document.querySelectorAll("input[name='choice']").forEach((el) => {
     el.checked = false;
   });
@@ -166,7 +164,7 @@ function handleOptionClick(event, optionElement, optionId = null) {
   updateCardUI(questionIndex, quizData);
 }
 
-/ * * * Save Selected Option Style * * * /;
+/ * * * Save the style of the selected Option to localStorage * * * /;
 function saveSelectedOptionStyle(questionIndex, optionId) {
   let savedStyles =
     JSON.parse(localStorage.getItem("selectedOptionsStyles")) || {};
@@ -174,7 +172,7 @@ function saveSelectedOptionStyle(questionIndex, optionId) {
   localStorage.setItem("selectedOptionsStyles", JSON.stringify(savedStyles));
 }
 
-// Load selected options styles from localStorage
+/ * * Retrive the style after refreshing the page * * * /;
 function loadSelectedOptionStyles() {
   let savedStyles =
     JSON.parse(localStorage.getItem("selectedOptionsStyles")) || {};
@@ -279,6 +277,7 @@ flagIcon.addEventListener("click", () => {
     }.`
   );
 });
+
 / * * * Cards * * * /;
 const cards = document.getElementById("cards");
 cards.addEventListener("click", (event) => {

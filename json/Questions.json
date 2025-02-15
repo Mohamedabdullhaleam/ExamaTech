@@ -3,8 +3,8 @@
     "quizId": "quiz_101",
     "title": "General Knowledge Quiz",
     "quizTime": {
-      "hours": 0,
-      "minutes": 1,
+      "hours": 1,
+      "minutes": 5,
       "seconds": 0
     },
     "description": "Test your knowledge with this 12-question quiz!",
