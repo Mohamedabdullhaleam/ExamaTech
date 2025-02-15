@@ -50,7 +50,7 @@ async function fetchQuizData() {
     }
 
     // No data in local storage, fetch from API
-    const response = await fetch("http://localhost:30100/quiz");
+    const response = await fetch("http://localhost:3010/quiz");
     if (!response.ok) {
       throw new Error("Failed to fetch quiz data");
     }
