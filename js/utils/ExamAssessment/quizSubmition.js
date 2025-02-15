@@ -1,19 +1,24 @@
 import { clearLocalStorageAndRedirect, formatTimeTaken } from "./helpers.js";
+import { hideLoading, showLoading } from "../loading/loadingState.js";
+
 / * * * getting user info * * * /;
 export function getUserInfo() {
   const username = localStorage.getItem("loggedInUser") || "Ash_1803";
-  const email = localStorage.getItem("email") || "john.doe@example.com";
+  const email = localStorage.getItem("email") || "kholoud.haleem@ahmed.com";
   return { username, email };
 }
 
+showLoading();
 / * * * fetch current user grades * * * /;
 export async function fetchUserGrades(username) {
   try {
     const response = await fetch(
       `http://localhost:3020/grades?username=${username}`
     );
+    hideLoading();
     return response.ok ? await response.json() : [];
   } catch (error) {
+    hideLoading();
     window.location.replace("notFound.html");
     console.error("Error fetching user grades:", error);
     return [];
@@ -95,6 +100,7 @@ export function preparePayload(
 }
 
 / * * * Post grades * * * /;
+showLoading();
 export async function submitQuizData(payload) {
   try {
     const response = await fetch("http://localhost:3020/grades", {
@@ -104,8 +110,10 @@ export async function submitQuizData(payload) {
       },
       body: JSON.stringify(payload),
     });
+    hideLoading();
     return response.ok;
   } catch (error) {
+    hideLoading();
     window.location.replace("notFound.html");
     console.error("Error submitting quiz data:", error);
     return false;

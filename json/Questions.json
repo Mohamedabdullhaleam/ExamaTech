@@ -4,8 +4,8 @@
     "title": "General Knowledge Quiz",
     "quizTime": {
       "hours": 1,
-      "minutes": 30,
-      "seconds": 30
+      "minutes": 5,
+      "seconds": 0
     },
     "description": "Test your knowledge with this 12-question quiz!",
     "questions": [

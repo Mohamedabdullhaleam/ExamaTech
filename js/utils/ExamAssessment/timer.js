@@ -1,4 +1,5 @@
 import { showLoading, hideLoading } from "../loading/loadingState.js";
+
 export function startCountdown(hours, minutes, seconds) {
   const finishTime = localStorage.getItem("countdownFinishTime");
   if (!finishTime) {
@@ -50,7 +51,11 @@ export function initCountdown() {
     warningTimer.classList.remove("invisible");
 
     // Handle the warning styles when less than 2 minutes remain
-    if (remainingHours === 0 && remainingMinutes < 2) {
+    if (
+      remainingHours === 0 &&
+      remainingMinutes === 0 &&
+      remainingSeconds < 30
+    ) {
       warningTimer.classList.add("text-red-500");
       warningIcon.classList.remove("text-sec-color");
       warningIcon.classList.add("text-red-500", "fa-beat-fade");
